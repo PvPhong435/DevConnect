@@ -32,13 +32,10 @@ public class loginController {
 	String maXacThuc="";
 	@Autowired
 	UserDao userDao;
-<<<<<<< HEAD
 	User userLogin=null;
-=======
 	String mess="";
 	String checkMaXacThuc="";
 	User user;
->>>>>>> main
 	
 	
 	//Đăng nhập
@@ -54,50 +51,6 @@ public class loginController {
 	}
 	
 	@PostMapping("/login")
-<<<<<<< HEAD
-	public String checkLogin(Model model,@RequestParam("username")String username,@RequestParam("password")String pass)
-	{
-		List<User> dsnv=userDao.findAll();
-		Boolean checkUser=false;
-		String messErr="";
-		for(User u:dsnv)
-		{
-			if(u.getUsername().equals(username))
-			{
-				checkUser=true;
-				if(u.getPassword().equals(pass))
-				{
-					System.out.println("Đăng nhập thành công");
-					userLogin=new User();
-					userLogin=u;
-					break;
-				}
-				else
-				{
-					messErr="Sai mật khẩu vui lòng nhập lại";
-					break;
-				}
-			}
-		}
-		if(!checkUser)
-		{
-			model.addAttribute("mess", "Tài khoản không tồn tại");
-			return "redirect:Check/Login";
-		}
-		else
-		{
-			if(userLogin!=null)
-			{
-				return"check/success";
-			}
-			else
-			{
-				model.addAttribute("mess", messErr);
-				return "redirect:Check/Login";
-			}
-		}
-		
-=======
 	public String checkLogin(Model model, @RequestParam("username") String username, @RequestParam("password") String pass) {
 	    User user = userDao.findByUsername(username);
 	    if (user == null) {
@@ -111,7 +64,6 @@ public class loginController {
 	    user = user;
 	    System.out.println("Đăng nhập thành công");
 	    return "check/success";
->>>>>>> main
 	}
 
 	
