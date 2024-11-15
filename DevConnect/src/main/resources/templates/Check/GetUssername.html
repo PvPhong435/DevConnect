@@ -36,22 +36,14 @@
 <body>
     <div class="form-container">
         <h2 class="form-title">Quên Mật Khẩu</h2>
-        <form action="/forgotpass" method="post">
-            <!-- Nhập mã xác thực -->
-            <div class="mb-3 d-flex">
-                <div class="flex-grow-1 me-2">
-                    <label for="otp" class="form-label">Mã xác thực</label>
-                    <input type="text" id="otp" name="otp" class="form-control" placeholder="Nhập mã xác thực" required>
-                </div>
-                <div class="align-self-end">
-                    <button type="button" class="btn btn-orange" onclick="window.location.href='/sendMailAganin';">
-					    Nhận lại mã
-					</button>
-                </div>
+        <form action="/getCode" method="post">
+            <!-- Nhập username -->
+            <div class="mb-3">
+                <label for="username" class="form-label">Tên đăng nhập</label>
+                <input type="text" id="username" name="username" class="form-control" placeholder="Nhập tên đăng nhập" required>
             </div>
-            <label th:text="${warning}" style="color: orange" class="form-label">Chúng tôi đã gửi mã xác thực về email của bạn vui lòng kiểm tra !!</label>
             <!-- Nút xác thực -->
-            <button type="submit" class="btn btn-orange w-100">Xác thực</button>
+            <button type="submit" class="btn btn-orange w-100">Tiếp</button>
              <b th:text=${mess} style="color: red"></b>
         </form>
     </div>
