@@ -32,7 +32,7 @@ public class loginController {
 	String maXacThuc="";
 	@Autowired
 	UserDao userDao;
-	User userLogin=new User();
+	User userLogin=null;
 	
 	
 	//Đăng nhập
@@ -60,7 +60,9 @@ public class loginController {
 				if(u.getPassword().equals(pass))
 				{
 					System.out.println("Đăng nhập thành công");
-					
+					userLogin=new User();
+					userLogin=u;
+					break;
 				}
 				else
 				{
@@ -72,12 +74,19 @@ public class loginController {
 		if(!checkUser)
 		{
 			model.addAttribute("mess", "Tài khoản không tồn tại");
-			return "";
+			return "redirect:Check/Login";
 		}
 		else
 		{
-			model.addAttribute("mess", messErr);
-			return "";
+			if(userLogin!=null)
+			{
+				return"check/success";
+			}
+			else
+			{
+				model.addAttribute("mess", messErr);
+				return "redirect:Check/Login";
+			}
 		}
 		
 	}
