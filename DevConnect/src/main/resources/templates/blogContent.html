@@ -36,7 +36,7 @@
             <div class="border rounded-2 my-3 p-0" th:each="comment : *{comments}">
                 <div class="border-bottom rounded-2 p-3">
                     <div class="row">
-                        <div class="col-1"><img src="https://static.vecteezy.com/system/resources/thumbnails/014/440/983/small_2x/image-icon-design-in-blue-circle-png.png" alt="UserAvatar" width="60" height="60"></div>
+                        <div class="col-1"><img th:src="${comment.user.img}" src="https://static.vecteezy.com/system/resources/thumbnails/014/440/983/small_2x/image-icon-design-in-blue-circle-png.png" alt="UserAvatar" width="60" height="60"></div>
                         <div class="col-11 d-flex justify-content-center flex-column text-start">
                             <div><b th:text="${comment.user.fullname}"></b></div>
                             <div th:text="${comment.createAtAsString}"></div>
