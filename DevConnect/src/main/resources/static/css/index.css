@@ -1,0 +1,140 @@
+.hero-section {
+    min-height: 100vh;
+    background-color: #0a0a0a;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Gradient text effect */
+.text-gradient {
+    background: linear-gradient(90deg, #007bff, #6610f2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Custom animations */
+.animate__animated {
+    --animate-duration: 1s;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .hero-section {
+        min-height: auto;
+        padding: 4rem 0;
+    }
+}
+
+.feature-card {
+    transition: all 0.3s ease;
+    background: linear-gradient(145deg, #1a1a1a 0%, #2a2a2a 100%);
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    background: linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 100%);
+}
+
+.feature-icon {
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+    transform: scale(1.1);
+}
+
+/* Category Tiles */
+.category-tile {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.category-content {
+    transition: all 0.3s ease;
+}
+
+.category-tile:hover .category-content {
+    transform: scale(1.05);
+    background-color: var(--bs-primary) !important;
+    color: white !important;
+}
+
+/* Activity Feed Animation */
+.activity-item {
+    animation: slideIn 0.5s ease forwards;
+    opacity: 0;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Animated Shapes */
+.shape {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    animation: floatAnimation 20s infinite linear;
+}
+
+.shape-1 {
+    width: 300px;
+    height: 300px;
+    top: -150px;
+    left: -150px;
+}
+
+.shape-2 {
+    width: 200px;
+    height: 200px;
+    top: 50%;
+    right: -100px;
+    animation-delay: -5s;
+}
+
+.shape-3 {
+    width: 150px;
+    height: 150px;
+    bottom: -75px;
+    left: 50%;
+    animation-delay: -10s;
+}
+
+@keyframes floatAnimation {
+    0% {
+        transform: rotate(0deg) translate(0, 0) scale(1);
+    }
+    33% {
+        transform: rotate(120deg) translate(50px, 50px) scale(1.1);
+    }
+    66% {
+        transform: rotate(240deg) translate(-50px, 50px) scale(0.9);
+    }
+    100% {
+        transform: rotate(360deg) translate(0, 0) scale(1);
+    }
+}
+
+/* Company Logos */
+.company-logo {
+    opacity: 0.6;
+    transition: all 0.3s ease;
+    filter: grayscale(100%);
+}
+
+.company-logo:hover {
+    opacity: 1;
+    filter: grayscale(0%);
+}
+
+/*Carousel*/
