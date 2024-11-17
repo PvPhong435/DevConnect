@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${article.title}"></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+<div class="container" th:object="${article}">
+    <div class="">
+        <h2 th:text="*{title}"></h2>
+        <span th:text="*{createat}"></span>
+        <div class="my-3 d-flex flex-nowrap">
+            <a href="" class="btn btn-outline-secondary rounded-3 me-2" th:each="tag : *{tags}" th:text="${tag.id}"></a>
+        </div>
+        <hr>
+        <div th:text="*{content}"></div>
+        <hr>
+    </div>
+    <div class="d-flex justify-content-center mt-4">
+        <div style="width: 80%">
+            <div th:text="${#lists.size(article.comments)} + ' bình luận'"></div>
+<!--            <div>Sắp xếp: <b>Mới nhất <i class="fa-solid fa-arrow-down-wide-short"></i></b></div>-->
+            <form action="" method="" class="border rounded-2 p-3 bg-body-tertiary">
+                <div class="row">
+                    <div class="col-1"><img src="https://static.vecteezy.com/system/resources/thumbnails/014/440/983/small_2x/image-icon-design-in-blue-circle-png.png" alt="UserAvatar" width="60" height="60"></div>
+                    <div class="col-11"><textarea class="w-100 border-0 rounded-3 form-control bg-body-tertiary" rows="4"></textarea></div>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-success">Bình luận</button>
+                </div>
+            </form>
+            <div class="border rounded-2 my-3 p-0" th:each="comment : *{comments}">
+                <div class="border-bottom rounded-2 p-3">
+                    <div class="row">
+                        <div class="col-1"><img src="https://static.vecteezy.com/system/resources/thumbnails/014/440/983/small_2x/image-icon-design-in-blue-circle-png.png" alt="UserAvatar" width="60" height="60"></div>
+                        <div class="col-11 d-flex justify-content-center flex-column text-start">
+                            <div><b th:text="${comment.user.fullname}"></b></div>
+                            <div th:text="${comment.createAtAsString}"></div>
+                        </div>
+                    </div>
+                    <div class="my-3" th:text="${comment.content}"></div>
+                    <div class="d-flex justify-content-between w-100">
+                        <div>
+                            <i class="fa-regular fa-thumbs-up fa-xl"></i><i class="fa-solid fa-reply fa-xl ms-2"></i>
+                        </div>
+                        <div>
+                            10 lượt thích
+                        </div>
+                    </div>
+                </div>
+<!--                <div class="col-11 p-3 ms-auto border border-2 border-top-0 border-end-0 border-bottom-0" style="width: 95%">-->
+<!--                    <div class="row">-->
+<!--                        <div class="col-1"><img src="https://static.vecteezy.com/system/resources/thumbnails/014/440/983/small_2x/image-icon-design-in-blue-circle-png.png" alt="UserAvatar" width="60" height="60"></div>-->
+<!--                        <div class="col-11 d-flex justify-content-center flex-column text-start">-->
+<!--                            <div><b>User12</b></div>-->
+<!--                            <div>1 phút trước</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="my-3">-->
+<!--                        <b>@User1</b> Góp ý rất thuyết phục-->
+<!--                    </div>-->
+<!--                    <div class="d-flex justify-content-between w-100">-->
+<!--                        <div>-->
+<!--                            <i class="fa-regular fa-thumbs-up fa-xl"></i><i class="fa-solid fa-reply fa-xl ms-2"></i>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            1 lượt thích-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
