@@ -1,7 +1,7 @@
 package com.dev.Controller;
 
 import java.util.List;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.dev.Dao.UserDao;
 import com.dev.Model.User;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.websocket.server.PathParam;
 
 @Controller
@@ -34,11 +35,14 @@ public class loginController {
 	String maXacThuc="";
 	@Autowired
 	UserDao userDao;
+	@Autowired
+    private HttpServletRequest request;
 	User userLogin=null;
 	String mess="";
 	String checkMaXacThuc="";
 	User user;
 	User userSignUp;
+	HttpSession session;
 
 	
 	
@@ -55,7 +59,7 @@ public class loginController {
 	}
 	
 	@PostMapping("/login")
-	public String checkLogin(Model model, @RequestParam("username") String username, @RequestParam("password") String pass,HttpSession session) {
+	public String checkLogin(Model model, @RequestParam("username") String username, @RequestParam("password") String pass) {
 	    User user = userDao.findByUsername(username);
 	    if (user == null) {
 	    	mess="Tài khoản không tồn tại";
@@ -67,7 +71,9 @@ public class loginController {
 	    }
 	    user = user;
 	    System.out.println("Đăng nhập thành công");
-		session.setAttribute("user", username);
+	    HttpSession session = request.getSession();
+		session.setAttribute("user", user);
+		System.out.println((User)session.getAttribute("user"));
 	    return "check/success";
 	}
 
