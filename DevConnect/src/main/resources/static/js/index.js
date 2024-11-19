@@ -30,3 +30,19 @@ setInterval(() => {
     const randomActivity = activities[Math.floor(Math.random() * activities.length)];
     addActivityItem(randomActivity);
 }, 5000);
+
+//Bookmark AJAX
+document.querySelectorAll(".bookmark").forEach(bookmark=> bookmark.addEventListener("click",function(){
+	const articleID=this.getAttribute("data-article-id")
+	console.log(articleID)
+	fetch(`/user/bookmark/${articleID}`,{
+		method:'POST',
+		headers:{
+			'Content-Type':'application/json',
+		},
+	}).then(response => response.json())
+	.then(data => console.log('Success',data))
+	.catch(error=>{
+		console.error('Error: ',error)
+	})
+}))
