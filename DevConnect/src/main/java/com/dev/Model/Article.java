@@ -33,5 +33,7 @@ public class Article {
     private Set<Tag> tags;
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     private List<Comment> comments;
+    @Transient
+    private String titleSlug;
 
 }

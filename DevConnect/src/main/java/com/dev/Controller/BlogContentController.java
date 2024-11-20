@@ -5,6 +5,7 @@ import com.dev.Model.Comment;
 import com.dev.Model.Tag;
 import com.dev.Repository.ArticleRepository;
 import com.dev.Repository.TagRepository;
+import com.dev.Util.SlugUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,7 @@ public class BlogContentController {
                 comment.setCreateAtAsString(returnTime(comment.getCreateat().getTime()));
             }
         }
+
         Set<Article> relatedArticle = new HashSet<>();
         for (int i = 0; i < list.size() && i < 3; i++) {
             Article article = list.get(i);
@@ -42,9 +44,11 @@ public class BlogContentController {
                 }
             }
         }
+
         List<Tag> tags = tagRepository.findAll();
         tags.sort((o1, o2) -> o2.getArticles().size() - o1.getArticles().size());
         tags = tags.subList(0, Math.min(tags.size(), 5));
+
         model.addAttribute("article", list.get(0));
         model.addAttribute("relatedArticle", relatedArticle);
         model.addAttribute("tags", tags);
@@ -54,13 +58,36 @@ public class BlogContentController {
     @GetMapping("/blog/{title}")
     public String blog(Model model, @PathVariable String title) {
         List<Article> list = articleRepository.findAll();
-        Optional<Article> article = list.stream().filter(a -> a.getTitle().equals(title)).findFirst();
-        if (article.isPresent()) {
-            model.addAttribute("article", article.get());
+        Optional<Article> articleFound = list.stream().filter(a -> SlugUtil.toSlug(a.getTitle()).equals(title)).findFirst();
+
+        if (articleFound.isPresent()) {
+            Article article = articleFound.get();
+            for (Comment comment : article.getComments()) {
+                comment.setCreateAtAsString(returnTime(comment.getCreateat().getTime()));
+            }
+
+            Set<Article> relatedArticle = new HashSet<>();
+            for (int i = 0; i < list.size() && i < 3; i++) {
+                Article article1 = list.get(i);
+                for (Tag tag : article.getTags()) {
+                    if (article1.getTags().contains(tag)) {
+                        relatedArticle.add(article1);
+                        break;
+                    }
+                }
+            }
+
+            List<Tag> tags = tagRepository.findAll();
+            tags.sort((o1, o2) -> o2.getArticles().size() - o1.getArticles().size());
+            tags = tags.subList(0, Math.min(tags.size(), 5));
+
+            model.addAttribute("article", article);
+            model.addAttribute("relatedArticle", relatedArticle);
+            model.addAttribute("tags", tags);
         } else {
             return "notFoundBlog";
         }
-        return "blog/blog-test";
+        return "blog/blog_detail";
     }
 
     private String returnTime(long duration) {
