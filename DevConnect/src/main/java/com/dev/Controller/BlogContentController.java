@@ -2,23 +2,26 @@ package com.dev.Controller;
 
 import com.dev.Model.Article;
 import com.dev.Model.Comment;
+import com.dev.Model.Tag;
 import com.dev.Repository.ArticleRepository;
+import com.dev.Repository.TagRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.*;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class BlogContentController {
 
     ArticleRepository articleRepository;
+    TagRepository tagRepository;
 
-    public BlogContentController(ArticleRepository articleRepository) {
+    public BlogContentController(ArticleRepository articleRepository, TagRepository tagRepository) {
         this.articleRepository = articleRepository;
+        this.tagRepository = tagRepository;
     }
 
     @GetMapping("/blog-test")
@@ -29,8 +32,23 @@ public class BlogContentController {
                 comment.setCreateAtAsString(returnTime(comment.getCreateat().getTime()));
             }
         }
+        Set<Article> relatedArticle = new HashSet<>();
+        for (int i = 0; i < list.size() && i < 3; i++) {
+            Article article = list.get(i);
+            for (Tag tag : list.get(0).getTags()) {
+                if (article.getTags().contains(tag)) {
+                    relatedArticle.add(article);
+                    break;
+                }
+            }
+        }
+        List<Tag> tags = tagRepository.findAll();
+        tags.sort((o1, o2) -> o2.getArticles().size() - o1.getArticles().size());
+        tags = tags.subList(0, Math.min(tags.size(), 5));
         model.addAttribute("article", list.get(0));
-        return "blogContent";
+        model.addAttribute("relatedArticle", relatedArticle);
+        model.addAttribute("tags", tags);
+        return "blog/blog_detail";
     }
 
     @GetMapping("/blog/{title}")
@@ -42,7 +60,7 @@ public class BlogContentController {
         } else {
             return "notFoundBlog";
         }
-        return "blogContent";
+        return "blog/blog-test";
     }
 
     private String returnTime(long duration) {
