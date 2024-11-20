@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<header class="bg-white shadow" th:fragment="header">
+    <div class="container py-3">
+        <nav class="navbar navbar-expand-md navbar-light">
+            <!-- Logo và nút menu mobile -->
+            <div class="d-flex align-items-center">
+                <button class="navbar-toggler me-3"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand text-primary fw-bold fs-4" href="#">DevConnect</a>
+            </div>
+
+            <!-- Menu chính -->
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/}" >Trang chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/topics}">Chủ đề</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/about}">Hỏi đáp</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/posts}">Bài viết</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Thanh tìm kiếm và đăng nhập -->
+            <div class="d-flex align-items-center">
+                <form class="position-relative me-3" th:action="@{/search}" method="get">
+                    <input type="text" class="form-control rounded-pill ps-4" name="q" placeholder="Tìm kiếm...">
+                    <span class="position-absolute top-50 start-0 translate-middle-y ms-2">🔍</span>
+                </form>
+                <a th:href="@{/login}" class="btn btn-primary rounded-pill px-4 py-2">
+                    Đăng nhập
+                </a>
+                <a th:href="@{/register}" class="btn btn-outline-secondary rounded-pill px-4 py-2">
+                    Đăng ký
+                </a>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
