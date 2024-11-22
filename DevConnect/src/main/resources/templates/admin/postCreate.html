@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="createPostModal"
+         id="createPostModal"
+         class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center z-50 overflow-y-auto">
+  <div class="max-w-full mx-auto bg-white shadow-md rounded-lg p-6 overflow-y-auto">
+  <div class="flex justify-between items-center mb-6">
+      <h1 class="text-2xl font-bold text-gray-800">Thêm Bài Viết Mới</h1>
+      <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+        <i class="fas fa-times text-xl"></i>
+      </button>
+    </div>
+
+    <form method="post">
+      <!-- TIÊU ĐỀ BÀI VIẾT -->
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
+          Tiêu đề bài viết
+        </label>
+        <input type="text" id="title" name="title"
+               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
+               placeholder="Nhập tiêu đề bài viết" required>
+      </div>
+
+      <!-- MÔ TẢ NGẮN -->
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
+          Mô tả ngắn
+        </label>
+        <textarea id="description" name="description" rows="3"
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Nhập mô tả ngắn cho bài viết"></textarea>
+      </div>
+
+      <!-- NỘI DUNG CHÍNH -->
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="content">
+          Nội dung bài viết
+        </label>
+        <textarea id="content" name="content" rows="10"
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Nhập nội dung chi tiết bài viết" required></textarea>
+      </div>
+
+      <!-- ẢNH ĐẠI DIỆN -->
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2">
+          Ảnh
+        </label>
+        <div class="flex items-center justify-center w-full">
+          <label class="flex flex-col border-4 border-dashed w-full h-48 hover:bg-gray-100 hover:border-blue-300 group">
+            <div class="flex flex-col items-center justify-center pt-7 cursor-pointer">
+              <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 group-hover:text-blue-500"></i>
+              <p class="lowercase text-sm text-gray-400 group-hover:text-blue-500 pt-1">
+                Kéo và thả hoặc nhấp để tải ảnh
+              </p>
+              <input type="file" name="image" class="hidden" />
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- DANH MỤC VÀ THẺ -->
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-2">
+            Danh mục
+          </label>
+          <select name="category"
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="technology">Công nghệ</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-2">
+            Thẻ
+          </label>
+          <input type="text" name="tags"
+                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
+                 placeholder="Nhập thẻ, cách nhau bằng dấu phẩy">
+        </div>
+      </div>
+
+      <div class="mt-6 flex justify-end">
+        <button type="button" id="closeModal2"
+                class="bg-gray-500 text-white px-4 py-2 rounded mr-2 hover:bg-gray-600">
+          <i class="fas fa-times mr-2"></i>Hủy
+        </button>
+        <button type="submit"
+                class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+          <i class="fas fa-save mr-2"></i>Xuất Bản
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script th:fragment="modalScript">
+  document.addEventListener('DOMContentLoaded', function() {
+    const createPostBtn = document.getElementById('createPostBtn');
+    const createPostModal = document.getElementById('createPostModal');
+    const closeModalBtns = document.querySelectorAll('#closeModal, #closeModal2');
+
+    createPostBtn.addEventListener('click', function() {
+      createPostModal.classList.remove('hidden');
+      createPostModal.classList.add('flex');
+    });
+
+    closeModalBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        createPostModal.classList.remove('flex');
+        createPostModal.classList.add('hidden');
+      });
+    });
+  });
+</script>
+</html>
