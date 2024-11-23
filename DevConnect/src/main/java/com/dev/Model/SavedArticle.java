@@ -24,7 +24,7 @@ public class SavedArticle {
 
 	@EmbeddedId
 	SavedArticleKey id;
-	
+
 	@ManyToOne
 	@MapsId("user_id")
 	@JoinColumn(name="user_id")

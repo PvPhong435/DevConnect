@@ -15,5 +15,4 @@ public class SavedArticleKey {
 	String user_id;
 	@Column(name="article_id")
 	String article_id;
-	
 }

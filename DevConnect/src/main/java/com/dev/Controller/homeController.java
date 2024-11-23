@@ -21,13 +21,12 @@ public class homeController {
 		this.articleDAO = articleDAO;
 	}
 
-
-
 	@GetMapping("/home/index")
 	public String getHomePage(Model model) {
 		List<Article> list= articleDAO.findAll();
 		model.addAttribute("list",list);
 		return "home/index";
 	}
+	
 	
 }

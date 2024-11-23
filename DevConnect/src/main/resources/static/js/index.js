@@ -46,3 +46,4 @@ document.querySelectorAll(".bookmark").forEach(bookmark=> bookmark.addEventListe
 		console.error('Error: ',error)
 	})
 }))
+document.querySelectorAll(".bookmark-delete").forEach(bookmark=> bookmark)
