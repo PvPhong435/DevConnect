@@ -1,13 +1,13 @@
 package com.dev.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -18,6 +18,7 @@ public class Tag {
     @Column(name = "tagid")
     private String id;
     private String nametag;
+    @JsonIgnore
     @ManyToMany(mappedBy = "tags")
     private List<Article> articles;
 

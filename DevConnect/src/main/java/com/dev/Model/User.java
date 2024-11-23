@@ -1,16 +1,16 @@
 package com.dev.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -25,6 +25,7 @@ public class User {
     private String phone;
     private String address;
     private String img;
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private Set<Comment> comments;
 

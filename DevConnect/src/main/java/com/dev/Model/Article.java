@@ -1,5 +1,6 @@
 package com.dev.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -7,11 +8,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = {"comments", "tags"})
-@ToString(exclude = {"comments", "tags"})
 @Entity
 @Table(name = "articles")
 public class Article {
@@ -31,6 +31,7 @@ public class Article {
             inverseJoinColumns = @JoinColumn(name = "tagid")
     )
     private Set<Tag> tags;
+    @JsonIgnore
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     private List<Comment> comments;
     @Transient
