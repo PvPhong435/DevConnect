@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       th:replace="~{/layout/layout.html :: dynamic(~{::body})}">
-
 <body>
 <div th:object="${article}">
+    <meta name="title" th:content="*{title}">
+    <script>
+        document.title = document.querySelector('meta[name="title"]').content;
+    </script>
     <!-- Hero Section -->
     <div class="position-relative py-4 bg-light border-bottom">
         <div class="container">
@@ -32,7 +35,7 @@
 <!--                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7AJgRNJQkHzanHnwf8mAVed-Do-X9NXLQmQ&s"-->
 <!--                                 style="height: 40px;width: 40px" class="rounded-circle me-2" alt="Author Avatar">-->
                             <div>
-                                <div class="fw-medium" th:text="*{author}">Trần Văn E</div>
+                                <div class="fw-medium" th:text="*{author.fullname}">Trần Văn E</div>
 <!--                                <div class="text-muted small">Senior JavaScript Developer</div>-->
                             </div>
                         </div>
@@ -104,11 +107,11 @@
 
                     <!-- Comments Section -->
                     <section class="comments-section">
-                        <h3 class="fw-bold mb-2">Bình luận <span th:text="${#lists.size(*{comments})}"></span></h3>
+                        <h3 class="fw-bold mb-2">Bình luận <span th:text="${#lists.size(article.comments)}"></span></h3>
 
                         <!-- Comment Form -->
                         <div class="card border-0 shadow-sm p-4">
-                            <form th:action="@{/commemt}" method="post" th:object="${comment}">
+                            <form th:action="@{/blog/${article.titleSlug}/comment}" method="post" th:object="${comment}">
                                 <div class="mb-3">
                                     <textarea class="form-control border-3 bg-light" rows="3"
                                               placeholder="Viết bình luận của bạn..." th:field="*{content}"></textarea>

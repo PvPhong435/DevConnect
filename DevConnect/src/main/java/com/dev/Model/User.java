@@ -29,5 +29,7 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private Set<Comment> comments;
+    @OneToMany(mappedBy = "author")
+    private Set<Article> articles;
 
 }

@@ -2,6 +2,7 @@ package com.dev.Controller;
 
 import java.util.List;
 
+import com.dev.Util.SlugUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,8 +24,8 @@ public class homeController {
 
 	@GetMapping("/home/index")
 	public String getHomePage(Model model) {
-		List<Article> list= articleDAO.findAll();
-		model.addAttribute("list",list);
+		List<Article> list= articleDAO.findAll().stream().peek(a -> a.setTitleSlug(SlugUtil.toSlug(a.getTitle()))).toList();
+		model.addAttribute("list", list);
 		return "home/index";
 	}
 	

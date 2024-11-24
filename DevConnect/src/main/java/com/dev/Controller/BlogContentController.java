@@ -62,7 +62,8 @@ public class BlogContentController {
     @GetMapping("/blog/{title}")
     public String blog(Model model, @PathVariable String title) {
         List<Article> list = articleRepository.findAll();
-        Optional<Article> articleFound = list.stream().filter(a -> SlugUtil.toSlug(a.getTitle()).equals(title)).findFirst();
+        Optional<Article> articleFound = list.stream()
+                .filter(a -> SlugUtil.toSlug(a.getTitle()).equals(title)).findFirst();
 
         if (articleFound.isPresent()) {
             Article article = articleFound.get();
@@ -95,14 +96,18 @@ public class BlogContentController {
         return "blog/blog_detail";
     }
 
-    @PostMapping("/comment")
-    public String comment(@AuthenticationPrincipal UserPrincipal userPrincipal, HttpServletRequest request, Model model, @ModelAttribute Comment comment) {
-        if(userPrincipal == null)
+    @PostMapping("/blog/{title}/comment")
+    public String comment(@AuthenticationPrincipal UserPrincipal userPrincipal, @ModelAttribute Comment comment, @PathVariable String title) {
+        if (userPrincipal == null)
             throw new RuntimeException("User not logged in");
-        comment.setUser(userPrincipal.getUser());
-        commentRepository.save(comment);
-
-        return "redirect:" + request.getRequestURI();
+        Optional<Article> article = articleRepository.findAll().stream()
+                .filter(a -> SlugUtil.toSlug(a.getTitle()).equals(title)).findFirst();
+        if (article.isPresent()) {
+            comment.setUser(userPrincipal.getUser());
+            comment.setArticle(article.get());
+            commentRepository.save(comment);
+        }
+        return "redirect:/blog/" + title;
     }
 
     private String returnTime(long duration) {

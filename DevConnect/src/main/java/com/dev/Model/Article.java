@@ -20,7 +20,6 @@ public class Article {
     @Column(name = "articleid")
     private String id;
     private String title;
-    private String author;
     private String content;
     @Temporal(TemporalType.TIMESTAMP)
     private Date createat;
@@ -36,6 +35,9 @@ public class Article {
     @JsonIgnore
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     private List<Comment> comments;
+    @ManyToOne
+    @JoinColumn(name = "author")
+    private User author;
     @Transient
     private String titleSlug;
 
