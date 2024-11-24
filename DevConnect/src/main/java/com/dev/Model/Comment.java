@@ -17,7 +17,8 @@ public class Comment {
     @Column(name = "commentid")
     private String id;
     private String content;
-    private Date createat;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createat = new Date();
     @ManyToOne
     @JoinColumn(name = "articleid")
     private Article article;

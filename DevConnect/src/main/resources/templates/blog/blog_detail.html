@@ -104,14 +104,14 @@
 
                     <!-- Comments Section -->
                     <section class="comments-section">
-                        <h3 class="fw-bold mb-2">Bình luận (5)</h3>
+                        <h3 class="fw-bold mb-2">Bình luận <span th:text="${#lists.size(*{comments})}"></span></h3>
 
                         <!-- Comment Form -->
                         <div class="card border-0 shadow-sm p-4">
-                            <form>
+                            <form th:action="@{/commemt}" method="post" th:object="${comment}">
                                 <div class="mb-3">
                                     <textarea class="form-control border-3 bg-light" rows="3"
-                                              placeholder="Viết bình luận của bạn..."></textarea>
+                                              placeholder="Viết bình luận của bạn..." th:field="*{content}"></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Gửi bình luận</button>
                             </form>

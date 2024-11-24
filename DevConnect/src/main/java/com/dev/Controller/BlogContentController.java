@@ -4,26 +4,30 @@ import com.dev.Model.Article;
 import com.dev.Model.Comment;
 import com.dev.Model.Tag;
 import com.dev.Repository.ArticleRepository;
+import com.dev.Repository.CommentRepository;
 import com.dev.Repository.TagRepository;
 import com.dev.Util.SlugUtil;
+import com.dev.services.UserPrincipal;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.*;
 import java.util.*;
 
 @Controller
+@RequiredArgsConstructor
 public class BlogContentController {
 
-    ArticleRepository articleRepository;
-    TagRepository tagRepository;
-
-    public BlogContentController(ArticleRepository articleRepository, TagRepository tagRepository) {
-        this.articleRepository = articleRepository;
-        this.tagRepository = tagRepository;
-    }
+    private final ArticleRepository articleRepository;
+    private final TagRepository tagRepository;
+    private final CommentRepository commentRepository;
 
     @GetMapping("/blog-test")
     public String index(Model model) {
@@ -81,6 +85,7 @@ public class BlogContentController {
             tags.sort((o1, o2) -> o2.getArticles().size() - o1.getArticles().size());
             tags = tags.subList(0, Math.min(tags.size(), 5));
 
+            model.addAttribute("comment", new Comment());
             model.addAttribute("article", article);
             model.addAttribute("relatedArticle", relatedArticle);
             model.addAttribute("tags", tags);
@@ -88,6 +93,16 @@ public class BlogContentController {
             return "notFoundBlog";
         }
         return "blog/blog_detail";
+    }
+
+    @PostMapping("/comment")
+    public String comment(@AuthenticationPrincipal UserPrincipal userPrincipal, HttpServletRequest request, Model model, @ModelAttribute Comment comment) {
+        if(userPrincipal == null)
+            throw new RuntimeException("User not logged in");
+        comment.setUser(userPrincipal.getUser());
+        commentRepository.save(comment);
+
+        return "redirect:" + request.getRequestURI();
     }
 
     private String returnTime(long duration) {

@@ -5,7 +5,7 @@
 
 <!-- Liên kết file CSS với Thymeleaf -->
 <link rel="stylesheet" th:href="@{/css/index.css}">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <body>
 <!-- Define the content fragment that will be inserted into layout -->
 <!--<div th:fragment="content">-->
@@ -335,219 +335,37 @@
 
             <div class="row g-4">
                 <!-- Blog Card -->
-                <div class="col-md-3" th:each="article : ${articles}">
+                <div th:each="article: ${list}" class="col-md-3">
                     <div class="card border-0 shadow-sm h-100">
-<!--                        <img src="blog-image-1.jpg" class="card-img-top" alt="Blog Image">-->
+                        <img src="blog-image-1.jpg" class="card-img-top" alt="Blog Image">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
-<!--                                <span class="badge bg-primary me-2">React</span>-->
-                                <span class="text-muted small" th:text="${#dates.format(article.createat, 'dd/MM/yy')}">10/10/24</span>
+                                <span class="badge bg-primary me-2">React</span>
+                                <span th:text="${#dates.format(article.createat,'dd/MM/yyyy')}" class="text-muted small"></span>
                             </div>
                             <h5 class="card-title fw-bold mb-3">
-                                <a th:href="@{|/blog/${article.titleSlug}|}" class="text-decoration-none text-dark stretched-link" th:text="${article.title}">
-                                    Top 10 React Hooks you should know
+                                <a href="#" th:text="${article.title}" class="text-decoration-none text-dark stretched-link">
+                                   
                                 </a>
                             </h5>
-                            <p class="card-text text-muted mb-3" style="text-wrap: none; overflow: hidden; text-overflow: ellipsis; width: 100%" th:utext="${article.content}">Tìm hiểu về các Hook cơ bản và nâng cao trong React...</p>
-                            <div class="d-flex flex-wrap gap-2">
-                                <a href="#" class="badge bg-light text-dark text-decoration-none" th:each="tag : ${article.tags}" th:text="${tag.id}">#javascript</a>
-                            </div>
+                            <p  th:text="${article.content}" class="card-text text-muted"></p>
                         </div>
-<!--                        <div class="card-footer bg-transparent border-0 pt-0 pb-4 px-4">-->
-<!--                            <div class="d-flex align-items-center">-->
-<!--                                <img src="author-avatar-1.jpg" class="rounded-circle me-2" width="24" height="24"-->
-<!--                                     alt="Author">-->
-<!--                                <span class="small fw-medium">Nguyễn Văn A</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
+                        <div class="card-footer bg-transparent border-0 pt-0 pb-4 px-4">
+                            <div class="d-flex align-items-center">
+                                <img src="author-avatar-1.jpg" class="rounded-circle me-2" width="24" height="24"
+                                     alt="Author Avatar">
+                                <span th:text="${article.author.fullname}" class="small fw-medium"></span>
+                            </div>
+                            <span class="z-2 position-relative d-flex justify-content-end"><a class="bookmark" href="javascript:void(0)"  th:attr="data-article-id=${article.articleID}"><i class="fas fa-bookmark fa-lg" style="color: #FFD43B;"></i></a> </span>
+                        </div>
                     </div>
                 </div>
 
                 <!-- More blog cards... -->
-<!--                <div class="col-md-3">-->
-<!--                    <div class="card border-0 shadow-sm h-100">-->
-<!--                        <img src="blog-image-2.jpg" class="card-img-top" alt="Blog Image">-->
-<!--                        <div class="card-body">-->
-<!--                            <div class="d-flex align-items-center mb-3">-->
-<!--                                <span class="badge bg-danger me-2">Java Spring</span>-->
-<!--                                <span class="text-muted small">25/10/24</span>-->
-<!--                            </div>-->
-<!--                            <h5 class="card-title fw-bold mb-3">-->
-<!--                                <a href="#" class="text-decoration-none text-dark stretched-link">-->
-<!--                                    Beginners Guide to Machine Learning-->
-<!--                                </a>-->
-<!--                            </h5>-->
-<!--                            <p class="card-text text-muted">Bài giới thiệu cơ bản về Machine Learning, các khái niệm và-->
-<!--                                ứng dụng...</p>-->
-<!--                        </div>-->
-<!--                        <div class="card-footer bg-transparent border-0 pt-0 pb-4 px-4">-->
-<!--                            <div class="d-flex align-items-center">-->
-<!--                                <img src="author-avatar-2.jpg" class="rounded-circle me-2" width="24" height="24"-->
-<!--                                     alt="Author Avatar">-->
-<!--                                <span class="small fw-medium">Trần Thị B</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="col-md-3">-->
-<!--                    <div class="card border-0 shadow-sm h-100">-->
-<!--                        <img src="blog-image-3.jpg" class="card-img-top" alt="Blog Image">-->
-<!--                        <div class="card-body">-->
-<!--                            <div class="d-flex align-items-center mb-3">-->
-<!--                                <span class="badge bg-success me-2">DevOps</span>-->
-<!--                                <span class="text-muted small">02/11/24</span>-->
-<!--                            </div>-->
-<!--                            <h5 class="card-title fw-bold mb-3">-->
-<!--                                <a href="#" class="text-decoration-none text-dark stretched-link">-->
-<!--                                    Docker 101: Containerization for Beginners-->
-<!--                                </a>-->
-<!--                            </h5>-->
-<!--                            <p class="card-text text-muted">Hướng dẫn cơ bản về Docker và cách sử dụng containers để-->
-<!--                                đóng gói và triển khai ứng dụng...</p>-->
-<!--                        </div>-->
-<!--                        <div class="card-footer bg-transparent border-0 pt-0 pb-4 px-4">-->
-<!--                            <div class="d-flex align-items-center">-->
-<!--                                <img src="author-avatar-3.jpg" class="rounded-circle me-2" width="24" height="24"-->
-<!--                                     alt="Author Avatar">-->
-<!--                                <span class="small fw-medium">Lê Văn C</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="col-md-3">-->
-<!--                    <div class="card border-0 shadow-sm h-100">-->
-<!--                        <img src="blog-image-4.jpg" class="card-img-top" alt="Blog Image">-->
-<!--                        <div class="card-body">-->
-<!--                            <div class="d-flex align-items-center mb-3">-->
-<!--                                <span class="badge bg-info me-2">Python</span>-->
-<!--                                <span class="text-muted small">12/11/24</span>-->
-<!--                            </div>-->
-<!--                            <h5 class="card-title fw-bold mb-3">-->
-<!--                                <a href="#" class="text-decoration-none text-dark stretched-link">-->
-<!--                                    Top 5 Python Libraries for Data Science-->
-<!--                                </a>-->
-<!--                            </h5>-->
-<!--                            <p class="card-text text-muted">Tìm hiểu 5 thư viện Python hữu ích nhất dành cho Data-->
-<!--                                Science...</p>-->
-<!--                        </div>-->
-<!--                        <div class="card-footer bg-transparent border-0 pt-0 pb-4 px-4">-->
-<!--                            <div class="d-flex align-items-center">-->
-<!--                                <img src="author-avatar-4.jpg" class="rounded-circle me-2" width="24" height="24"-->
-<!--                                     alt="Author Avatar">-->
-<!--                                <span class="small fw-medium">Nguyễn Thị D</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="col-md-3">-->
-<!--                    <div class="card border-0 shadow-sm h-100">-->
-<!--                        <img src="blog-image-5.jpg" class="card-img-top" alt="Blog Image">-->
-<!--                        <div class="card-body">-->
-<!--                            <div class="d-flex align-items-center mb-3">-->
-<!--                                <span class="badge bg-warning me-2">JavaScript</span>-->
-<!--                                <span class="text-muted small">18/11/24</span>-->
-<!--                            </div>-->
-<!--                            <h5 class="card-title fw-bold mb-3">-->
-<!--                                <a href="#" class="text-decoration-none text-dark stretched-link">-->
-<!--                                    Mastering Async/Await in JavaScript-->
-<!--                                </a>-->
-<!--                            </h5>-->
-<!--                            <p class="card-text text-muted">Hiểu sâu về cách sử dụng Async/Await để xử lý bất đồng bộ-->
-<!--                                trong JavaScript...</p>-->
-<!--                        </div>-->
-<!--                        <div class="card-footer bg-transparent border-0 pt-0 pb-4 px-4">-->
-<!--                            <div class="d-flex align-items-center">-->
-<!--                                <img src="author-avatar-5.jpg" class="rounded-circle me-2" width="24" height="24"-->
-<!--                                     alt="Author Avatar">-->
-<!--                                <span class="small fw-medium">Trần Văn E</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="col-md-3">-->
-<!--                    <div class="card border-0 shadow-sm h-100">-->
-<!--                        <img src="blog-image-6.jpg" class="card-img-top" alt="Blog Image">-->
-<!--                        <div class="card-body">-->
-<!--                            <div class="d-flex align-items-center mb-3">-->
-<!--                                <span class="badge bg-primary me-2">Web Dev</span>-->
-<!--                                <span class="text-muted small">01/09/24</span>-->
-<!--                            </div>-->
-<!--                            <h5 class="card-title fw-bold mb-3">-->
-<!--                                <a href="#" class="text-decoration-none text-dark stretched-link">-->
-<!--                                    Responsive Web Design Techniques-->
-<!--                                </a>-->
-<!--                            </h5>-->
-<!--                            <p class="card-text text-muted">Các kỹ thuật thiết kế web responsive hiệu quả để tối ưu hóa-->
-<!--                                trải nghiệm người dùng...</p>-->
-<!--                        </div>-->
-<!--                        <div class="card-footer bg-transparent border-0 pt-0 pb-4 px-4">-->
-<!--                            <div class="d-flex align-items-center">-->
-<!--                                <img src="author-avatar-6.jpg" class="rounded-circle me-2" width="24" height="24"-->
-<!--                                     alt="Author Avatar">-->
-<!--                                <span class="small fw-medium">Lê Thị F</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="col-md-3">-->
-<!--                    <div class="card border-0 shadow-sm h-100">-->
-<!--                        <img src="blog-image-7.jpg" class="card-img-top" alt="Blog Image">-->
-<!--                        <div class="card-body">-->
-<!--                            <div class="d-flex align-items-center mb-3">-->
-<!--                                <span class="badge bg-danger me-2">AI</span>-->
-<!--                                <span class="text-muted small">22/10/24</span>-->
-<!--                            </div>-->
-<!--                            <h5 class="card-title fw-bold mb-3">-->
-<!--                                <a href="#" class="text-decoration-none text-dark stretched-link">-->
-<!--                                    Introduction to Artificial Intelligence-->
-<!--                                </a>-->
-<!--                            </h5>-->
-<!--                            <p class="card-text text-muted">Hiểu cơ bản về Trí tuệ nhân tạo, các khái niệm và ứng dụng-->
-<!--                                chính...</p>-->
-<!--                        </div>-->
-<!--                        <div class="card-footer bg-transparent border-0 pt-0 pb-4 px-4">-->
-<!--                            <div class="d-flex align-items-center">-->
-<!--                                <img src="author-avatar-7.jpg" class="rounded-circle me-2" width="24" height="24"-->
-<!--                                     alt="Author Avatar">-->
-<!--                                <span class="small fw-medium">Nguyễn Văn G</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="col-md-3">-->
-<!--                    <div class="card border-0 shadow-sm h-100">-->
-<!--                        <img src="blog-image-8.jpg" class="card-img-top" alt="Blog Image">-->
-<!--                        <div class="card-body">-->
-<!--                            <div class="d-flex align-items-center mb-3">-->
-<!--                                <span class="badge bg-info me-2">Git</span>-->
-<!--                                <span class="text-muted small">14/11/24</span>-->
-<!--                            </div>-->
-<!--                            <h5 class="card-title fw-bold mb-3">-->
-<!--                                <a href="#" class="text-decoration-none text-dark stretched-link">-->
-<!--                                    Git Workflow Best Practices-->
-<!--                                </a>-->
-<!--                            </h5>-->
-<!--                            <p class="card-text text-muted">Hướng dẫn về các best practice khi sử dụng Git trong quy-->
-<!--                                trình phát triển phần mềm...</p>-->
-<!--                        </div>-->
-<!--                        <div class="card-footer bg-transparent border-0 pt-0 pb-4 px-4">-->
-<!--                            <div class="d-flex align-items-center">-->
-<!--                                <img src="author-avatar-8.jpg" class="rounded-circle me-2" width="24" height="24"-->
-<!--                                     alt="Author Avatar">-->
-<!--                                <span class="small fw-medium">Trần Thị H</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-            </div>
+                </div>
         </div>
     </section>
+    <div></div>
 
     <!-- Trust Indicators Section -->
     <!--    <section class="py-5">-->
@@ -633,6 +451,20 @@
             });
         });
     });
+    document.querySelectorAll(".bookmark").forEach(bookmark=> bookmark.addEventListener("click",function(){
+    	const articleID=this.getAttribute("data-article-id")
+    	console.log(articleID)
+    	fetch(`/user/bookmark/${articleID}`,{
+    		method:'POST',
+    		headers:{
+    			'Content-Type':'application/json',
+    		},
+    	}).then(response => response.json())
+    	.then(data => console.log('Success',data))
+    	.catch(error=>{
+    		console.error('Error: ',error)
+    	})
+    }))
 </script>
 </body>
 

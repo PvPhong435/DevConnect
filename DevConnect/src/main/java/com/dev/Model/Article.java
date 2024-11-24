@@ -22,7 +22,9 @@ public class Article {
     private String title;
     private String author;
     private String content;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createat;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date updateat;
     @ManyToMany
     @JoinTable(
