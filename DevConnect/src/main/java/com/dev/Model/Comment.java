@@ -28,4 +28,15 @@ public class Comment {
     @Transient
     private String createAtAsString;
 
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id='" + id + '\'' +
+                ", content='" + content + '\'' +
+                ", createat=" + createat +
+                ", article=" + article.getId() +
+                ", user=" + user.getUsername() +
+                ", createAtAsString='" + createAtAsString + '\'' +
+                '}';
+    }
 }

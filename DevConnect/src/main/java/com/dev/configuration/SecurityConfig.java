@@ -27,6 +27,7 @@ public class SecurityConfig {
 				.authorizeHttpRequests(
 						auth ->{
 							auth.requestMatchers("/","/error","/favicon.ico","/home/**","/js/**", "/blog/**").permitAll();
+							auth.requestMatchers("/blog/{title}/comment").authenticated();
 							auth.anyRequest().authenticated();	
 						}
 						)

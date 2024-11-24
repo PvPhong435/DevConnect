@@ -10,6 +10,7 @@ import com.dev.Util.SlugUtil;
 import com.dev.services.UserPrincipal;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,13 +61,14 @@ public class BlogContentController {
     }
 
     @GetMapping("/blog/{title}")
-    public String blog(Model model, @PathVariable String title) {
+    public String blog(Model model, @PathVariable String title, @AuthenticationPrincipal UserPrincipal user) {
         List<Article> list = articleRepository.findAll();
         Optional<Article> articleFound = list.stream()
                 .filter(a -> SlugUtil.toSlug(a.getTitle()).equals(title)).findFirst();
 
         if (articleFound.isPresent()) {
             Article article = articleFound.get();
+            article.setTitleSlug(SlugUtil.toSlug(article.getTitle()));
             for (Comment comment : article.getComments()) {
                 comment.setCreateAtAsString(returnTime(comment.getCreateat().getTime()));
             }
@@ -100,9 +102,11 @@ public class BlogContentController {
     public String comment(@AuthenticationPrincipal UserPrincipal userPrincipal, @ModelAttribute Comment comment, @PathVariable String title) {
         if (userPrincipal == null)
             throw new RuntimeException("User not logged in");
+        int latestCommentId = commentRepository.findAll().stream().map(c -> Integer.parseInt(c.getId().replaceAll("\\D", ""))).max(Comparator.naturalOrder()).get();
         Optional<Article> article = articleRepository.findAll().stream()
                 .filter(a -> SlugUtil.toSlug(a.getTitle()).equals(title)).findFirst();
         if (article.isPresent()) {
+            comment.setId("com" + (latestCommentId + 1));
             comment.setUser(userPrincipal.getUser());
             comment.setArticle(article.get());
             commentRepository.save(comment);
