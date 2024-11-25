@@ -1,6 +1,7 @@
 package com.dev.Controller;
 
 import java.util.List;
+import jakarta.servlet.http.HttpSession;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.dev.Dao.UserDao;
 import com.dev.Model.User;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.websocket.server.PathParam;
 
 @Controller
@@ -32,9 +35,15 @@ public class loginController {
 	String maXacThuc="";
 	@Autowired
 	UserDao userDao;
+	@Autowired
+    private HttpServletRequest request;
+	User userLogin=null;
 	String mess="";
 	String checkMaXacThuc="";
 	User user;
+	User userSignUp;
+	HttpSession session;
+
 	
 	
 	//Đăng nhập
@@ -62,6 +71,9 @@ public class loginController {
 	    }
 	    user = user;
 	    System.out.println("Đăng nhập thành công");
+	    HttpSession session = request.getSession();
+		session.setAttribute("user", user);
+		System.out.println((User)session.getAttribute("user"));
 	    return "check/success";
 	}
 
@@ -75,10 +87,39 @@ public class loginController {
 	}
 	
 	@PostMapping("/signup")
-	public String signup(Model model)
+	public String signup(Model model,@ModelAttribute User user)
+	{
+		userSignUp=user;
+		userSignUp.setRole("user");
+		if(sendMailSignUp(user.getEmail(), user.getFullname()))
+		{
+			return "Check/RegistrationVerification";
+		}
+		else
+		{
+			System.out.println("Lỗi trong quá trình đăng ký tài khoản");
+			return "Check/SignUp";
+		}
+	}
+	
+	@PostMapping("/CheckSignUp")
+	public String CheckSignUp(@RequestParam("otp") String otp,Model model)
 	{
 		
-		return "";
+		if(otp.equals(checkMaXacThuc))
+		{
+			
+			System.out.println("Đăng ký thành công");
+			user=userSignUp;
+			userDao.save(user);
+			//session.setAttribute("user", user);
+			return "Check/success";
+		}
+		else
+		{
+			mess="Mã xác thực không đúng vui lòng nhập lại";
+			return "redirect:/checkOTP";
+		}
 	}
 	
 	//Quên mật khẩu
@@ -254,6 +295,63 @@ public class loginController {
         return null;
     }
 	
+	public void AddToSession(User user)
+	{
+		
+	}
 
-	
+	public Boolean sendMailSignUp(String email,String name)
+	{
+		try {
+			Properties properties = new Properties();
+	        properties.put("mail.smtp.host", "smtp.gmail.com");
+	        properties.put("mail.smtp.port", "587");
+	        properties.put("mail.smtp.auth", "true");
+	        properties.put("mail.smtp.starttls.enable", "true");
+		
+	        final String myEmail = "phongpvps36848@fpt.edu.vn";
+	        final String password = "hghm ugqp puja zqpk";
+	        
+	        Session session = Session.getInstance(properties, new Authenticator() {
+	            @Override
+	            protected PasswordAuthentication getPasswordAuthentication() {
+	                return new PasswordAuthentication(myEmail, password);
+	            }
+	        });
+	        
+	        StringBuilder ranNum = new StringBuilder();
+	        for (int i = 0; i < 6; i++) {
+	            int rand = (int) ((Math.random() * 9) + 1); // Random số nguyên từ 1 đến 9
+	            ranNum.append(rand);
+	        }
+	        System.out.println("mã khi vừa đc render "+ranNum.toString());
+	        maXacThuc=ranNum.toString();
+	        
+	        
+	        String messageText = "Kính gửi "+name+",\n\n" +
+	        	    "Chúng tôi đã nhận được yêu cầu xác nhận đăng ký tài khoản của bạn. " +
+	        	    "Vui lòng sử dụng mã xác thực dưới đây để hoàn tất quá trình đăng ký tài khoản:\n\n" +
+	        	    "Mã xác thực: "+ranNum+"\n\n" +
+	        	    "Mã này có hiệu lực trong vòng 10 phút. Nếu bạn không yêu cầu xác nhận, vui lòng bỏ qua email này. " +
+	        	    "Nếu có bất kỳ thắc mắc nào, xin vui lòng liên hệ với chúng tôi qua email hỗ trợ.\n\n" +
+	        	    "Trân trọng,\n" +
+	        	    "Đội ngũ hỗ trợ: DevConnect \n" +
+	        	    "DevConnect. Kết nối tri thức, dẫn lối đam mê";
+
+	        
+	        System.out.println(messageText);
+	        Message message = prepareMessage(session, myEmail,email, "Mail Xác Thực", messageText);
+	        
+	        
+	        Transport.send(message);
+	        System.out.println("Email đã được gửi thành công!");
+	        checkMaXacThuc=maXacThuc;
+	        System.out.println(checkMaXacThuc);
+	        maXacThuc="";
+	        return true;
+		} catch (Exception e) {
+			System.out.println("Email đã được gửi Thất Bại!"+e.toString());
+			return false;
+		}
+	}
 }
