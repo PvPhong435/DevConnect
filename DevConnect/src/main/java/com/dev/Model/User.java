@@ -8,7 +8,7 @@ import lombok.Data;
 @SuppressWarnings("serial")
 @Data
 @Entity
-@Table(name="Users")
+@Table(name="users")
 public class User {
 	@Id
 	String username;

@@ -100,6 +100,12 @@
     		<artifactId>tomcat-embed-jasper</artifactId>
     		<scope>provided</scope>
 		</dependency>
+		
+		<dependency>
+		    <groupId>org.postgresql</groupId>
+		    <artifactId>postgresql</artifactId>
+		    <version>42.6.0</version> <!-- Kiểm tra phiên bản mới nhất -->
+		</dependency>
 
 <dependency>
     <groupId>javax.servlet</groupId>
