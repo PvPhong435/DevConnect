@@ -21,7 +21,7 @@ public class homeController {
 		this.articleDAO = articleDAO;
 	}
 
-	@GetMapping("/home/index")
+	@GetMapping("/")
 	public String getHomePage(Model model) {
 		List<Article> list= articleDAO.findAll();
 		model.addAttribute("list",list);

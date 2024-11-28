@@ -138,3 +138,12 @@
 }
 
 /*Carousel*/
+
+.btn-bookmark{
+	  color:#FFD43B !important;
+	  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.btn-unbookmark{
+	  color:#74C0FC	!important;
+	  transition: background-color 0.3s ease, color 0.3s ease;
+}
