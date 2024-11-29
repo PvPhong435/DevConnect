@@ -59,6 +59,19 @@ public class AdminController {
 		}		
 	}
 	
-	@RequestMapping("/admin/user/")
+	@RequestMapping("/admin/user/remove/{id}")
+	public String removeUser(Model model,@PathVariable("id") String username)
+	{
+		try {
+			User userRemove=dao.findByUsername(username);
+			dao.delete(userRemove);
+			System.out.println("Thêm dữ liệu thành công");
+			return "redirect:/admin/user";
+		} catch (Exception e) {
+			System.out.println("Thêm dữ liệu thất bại");
+			return "redirect:/admin/user";
+		}
+		
+	}
 	
 }
