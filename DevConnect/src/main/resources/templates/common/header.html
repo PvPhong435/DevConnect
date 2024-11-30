@@ -37,9 +37,9 @@
 
             <!-- Thanh tìm kiếm và đăng nhập -->
             <div class="d-flex align-items-center">
-                <form class="position-relative me-3" th:action="@{/search}" method="get">
-                    <input type="text" class="form-control rounded-pill ps-4" name="q" placeholder="Tìm kiếm...">
-                    <span class="position-absolute top-50 start-0 translate-middle-y ms-2">🔍</span>
+                <form class="position-relative me-3" th:action="@{/blogs}" method="get">
+                    <input type="text" class="form-control rounded-pill ps-4" name="search" placeholder="Tìm kiếm...">
+                    <button type="submit" class="position-absolute top-50 end-0 btn-primary-outlinew border-0 translate-middle-y ms-2">🔍</button>
                 </form>
                 <a th:href="@{/login}" class="btn btn-primary rounded-pill px-4 py-2">
                     Đăng nhập

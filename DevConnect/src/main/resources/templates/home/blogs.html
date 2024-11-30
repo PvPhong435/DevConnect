@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/layout/layout.html :: dynamic(~{::body})}">
+
+<!-- Liên kết file CSS với Thymeleaf -->
+
+<link rel="icon" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+
+<body>
+	<div class="row g-4">
+					<!-- Blog Card -->
+					<div th:each="article: ${list}" class="col-md-3">
+						<div class="card border-0 shadow-sm h-100">
+							<div th:if="${article.images.size()!=0}">
+								<img th:src="${article.images[0]}" class="card-img-top"
+									alt="Blog Image">
+							</div>
+							<div th:if="${article.images.size()==0}">
+								<p>Image not found</p>
+							</div>
+
+							<div class="card-body">
+								<div class="d-flex align-items-center mb-3">
+									<span class="badge bg-primary me-2"></span> 
+									<span
+										th:text="${#dates.format(article.createat,'dd/MM/yyyy')}"
+										class="text-muted small"></span>
+								</div>
+								<h5 class="card-title fw-bold mb-3">
+									<a href="#" th:text="${article.title}"
+										class="text-decoration-none text-dark stretched-link"> </a>
+								</h5>
+								<p th:text="${article.content}" class="card-text text-muted"></p>
+							</div>
+							<div class="card-footer bg-transparent border-0 pt-0 pb-4 px-4">
+								<div class="d-flex align-items-center">
+									<!-- <img src="author-avatar-1.jpg" class="rounded-circle me-2"
+										width="24" height="24" alt="Author Avatar"> --> <span
+										th:text="${article.author.fullname}" class="small fw-medium"></span>
+								</div>
+								<span class="z-2 position-relative d-flex justify-content-end"><button type="button"
+									class="btn border-0 btn-toggle"
+									 onclick="addBookmark(this)"
+									th:attr="data-article-id=${article.articleID}"><i
+										class="child fas fa-bookmark fa-lg btn-unbookmark"></i></button> </span>
+							</div>
+						</div>
+					</div>
+				</div>
+</body>
+</html>

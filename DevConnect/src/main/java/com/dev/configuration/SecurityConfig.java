@@ -36,7 +36,7 @@ public class SecurityConfig {
 				.authenticationProvider(authenticationProviderUser())
 				.authorizeHttpRequests(
 						auth ->{
-							auth.requestMatchers("/","/error","/favicon.ico","/home/**").permitAll();
+							auth.requestMatchers("/","/error","/favicon.ico","/home/**","/blogs").permitAll();
 							auth.requestMatchers("/js/**","/images/**","/css/**").permitAll();
 							auth.anyRequest().authenticated();	
 						}
