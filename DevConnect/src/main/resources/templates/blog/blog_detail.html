@@ -86,7 +86,7 @@
                     <!-- Tags -->
                     <div class="mt-4 mb-5">
                         <div class="d-flex gap-2">
-                            <a href="#" class="badge bg-light text-dark text-decoration-none" th:each="tag : *{tags}" th:text="${tag.id}"></a>
+                            <a th:href="@{|/tags/${tag.tagByName}|}" class="badge bg-light text-dark text-decoration-none" th:each="tag : *{tags}" th:text="${tag.id}"></a>
                         </div>
                     </div>
 
@@ -195,10 +195,10 @@
                     <div class="list-group list-group-flush">
                         <a th:href="@{|/blog/${rArticle.titleSlug}|}" class="list-group-item list-group-item-action border-0 px-0" th:each="rArticle : ${relatedArticle}">
                             <div class="d-flex gap-3">
-                                <img src="/api/placeholder/80/80" class="rounded-3" alt="Related Post">
+<!--                                <img th:src="${rArticle.images[0].imgURL}" class="rounded-3" alt="Post">-->
                                 <div>
-                                    <h6 class="mb-1" th:text="${rArticle.title}">JavaScript Promise Patterns</h6>
-                                    <small class="text-muted" th:text="${#dates.format(rArticle.createat, 'dd/MM/yy')}">15/11/24</small>
+                                    <h6 class="mb-1" th:text="${rArticle.title}"></h6>
+                                    <small class="text-muted" th:text="${#dates.format(rArticle.createat, 'dd/MM/yy')}"></small>
                                 </div>
                             </div>
                         </a>
@@ -218,7 +218,7 @@
                 <div class="card border-0 shadow-sm p-4">
                     <h4 class="fw-bold mb-3">Tags phổ biến</h4>
                     <div class="d-flex flex-wrap gap-2">
-                        <a href="#" class="badge bg-light text-dark text-decoration-none" th:each="tag : ${tags}" th:text="${tag.id}">#javascript</a>
+                        <a th:href="@{|/tags/${tag.tagByName}|}" class="badge bg-light text-dark text-decoration-none" th:each="tag : ${tags}" th:text="${tag.id}">#javascript</a>
 <!--                        <a href="#" class="badge bg-light text-dark text-decoration-none">#webdev</a>-->
 <!--                        <a href="#" class="badge bg-light text-dark text-decoration-none">#programming</a>-->
 <!--                        <a href="#" class="badge bg-light text-dark text-decoration-none">#react</a>-->

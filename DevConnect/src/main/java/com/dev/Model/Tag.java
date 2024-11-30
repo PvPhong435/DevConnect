@@ -22,4 +22,8 @@ public class Tag {
     @ManyToMany(mappedBy = "tags")
     private List<Article> articles;
 
+    public String getTagByName() {
+        return id.replace("#", "");
+    }
+
 }

@@ -15,7 +15,7 @@
                         data-bs-target="#navbarContent">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand text-primary fw-bold fs-4" href="#">DevConnect</a>
+                <a class="navbar-brand text-primary fw-bold fs-4" th:href="@{/}">DevConnect</a>
             </div>
             <!-- Menu chính -->
             <div class="collapse navbar-collapse" id="navbarContent">
@@ -24,14 +24,14 @@
                         <a class="nav-link" th:href="@{/}" >Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/topics}">Chủ đề</a>
+                        <a class="nav-link" th:href="@{/tags}">Tags</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/questions}">Hỏi đáp</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/posts}">Bài viết</a>
-                    </li>
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" th:href="@{/questions}">Hỏi đáp</a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" th:href="@{/posts}">Bài viết</a>-->
+<!--                    </li>-->
                 </ul>
             </div>
             <!-- Thanh tìm kiếm và đăng nhập -->
