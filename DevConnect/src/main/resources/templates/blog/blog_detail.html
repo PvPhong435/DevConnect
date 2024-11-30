@@ -34,8 +34,8 @@
                         <div class="d-flex align-items-center mb-4">
 <!--                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7AJgRNJQkHzanHnwf8mAVed-Do-X9NXLQmQ&s"-->
 <!--                                 style="height: 40px;width: 40px" class="rounded-circle me-2" alt="Author Avatar">-->
-                            <div>
-                                <div class="fw-medium" th:text="'Tác giả: ' + *{author.fullname}">Trần Văn E</div>
+                            <div th:if="*{author != null}">
+                                <div class="fw-medium" th:text="'Tác giả: ' + *{author.fullname}"></div>
 <!--                                <div class="text-muted small">Senior JavaScript Developer</div>-->
                             </div>
                         </div>
