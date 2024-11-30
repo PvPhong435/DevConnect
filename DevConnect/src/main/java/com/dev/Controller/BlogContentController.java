@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -49,12 +50,13 @@ public class BlogContentController {
             Set<Article> relatedArticle = new HashSet<>();
             for (Article article1 : list) {
                 for (Tag tag : article.getTags()) {
-                    if (article1.getTags().contains(tag)) {
+                    if (article1.getTags().contains(tag) && !article1.getTitleSlug().equals(title)) {
                         relatedArticle.add(article1);
                         break;
                     }
                 }
             }
+            relatedArticle = relatedArticle.stream().sorted((o1, o2) -> o2.getCreateat().compareTo(o1.getCreateat())).collect(Collectors.toCollection(LinkedHashSet::new));
 
             List<Tag> tags = tagDAO.findAll();
             tags.sort((o1, o2) -> o2.getArticles().size() - o1.getArticles().size());
