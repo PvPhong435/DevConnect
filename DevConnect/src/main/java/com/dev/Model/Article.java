@@ -17,31 +17,35 @@ import java.util.Set;
 @Table(name = "articles")
 public class Article {
 
-    @Id
-    @Column(name = "articleid")
-    private String id;
-    private String title;
-    private String content;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createat;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updateat;
-    @ManyToMany
-    @JoinTable(
-            name = "articletags",
-            joinColumns = @JoinColumn(name = "articleid"),
-            inverseJoinColumns = @JoinColumn(name = "tagid")
-    )
-    private Set<Tag> tags;
-    @JsonIgnore
-    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
-    private List<Comment> comments;
-    @ManyToOne
-    @JoinColumn(name = "author")
-    private User author;
+	@Id
+	private String articleID;
+	private String title;
+	private String content;
+	@ManyToOne
+	@JoinColumn(name="categoryid")
+	private Category category;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createat;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date updateat;
+	@OneToMany(mappedBy="article",cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<ArticleImages> images;
+	@ManyToMany
+	@JoinTable(
+			name = "articletags",
+			joinColumns = @JoinColumn(name = "articleid"),
+			inverseJoinColumns = @JoinColumn(name = "tagid")
+	)
+	private Set<Tag> tags;
+	@JsonIgnore
+	@OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+	private List<Comment> comments;
+	@ManyToOne
+	@JoinColumn(name = "author")
+	private User author;
 
-    public String getTitleSlug() {
-        return SlugUtil.toSlug(title);
-    }
-    
+	public String getTitleSlug() {
+		return SlugUtil.toSlug(title);
+	}
+
 }

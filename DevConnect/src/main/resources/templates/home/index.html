@@ -1,431 +1,467 @@
 <!-- File: templates/home/index.html -->
+
 <!DOCTYPE html>
+
 <html xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{/layout/layout.html :: dynamic(~{::body})}">
+	th:replace="~{/layout/layout.html :: dynamic(~{::body})}">
 
 <!-- Liên kết file CSS với Thymeleaf -->
-<link rel="stylesheet" th:href="@{/css/index.css}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<link rel="icon" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+
 <body>
-<!-- Define the content fragment that will be inserted into layout -->
-<!--<div th:fragment="content">-->
-<div>
-    <!-- Hero Section -->
-    <div class="hero-section position-relative overflow-hidden bg-dark text-white">
-        <!-- Background với hiệu ứng gradient -->
-        <div class="position-absolute w-100 h-100"
-             style="background: linear-gradient(135deg, #1a1a1a 0%, #0a2463 100%);"></div>
+	<!-- Define the content fragment that will be inserted into layout -->
+	<!--<div th:fragment="content">-->
+	<div>
+		<!-- Hero Section -->
+		<div
+			class="hero-section position-relative overflow-hidden bg-dark text-white">
+			<!-- Background với hiệu ứng gradient -->
+			<div class="position-absolute w-100 h-100"
+				style="background: linear-gradient(135deg, #1a1a1a 0%, #0a2463 100%);"></div>
 
-        <!-- Animated background elements -->
-        <div class="position-absolute w-100 h-100" style="opacity: 0.1;">
-            <div class="position-absolute" style="animation: float 8s infinite ease-in-out;">
-                <pre class="text-primary" style="font-size: 4rem;">{ }</pre>
-            </div>
-            <div class="position-absolute" style="right: 10%; animation: float 6s infinite ease-in-out;">
-                <pre class="text-success" style="font-size: 3rem;">&lt;/&gt;</pre>
-            </div>
-            <div class="position-absolute" style="bottom: 10%; animation: float 7s infinite ease-in-out;">
-                <pre class="text-info" style="font-size: 3.5rem;">#</pre>
-            </div>
-        </div>
+			<!-- Animated background elements -->
+			<div class="position-absolute w-100 h-100" style="opacity: 0.1;">
+				<div class="position-absolute"
+					style="animation: float 8s infinite ease-in-out;">
+					<pre class="text-primary" style="font-size: 4rem;">{ }</pre>
+				</div>
+				<div class="position-absolute"
+					style="right: 10%; animation: float 6s infinite ease-in-out;">
+					<pre class="text-success" style="font-size: 3rem;">&lt;/&gt;</pre>
+				</div>
+				<div class="position-absolute"
+					style="bottom: 10%; animation: float 7s infinite ease-in-out;">
+					<pre class="text-info" style="font-size: 3.5rem;">#</pre>
+				</div>
+			</div>
 
-        <!-- Main content -->
-        <div class="container position-relative py-5">
-            <div class="row align-items-center py-5">
-                <!-- Text content -->
-                <div class="col-lg-6 mb-5 mb-lg-0">
-                    <h1 class="display-3 fw-bold mb-4 animate__animated animate__fadeInUp">
-                        Mở ra kiến thức<br/>
-                        <span class="text-primary">Dẫn lối đam mê</span>
-                    </h1>
+			<!-- Main content -->
+			<div class="container position-relative py-5">
+				<div class="row align-items-center py-5">
+					<!-- Text content -->
+					<div class="col-lg-6 mb-5 mb-lg-0">
+						<h1
+							class="display-3 fw-bold mb-4 animate__animated animate__fadeInUp">
+							Mở ra kiến thức<br /> <span class="text-primary">Dẫn lối
+								đam mê</span>
+						</h1>
 
-                    <p class="lead mb-4 animate__animated animate__fadeInUp animate__delay-1s">
-                        Cộng đồng hỏi đáp và chia sẻ kiến thức công nghệ hàng đầu Việt Nam.
-                        Kết nối với hàng nghìn chuyên gia và những người đam mê công nghệ.
-                    </p>
+						<p
+							class="lead mb-4 animate__animated animate__fadeInUp animate__delay-1s">
+							Cộng đồng hỏi đáp và chia sẻ kiến thức công nghệ hàng đầu Việt
+							Nam. Kết nối với hàng nghìn chuyên gia và những người đam mê công
+							nghệ.</p>
 
-                    <!-- Statistics -->
-                    <div class="row g-4 mb-5 animate__animated animate__fadeInUp animate__delay-2s">
-                        <div class="col-auto">
-                            <div class="d-flex align-items-center">
-                                <div class="display-6 fw-bold me-2">10K+</div>
-                                <div class="text-muted">Câu hỏi<br/>được giải đáp</div>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <div class="d-flex align-items-center">
-                                <div class="display-6 fw-bold me-2">5K+</div>
-                                <div class="text-muted">Thành viên<br/>tích cực</div>
-                            </div>
-                        </div>
-                    </div>
+						<!-- Statistics -->
+						<div
+							class="row g-4 mb-5 animate__animated animate__fadeInUp animate__delay-2s">
+							<div class="col-auto">
+								<div class="d-flex align-items-center">
+									<div class="display-6 fw-bold me-2">10K+</div>
+									<div class="text-muted">
+										Câu hỏi<br />được giải đáp
+									</div>
+								</div>
+							</div>
+							<div class="col-auto">
+								<div class="d-flex align-items-center">
+									<div class="display-6 fw-bold me-2">5K+</div>
+									<div class="text-muted">
+										Thành viên<br />tích cực
+									</div>
+								</div>
+							</div>
+						</div>
 
-                    <!-- CTA Buttons -->
-                    <div class="animate__animated animate__fadeInUp animate__delay-3s">
-                        <a href="#" class="btn btn-primary btn-lg me-3 px-4 py-3 rounded-pill">
-                            Đặt câu hỏi ngay
-                        </a>
-                        <a href="#" class="btn btn-outline-light btn-lg px-4 py-3 rounded-pill">
-                            Khám phá cộng đồng
-                        </a>
-                    </div>
-                </div>
+						<!-- CTA Buttons -->
+						<div class="animate__animated animate__fadeInUp animate__delay-3s">
+							<a href="#"
+								class="btn btn-primary btn-lg me-3 px-4 py-3 rounded-pill">
+								Đặt câu hỏi ngay </a> <a href="#"
+								class="btn btn-outline-light btn-lg px-4 py-3 rounded-pill">
+								Khám phá cộng đồng </a>
+						</div>
+					</div>
 
-                <!-- Illustration -->
-                <div class="col-lg-6 animate__animated animate__fadeInRight">
-                    <div class="position-relative">
-                        <img th:src="@{/images/background.png}" alt="Tech Community Illustration"
-                             class="img-fluid rounded-4 shadow-lg">
-                        <!-- Floating elements -->
-                        <!--                        <div class="position-absolute top-0 start-0 translate-middle p-4 bg-white rounded-4 shadow-lg animate__animated animate__fadeInUp animate__delay-1s">-->
-                        <!--                            <div class="d-flex align-items-center">-->
-                        <!--                                <div class="bg-success rounded-circle p-2 me-2">-->
-                        <!--                                    <i class="bi bi-check-lg text-white"></i>-->
-                        <!--                                </div>-->
-                        <!--                                <div>Giải đáp nhanh chóng</div>-->
-                        <!--                            </div>-->
-                        <!--                        </div>-->
-                        <!--                        <div class="position-absolute bottom-0 end-0 translate-middle-y p-4 bg-white rounded-4 shadow-lg animate__animated animate__fadeInUp animate__delay-2s">-->
-                        <!--                            <div class="d-flex align-items-center">-->
-                        <!--                                <div class="bg-primary rounded-circle p-2 me-2">-->
-                        <!--                                    <i class="bi bi-people-fill text-white"></i>-->
-                        <!--                                </div>-->
-                        <!--                                <div>Cộng đồng chuyên gia</div>-->
-                        <!--                            </div>-->
-                        <!--                        </div>-->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+					<!-- Illustration -->
+					<div class="col-lg-6 animate__animated animate__fadeInRight">
+						<div class="position-relative">
+							<img th:src="@{/images/background.png}"
+								alt="Tech Community Illustration"
+								class="img-fluid rounded-4 shadow-lg">
+							<!-- Floating elements -->
+							<!--                        <div class="position-absolute top-0 start-0 translate-middle p-4 bg-white rounded-4 shadow-lg animate__animated animate__fadeInUp animate__delay-1s">-->
+							<!--                            <div class="d-flex align-items-center">-->
+							<!--                                <div class="bg-success rounded-circle p-2 me-2">-->
+							<!--                                    <i class="bi bi-check-lg text-white"></i>-->
+							<!--                                </div>-->
+							<!--                                <div>Giải đáp nhanh chóng</div>-->
+							<!--                            </div>-->
+							<!--                        </div>-->
+							<!--                        <div class="position-absolute bottom-0 end-0 translate-middle-y p-4 bg-white rounded-4 shadow-lg animate__animated animate__fadeInUp animate__delay-2s">-->
+							<!--                            <div class="d-flex align-items-center">-->
+							<!--                                <div class="bg-primary rounded-circle p-2 me-2">-->
+							<!--                                    <i class="bi bi-people-fill text-white"></i>-->
+							<!--                                </div>-->
+							<!--                                <div>Cộng đồng chuyên gia</div>-->
+							<!--                            </div>-->
+							<!--                        </div>-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-    <!-- Thêm các section khác của trang chủ ở đây -->
-    <!--    <section class="py-5">-->
-    <!--        <div class="container">-->
-    <!--            <h2>Câu hỏi mới nhất</h2>-->
-    <!--            &lt;!&ndash; Content của section &ndash;&gt;-->
-    <!--        </div>-->
-    <!--    </section>-->
-    <section class="py-5 bg-gradient position-relative overflow-hidden">
-        <!-- Background Animation -->
-        <div class="position-absolute w-100 h-100 top-0 start-0"
-             style="background: linear-gradient(135deg, #0a2463 0%, #1a1a1a 100%); opacity: 0.97;"></div>
+		<!-- Thêm các section khác của trang chủ ở đây -->
+		<!--    <section class="py-5">-->
+		<!--        <div class="container">-->
+		<!--            <h2>Câu hỏi mới nhất</h2>-->
+		<!--            &lt;!&ndash; Content của section &ndash;&gt;-->
+		<!--        </div>-->
+		<!--    </section>-->
+		<section class="py-5 bg-gradient position-relative overflow-hidden">
+			<!-- Background Animation -->
+			<div class="position-absolute w-100 h-100 top-0 start-0"
+				style="background: linear-gradient(135deg, #0a2463 0%, #1a1a1a 100%); opacity: 0.97;"></div>
 
-        <div class="container position-relative">
-            <div class="row mb-5 text-center">
-                <div class="col-lg-6 mx-auto">
-                    <h2 class="text-white fw-bold mb-3">Tại sao chọn chúng tôi?</h2>
-                    <p class="text-white-50">Nền tảng hỏi đáp công nghệ hàng đầu với cộng đồng chuyên gia</p>
-                </div>
-            </div>
+			<div class="container position-relative">
+				<div class="row mb-5 text-center">
+					<div class="col-lg-6 mx-auto">
+						<h2 class="text-white fw-bold mb-3">Tại sao chọn chúng tôi?</h2>
+						<p class="text-white-50">Nền tảng hỏi đáp công nghệ hàng đầu
+							với cộng đồng chuyên gia</p>
+					</div>
+				</div>
 
-            <div class="row g-4">
-                <!-- Feature Card 1 -->
-                <div class="col-md-4">
-                    <div class="card bg-dark text-white border-0 h-100 feature-card">
-                        <div class="card-body p-4">
-                            <div class="feature-icon mb-4">
-                                <i class="bi bi-lightning-charge display-4 text-primary"></i>
-                            </div>
-                            <h4 class="fw-bold mb-3">Giải đáp nhanh chóng</h4>
-                            <p class="text-white-50">Nhận câu trả lời từ chuyên gia trong vòng 30 phút. Không để bạn
-                                phải chờ đợi.</p>
-                        </div>
-                    </div>
-                </div>
+				<div class="row g-4">
+					<!-- Feature Card 1 -->
+					<div class="col-md-4">
+						<div class="card bg-dark text-white border-0 h-100 feature-card">
+							<div class="card-body p-4">
+								<div class="feature-icon mb-4">
+									<i class="bi bi-lightning-charge display-4 text-primary"></i>
+								</div>
+								<h4 class="fw-bold mb-3">Giải đáp nhanh chóng</h4>
+								<p class="text-white-50">Nhận câu trả lời từ chuyên gia
+									trong vòng 30 phút. Không để bạn phải chờ đợi.</p>
+							</div>
+						</div>
+					</div>
 
-                <!-- Feature Card 2 -->
-                <div class="col-md-4">
-                    <div class="card bg-dark text-white border-0 h-100 feature-card">
-                        <div class="card-body p-4">
-                            <div class="feature-icon mb-4">
-                                <i class="bi bi-people display-4 text-success"></i>
-                            </div>
-                            <h4 class="fw-bold mb-3">Cộng đồng chuyên gia</h4>
-                            <p class="text-white-50">Kết nối với hơn 5000+ chuyên gia công nghệ hàng đầu Việt Nam.</p>
-                        </div>
-                    </div>
-                </div>
+					<!-- Feature Card 2 -->
+					<div class="col-md-4">
+						<div class="card bg-dark text-white border-0 h-100 feature-card">
+							<div class="card-body p-4">
+								<div class="feature-icon mb-4">
+									<i class="bi bi-people display-4 text-success"></i>
+								</div>
+								<h4 class="fw-bold mb-3">Cộng đồng chuyên gia</h4>
+								<p class="text-white-50">Kết nối với hơn 5000+ chuyên gia
+									công nghệ hàng đầu Việt Nam.</p>
+							</div>
+						</div>
+					</div>
 
-                <!-- Feature Card 3 -->
-                <div class="col-md-4">
-                    <div class="card bg-dark text-white border-0 h-100 feature-card">
-                        <div class="card-body p-4">
-                            <div class="feature-icon mb-4">
-                                <i class="bi bi-award display-4 text-warning"></i>
-                            </div>
-                            <h4 class="fw-bold mb-3">Chất lượng đảm bảo</h4>
-                            <p class="text-white-50">Mọi câu trả lời đều được kiểm duyệt và đánh giá bởi cộng đồng.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+					<!-- Feature Card 3 -->
+					<div class="col-md-4">
+						<div class="card bg-dark text-white border-0 h-100 feature-card">
+							<div class="card-body p-4">
+								<div class="feature-icon mb-4">
+									<i class="bi bi-award display-4 text-warning"></i>
+								</div>
+								<h4 class="fw-bold mb-3">Chất lượng đảm bảo</h4>
+								<p class="text-white-50">Mọi câu trả lời đều được kiểm duyệt
+									và đánh giá bởi cộng đồng.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
-    <!-- Interactive Categories Section -->
-    <section class="py-5">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-lg-6">
-                    <h2 class="fw-bold">Khám phá chủ đề</h2>
-                    <p class="text-muted">Tìm kiếm câu trả lời trong lĩnh vực bạn quan tâm</p>
-                </div>
-            </div>
+		<!-- Interactive Categories Section -->
+		<section class="py-5">
+			<div class="container">
+				<div class="row mb-5">
+					<div class="col-lg-6">
+						<h2 class="fw-bold">Khám phá chủ đề</h2>
+						<p class="text-muted">Tìm kiếm câu trả lời trong lĩnh vực bạn
+							quan tâm</p>
+					</div>
+				</div>
 
-            <div id="topicCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
-                <div class="carousel-inner">
-                    <!-- First Set of Categories -->
-                    <div class="carousel-item active">
-                        <div class="row g-4">
-                            <!-- Web Dev Category -->
-                            <div class="col-md-3 col-6">
-                                <div class="category-tile position-relative">
-                                    <div class="ratio ratio-1x1">
-                                        <div class="bg-primary bg-opacity-10 rounded-4 d-flex align-items-center justify-content-center p-4 category-content">
-                                            <div class="text-center">
-                                                <i class="bi bi-code-square display-4 text-primary mb-3"></i>
-                                                <h5 class="fw-bold mb-2">Web Dev</h5>
-                                                <p class="small text-muted mb-0">25 câu hỏi</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+				<div id="topicCarousel" class="carousel slide"
+					data-bs-ride="carousel" data-bs-interval="2000">
+					<div class="carousel-inner">
+						<!-- First Set of Categories -->
+						<div class="carousel-item active">
+							<div class="row g-4">
+								<!-- Web Dev Category -->
+								<div class="col-md-3 col-6">
+									<div class="category-tile position-relative">
+										<div class="ratio ratio-1x1">
+											<div
+												class="bg-primary bg-opacity-10 rounded-4 d-flex align-items-center justify-content-center p-4 category-content">
+												<div class="text-center">
+													<i class="bi bi-code-square display-4 text-primary mb-3"></i>
+													<h5 class="fw-bold mb-2">Web Dev</h5>
+													<p class="small text-muted mb-0">25 câu hỏi</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 
-                            <!-- JavaScript Category -->
-                            <div class="col-md-3 col-6">
-                                <div class="category-tile position-relative">
-                                    <div class="ratio ratio-1x1">
-                                        <div class="bg-warning bg-opacity-10 rounded-4 d-flex align-items-center justify-content-center p-4 category-content">
-                                            <div class="text-center">
-                                                <i class="bi bi-code display-4 text-warning mb-3"></i>
-                                                <h5 class="fw-bold mb-2">JavaScript</h5>
-                                                <p class="small text-muted mb-0">48 câu hỏi</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+								<!-- JavaScript Category -->
+								<div class="col-md-3 col-6">
+									<div class="category-tile position-relative">
+										<div class="ratio ratio-1x1">
+											<div
+												class="bg-warning bg-opacity-10 rounded-4 d-flex align-items-center justify-content-center p-4 category-content">
+												<div class="text-center">
+													<i class="bi bi-code display-4 text-warning mb-3"></i>
+													<h5 class="fw-bold mb-2">JavaScript</h5>
+													<p class="small text-muted mb-0">48 câu hỏi</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 
-                            <!-- AI/ML Category -->
-                            <div class="col-md-3 col-6">
-                                <div class="category-tile position-relative">
-                                    <div class="ratio ratio-1x1">
-                                        <div class="bg-danger bg-opacity-10 rounded-4 d-flex align-items-center justify-content-center p-4 category-content">
-                                            <div class="text-center">
-                                                <i class="bi bi-robot display-4 text-danger mb-3"></i>
-                                                <h5 class="fw-bold mb-2">AI</h5>
-                                                <p class="small text-muted mb-0">31 câu hỏi</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Java Category -->
-                            <div class="col-md-3 col-6">
-                                <div class="category-tile position-relative">
-                                    <div class="ratio ratio-1x1">
-                                        <div class="bg-secondary bg-opacity-10 rounded-4 d-flex align-items-center justify-content-center p-4 category-content">
-                                            <div class="text-center">
-                                                <i class="fa-brands fa-java display-3 text-danger mb-3"></i>
-                                                <h5 class="fw-bold mb-2">Java</h5>
-                                                <p class="small text-muted mb-0">40 câu hỏi</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+								<!-- AI/ML Category -->
+								<div class="col-md-3 col-6">
+									<div class="category-tile position-relative">
+										<div class="ratio ratio-1x1">
+											<div
+												class="bg-danger bg-opacity-10 rounded-4 d-flex align-items-center justify-content-center p-4 category-content">
+												<div class="text-center">
+													<i class="bi bi-robot display-4 text-danger mb-3"></i>
+													<h5 class="fw-bold mb-2">AI</h5>
+													<p class="small text-muted mb-0">31 câu hỏi</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- Java Category -->
+								<div class="col-md-3 col-6">
+									<div class="category-tile position-relative">
+										<div class="ratio ratio-1x1">
+											<div
+												class="bg-secondary bg-opacity-10 rounded-4 d-flex align-items-center justify-content-center p-4 category-content">
+												<div class="text-center">
+													<i class="fa-brands fa-java display-3 text-danger mb-3"></i>
+													<h5 class="fw-bold mb-2">Java</h5>
+													<p class="small text-muted mb-0">40 câu hỏi</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 
-                    <!-- Second Set of Categories -->
-                    <div class="carousel-item">
-                        <div class="row g-4">
-                            <!-- Database Category -->
-                            <div class="col-md-3 col-6">
-                                <div class="category-tile position-relative">
-                                    <div class="ratio ratio-1x1">
-                                        <div class="bg-info bg-opacity-10 rounded-4 d-flex align-items-center justify-content-center p-4 category-content">
-                                            <div class="text-center">
-                                                <i class="fa-solid fa-database display-4 text-info mb-3"></i>
-                                                <h5 class="fw-bold mb-2">Database</h5>
-                                                <p class="small text-muted mb-0">22 câu hỏi</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+						<!-- Second Set of Categories -->
+						<div class="carousel-item">
+							<div class="row g-4">
+								<!-- Database Category -->
+								<div class="col-md-3 col-6">
+									<div class="category-tile position-relative">
+										<div class="ratio ratio-1x1">
+											<div
+												class="bg-info bg-opacity-10 rounded-4 d-flex align-items-center justify-content-center p-4 category-content">
+												<div class="text-center">
+													<i class="fa-solid fa-database display-4 text-info mb-3"></i>
+													<h5 class="fw-bold mb-2">Database</h5>
+													<p class="small text-muted mb-0">22 câu hỏi</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 
-                            <!-- Java Category -->
+								<!-- Java Category -->
 
-                            <!-- DevOps Category -->
-                            <div class="col-md-3 col-6">
-                                <div class="category-tile position-relative">
-                                    <div class="ratio ratio-1x1">
-                                        <div class="bg-success bg-opacity-10 rounded-4 d-flex align-items-center justify-content-center p-4 category-content">
-                                            <div class="text-center">
-                                                <i class="bi bi-tools display-4 text-success mb-3"></i>
-                                                <h5 class="fw-bold mb-2">DevOps</h5>
-                                                <p class="small text-muted mb-0">19 câu hỏi</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+								<!-- DevOps Category -->
+								<div class="col-md-3 col-6">
+									<div class="category-tile position-relative">
+										<div class="ratio ratio-1x1">
+											<div
+												class="bg-success bg-opacity-10 rounded-4 d-flex align-items-center justify-content-center p-4 category-content">
+												<div class="text-center">
+													<i class="bi bi-tools display-4 text-success mb-3"></i>
+													<h5 class="fw-bold mb-2">DevOps</h5>
+													<p class="small text-muted mb-0">19 câu hỏi</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 
-                            <!-- Cloud Computing Category -->
-                            <div class="col-md-3 col-6">
-                                <div class="category-tile position-relative">
-                                    <div class="ratio ratio-1x1">
-                                        <div class="bg-warning bg-opacity-10 rounded-4 d-flex align-items-center justify-content-center p-4 category-content">
-                                            <div class="text-center">
-                                                <i class="bi bi-cloud display-4 text-warning mb-3"></i>
-                                                <h5 class="fw-bold mb-2">Cloud</h5>
-                                                <p class="small text-muted mb-0">27 câu hỏi</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+								<!-- Cloud Computing Category -->
+								<div class="col-md-3 col-6">
+									<div class="category-tile position-relative">
+										<div class="ratio ratio-1x1">
+											<div
+												class="bg-warning bg-opacity-10 rounded-4 d-flex align-items-center justify-content-center p-4 category-content">
+												<div class="text-center">
+													<i class="bi bi-cloud display-4 text-warning mb-3"></i>
+													<h5 class="fw-bold mb-2">Cloud</h5>
+													<p class="small text-muted mb-0">27 câu hỏi</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 
-                            <!-- Cybersecurity Category -->
-                            <div class="col-md-3 col-6">
-                                <div class="category-tile position-relative">
-                                    <div class="ratio ratio-1x1">
-                                        <div class="bg-dark bg-opacity-10 rounded-4 d-flex align-items-center justify-content-center p-4 category-content">
-                                            <div class="text-center">
-                                                <i class="bi bi-shield-lock display-4 text-dark mb-3"></i>
-                                                <h5 class="fw-bold mb-2">Cybersec</h5>
-                                                <p class="small text-muted mb-0">18 câu hỏi</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+								<!-- Cybersecurity Category -->
+								<div class="col-md-3 col-6">
+									<div class="category-tile position-relative">
+										<div class="ratio ratio-1x1">
+											<div
+												class="bg-dark bg-opacity-10 rounded-4 d-flex align-items-center justify-content-center p-4 category-content">
+												<div class="text-center">
+													<i class="bi bi-shield-lock display-4 text-dark mb-3"></i>
+													<h5 class="fw-bold mb-2">Cybersec</h5>
+													<p class="small text-muted mb-0">18 câu hỏi</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
-                <!-- Navigation Controls -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#topicCarousel"
-                        data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#topicCarousel"
-                        data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </div>
-    </section>
+					<!-- Navigation Controls -->
+					<button class="carousel-control-prev" type="button"
+						data-bs-target="#topicCarousel" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button"
+						data-bs-target="#topicCarousel" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
+				</div>
+			</div>
+		</section>
 
 
-    <!-- Live Activity Feed -->
-    <section class="py-5 bg-light">
-        <div class="container">
-            <div class="row mb-4">
-                <div class="col-lg-6">
-                    <h2 class="fw-bold">Blog phổ biến nhất</h2>
-                    <p class="text-muted">Những bài viết được quan tâm nhất từ cộng đồng</p>
-                </div>
-            </div>
+		<!-- Live Activity Feed -->
+		<section class="py-5 bg-light">
+			<div class="container">
+				<div class="row mb-4">
+					<div class="col-lg-6">
+						<h2 class="fw-bold">Blog phổ biến nhất</h2>
+						<p class="text-muted">Những bài viết được quan tâm nhất từ
+							cộng đồng</p>
+					</div>
+				</div>
 
-            <div class="row g-4">
-                <!-- Blog Card -->
-                <div th:each="article : ${list}" class="col-md-3">
-                    <div class="card border-0 shadow-sm h-100">
-                        <img src="https://images.all-free-download.com/images/thumbjpg/web_technology_conceptual_banner_template_3d_laptop_smartphone_light_effect_6939025.jpg" class="card-img-top" alt="Blog Image">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center mb-3">
-<!--                                <span class="badge bg-primary me-2">React</span>-->
-                                <span th:text="${#dates.format(article.createat,'dd/MM/yyyy')}" class="text-muted small"></span>
-                            </div>
-                            <h5 class="card-title fw-bold mb-2">
-                                <a th:href="@{|/blog/${article.titleSlug}|}" style="display: block; height: 51px" th:text="${article.title}" class="text-decoration-none text-dark stretched-link"></a>
-                            </h5>
-                            <div class="mt-1">
-                                <div class="d-flex gap-2">
-                                    <a href="#" class="badge bg-light text-dark text-decoration-none" th:each="tag : ${article.tags}" th:text="${tag.id}"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer bg-transparent border-0 pt-0 pb-4 px-4">
-                            <div class="d-flex align-items-center">
-                                <img th:src="${article.author.img}" src="author-avatar-1.jpg" class="rounded-circle me-2" width="24" height="24" alt="Avatar">
-                                <span th:text="${article.author.fullname}" class="small fw-medium"></span>
-                            </div>
-                            <span class="z-2 position-relative d-flex justify-content-end"><a class="bookmark" href="javascript:void(0)"  th:attr="data-article-id=${article.id}"><i class="fas fa-bookmark fa-lg" style="color: #FFD43B;"></i></a> </span>
-                        </div>
-                    </div>
-                </div>
+				<div class="row g-4">
+					<!-- Blog Card -->
+					<div th:each="article: ${list}" class="col-md-3">
+						<div class="card border-0 shadow-sm h-100">
+							<div th:if="${article.images.size()!=0}">
+								<img th:src="${article.images[0]}" class="card-img-top"
+									alt="Blog Image">
+							</div>
+							<div th:if="${article.images.size()==0}">
+								<p>Image not found</p>
+							</div>
 
-                <!-- More blog cards... -->
-                </div>
-        </div>
-    </section>
-    <div></div>
+							<div class="card-body">
+								<div class="d-flex align-items-center mb-3">
+									<span class="badge bg-primary me-2"></span> 
+									<span
+										th:text="${#dates.format(article.createat,'dd/MM/yyyy')}"
+										class="text-muted small"></span>
+								</div>
+								<h5 class="card-title fw-bold mb-3">
+									<a href="#" th:text="${article.title}"
+										class="text-decoration-none text-dark stretched-link"> </a>
+								</h5>
+								<p th:text="${article.content}" class="card-text text-muted"></p>
+							</div>
+							<div class="card-footer bg-transparent border-0 pt-0 pb-4 px-4">
+								<div class="d-flex align-items-center">
+									<!-- <img src="author-avatar-1.jpg" class="rounded-circle me-2"
+										width="24" height="24" alt="Author Avatar"> --> <span
+										th:text="${article.author.fullname}" class="small fw-medium"></span>
+								</div>
+								<span class="z-2 position-relative d-flex justify-content-end"><button type="button"
+									class="btn border-0 btn-toggle"
+									 onclick="addBookmark(this)"
+									th:attr="data-article-id=${article.articleID}"><i
+										class="child fas fa-bookmark fa-lg btn-unbookmark"></i></button> </span>
+							</div>
+						</div>
+					</div>
 
-    <!-- Trust Indicators Section -->
-    <!--    <section class="py-5">-->
-    <!--        <div class="container">-->
-    <!--            <div class="row justify-content-center text-center mb-5">-->
-    <!--                <div class="col-lg-6">-->
-    <!--                    <h2 class="fw-bold">Được tin tưởng bởi</h2>-->
-    <!--                    <p class="text-muted">Các công ty hàng đầu tin dùng nền tảng của chúng tôi</p>-->
-    <!--                </div>-->
-    <!--            </div>-->
+					<!-- More blog cards... -->
+				</div>
+			</div>
+		</section>
 
-    <!--            <div class="row g-4 align-items-center justify-content-center">-->
-    <!--                &lt;!&ndash; Company logos &ndash;&gt;-->
-    <!--                <div class="col-md-2 col-4">-->
-    <!--                    <img src="company1.png" alt="Company 1" class="img-fluid company-logo">-->
-    <!--                </div>-->
-    <!--                &lt;!&ndash; More company logos... &ndash;&gt;-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </section>-->
-    <!-- CSS cho index -->
-    <!--    <style th:href="@{/css/index.css}"></style>-->
-</div>
-<style>
-    .category-tile {
-        transition: transform 0.3s ease;
-    }
+		<!-- Trust Indicators Section -->
+		<!--    <section class="py-5">-->
+		<!--        <div class="container">-->
+		<!--            <div class="row justify-content-center text-center mb-5">-->
+		<!--                <div class="col-lg-6">-->
+		<!--                    <h2 class="fw-bold">Được tin tưởng bởi</h2>-->
+		<!--                    <p class="text-muted">Các công ty hàng đầu tin dùng nền tảng của chúng tôi</p>-->
+		<!--                </div>-->
+		<!--            </div>-->
 
-    .category-tile:hover {
-        transform: scale(1.05);
-    }
+		<!--            <div class="row g-4 align-items-center justify-content-center">-->
+		<!--                &lt;!&ndash; Company logos &ndash;&gt;-->
+		<!--                <div class="col-md-2 col-4">-->
+		<!--                    <img src="company1.png" alt="Company 1" class="img-fluid company-logo">-->
+		<!--                </div>-->
+		<!--                &lt;!&ndash; More company logos... &ndash;&gt;-->
+		<!--            </div>-->
+		<!--        </div>-->
+		<!--    </section>-->
+		<!-- CSS cho index -->
+		<!--    <style th:href="@{/css/index.css}"></style>-->
+	</div>
+	<style>
+.category-tile {
+	transition: transform 0.3s ease;
+}
 
-    .carousel-control-prev,
-    .carousel-control-next {
-        width: 50px;
-        height: 50px;
-        background-color: rgba(0, 0, 0, 0.1);
-        border-radius: 50%;
-        top: 50%;
-        transform: translateY(-50%);
-    }
+.category-tile:hover {
+	transform: scale(1.05);
+}
 
-    .carousel-control-prev {
-        left: -30px;
-    }
+.carousel-control-prev, .carousel-control-next {
+	width: 50px;
+	height: 50px;
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 50%;
+	top: 50%;
+	transform: translateY(-50%);
+}
 
-    .carousel-control-next {
-        right: -30px;
-    }
+.carousel-control-prev {
+	left: -30px;
+}
 
-    @media (max-width: 768px) {
-        .carousel-control-prev,
-        .carousel-control-next {
-            display: none;
-        }
-    }
+.carousel-control-next {
+	right: -30px;
+}
+
+@media ( max-width : 768px) {
+	.carousel-control-prev, .carousel-control-next {
+		display: none;
+	}
+}
 </style>
 
-<script>
+	<script>
     document.addEventListener('DOMContentLoaded', function () {
         // Automatic carousel with 2-second interval
         const topicCarousel = new bootstrap.Carousel(document.getElementById('topicCarousel'), {
@@ -452,20 +488,32 @@
             });
         });
     });
-    document.querySelectorAll(".bookmark").forEach(bookmark=> bookmark.addEventListener("click",function(){
-    	const articleID=this.getAttribute("data-article-id")
+    function addBookmark(button){
+    	child=button.querySelector('.child')
+    	child.classList.toggle('btn-bookmark')
+    	child.classList.toggle('btn-unbookmark')
+    	const articleID=button.getAttribute("data-article-id")
     	console.log(articleID)
     	fetch(`/user/bookmark/${articleID}`,{
     		method:'POST',
     		headers:{
     			'Content-Type':'application/json',
     		},
-    	}).then(response => response.json())
-    	.then(data => console.log('Success',data))
+    	})
+    	.then(response =>{
+    		console.log("to response")
+    		if(response.status==401){
+    			return response.json()
+    				.then(data=>{ if(data.redirect){
+    				console.log("Redirecting to login")
+    				window.location.href=data.redirect}else{
+    				console.error("Unauthorized but no redirect URL provided")
+    					}}
+    			)}})
     	.catch(error=>{
     		console.error('Error: ',error)
     	})
-    }))
+    }
 </script>
 </body>
 

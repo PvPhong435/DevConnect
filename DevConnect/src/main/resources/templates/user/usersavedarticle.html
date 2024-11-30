@@ -3,7 +3,6 @@
       th:replace="~{/layout/layout.html :: dynamic(~{::body})}">
 
 <!-- Liên kết file CSS với Thymeleaf -->
-<link rel="stylesheet" th:href="@{/css/index.css}">
 <body>
 This is user bookmarks
 	<section class="py-5 bg-light">
@@ -11,13 +10,13 @@ This is user bookmarks
 				<div class="row g-4">
 					<!-- Blog Card -->
 
-					<div th:each="bookmark : ${bookmarks}" class="col-md-3">
+					<div th:each="bookmark : ${bookmarks}" id="'bookmark-' + ${bookmark.id}" class="col-md-3">
 						<div class="card border-0 shadow-sm h-100">
 							<img src="blog-image-1.jpg" class="card-img-top" alt="Blog Image">
 							<div class="card-body">
 								<div class="d-flex align-items-center mb-3">
 									<span th:text="${bookmark.article.category.categoryName}"
-										class="badge bg-primary me-2">React</span>
+										class="badge bg-primary me-2"></span>
 								</div>
 								<span th:text="${#dates.format(bookmark.article.createat, 'dd/MM/yyyy')}"
 									class="text-muted fw-light  small"></span>
@@ -30,19 +29,17 @@ This is user bookmarks
 							</div>
 							<div class="card-footer  bg-transparent border-0 pt-0 pb-4 px-4">
 								<div class="d-flex align-items-center">
-									<img src="author-avatar-1.jpg" class="rounded-circle me-2"
-										width="24" height="24" alt="Author Avatar"> <span
-										th:text="${bookmark.article.author.fullname}" class="small fw-medium"></span>	
+									<!-- <img src="author-avatar-1.jpg" class="rounded-circle me-2"
+										width="24" height="24" alt="Author Avatar"> -->
+										 <span th:text="${bookmark.article.author.fullname}" class="small fw-medium"></span>	
 								</div>
-								 <span class="z-2 position-relative d-flex justify-content-end"><a class="bookmark-delete" href="javascript:void(0)"  th:attr="data-article-id=${bookmark.article.articleID}"><i class="fas fa-bookmark fa-lg" style="color: #FFD43B;"></i></a> </span>
+								<span class="z-2 position-relative d-flex align-items-center justify-content-end"><button class="btn-close" th:onclick="deleteBookmark([[${bookmark.id.article_id}]])" aria-label="Close"></button></span>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</section>
-		<script src="/js/index.js">
-			
-		</script>
+		<script src="/js/index.js"></script>
 </body>
 </html>
