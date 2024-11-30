@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/layout/layout.html :: dynamic(~{::body})}">
+
+<body>
+<div>
+    <!-- Hero Section -->
+    <div class="position-relative py-4 bg-light border-bottom">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item active" aria-current="page">Lập trình hướng đối tượng(OOP) trong Java</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Blog Content -->
+    <div class="container py-5">
+        <div class="row">
+            <!-- Main Content -->
+            <div class="col-lg-8">
+                <!-- Article Header -->
+                <article>
+                    <header class="mb-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="text-muted">Published on 18/11/24</span>
+                        </div>
+                        <h1 class="fw-bold mb-4">Lập trình hướng đối tượng(OOP) trong Java</h1>
+                        <div class="d-flex align-items-center mb-4">
+                            <div>
+                                <div class="fw-medium">Tác giả: Trần Thái Trọng Tín</div>
+                            </div>
+                        </div>
+                    </header>
+
+                    <!-- Featured Image -->
+<!--                    <img src="/api/placeholder/800/400" class="img-fluid rounded-4 mb-4" alt="Blog Featured Image">-->
+
+                    <!-- Article Content -->
+                    <div class="article-content">
+                        <div style="white-space: pre-line">
+                            <b>Khái niệm về lập trình hướng đối tượng trong java</b>
+                            Lập trình hướng đối tượng (OOP - Object-Oriented Programming) là một phương pháp hay mô hình giúp tăng năng suất, đơn giản hóa việc bảo trì, dễ dàng mở rộng trong thiết kế phần mềm bởi việc cung cấp một vài khái niệm như:
+
+                            Đối tượng (Object)
+                            Lớp (Class)
+                            Kế thừa (Inheritance)
+                            Đa hình (Polymorphism)
+                            Trừu tượng (Abstraction)
+                            Đóng gói (Encapsulation)
+
+                            <img src="https://www.tutorialspoint.com/java/images/java-oops-concepts.jpg" alt="OOP"><hr><b>Đối tượng (Object)</b>
+                            Tất cả những thực thể có trạng thái và hành vi được biết đến như là một đối tượng.
+                            Ví dụ: bàn, ghế, bút chì, xe dạp, ô tô...<hr><b>Lớp (Class)</b>
+                            Tập hợp các đối tượng được gọi là lớp.<hr><b>Kế thừa (Inheritance)</b>
+                            Kế thừa là sự liên quan giữa hai class với nhau, trong đó có class cha (superclass) và class con (subclass). Khi kế thừa class con được hưởng tất cả các phương thức và thuộc tính của class cha. Tuy nhiên, nó chỉ được truy cập các public và protected và không được phép truy cập các private của class cha.
+
+                            <b>Ví dụ về đơn kế thừa</b>
+<pre class="rounded m-0"><code class="language-java">class Animal {
+    void eat() {
+        System.out.println("eating...");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("barking...");
+    }
+}
+
+public class TestInheritance1 {
+    public static void main(String args[]) {
+        Dog d = new Dog();
+        d.bark();
+        d.eat();
+    }
+}</code></pre><small>Output:</small>
+                            <pre class="rounded p-3 m-0" style="background-color: #f5f2f0"><code>barking...
+eating...</code></pre>
+                            <b>Ví dụ về kế thừa nhiều cấp</b>
+                            <pre class="rounded m-0"><code class="language-java">class Animal {
+    void eat() {
+        System.out.println("eating...");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("barking...");
+    }
+}
+
+class BabyDog extends Dog {
+    void weep() {
+        System.out.println("weeping...");
+    }
+}
+
+public class TestInheritance2 {
+    public static void main(String args[]) {
+        BabyDog d = new BabyDog();
+        d.weep();
+        d.bark();
+        d.eat();
+    }
+}</code></pre><small>Output:</small>
+                            <pre class="rounded p-3 m-0" style="background-color: #f5f2f0"><code>weeping...
+barking...
+eating...</code></pre><hr><b>Đa hình (Polymorphism)</b>
+                            Đa hình cho phép các đối tượng của lớp con được xử lý như là các đối tượng của lớp cha, giúp linh hoạt trong việc xử lý đối tượng và thực thi các phương thức theo cách đa hình.
+                            Có hai kiểu của đa hình, đó là đa hình lúc biên dịch (compile) và đa hình lúc thực thi (runtime). Chúng ta có thể thực hiện đa hình bằng cách nạp chồng phương thức và ghi đè phương thức.
+
+                            <b>Ví dụ đa hình</b>
+                            <pre class="rounded m-0"><code class="language-java">class Shape {
+    void draw() {
+        System.out.println("drawing...");
+    }
+}
+
+class Rectangle extends Shape {
+    @Override
+    void draw() {
+        System.out.println("drawing rectangle...");
+    }
+}
+
+class Circle extends Shape {
+    @Override
+    void draw() {
+        System.out.println("drawing circle...");
+    }
+}
+
+class Triangle extends Shape {
+    @Override
+    void draw() {
+        System.out.println("drawing triangle...");
+    }
+}
+
+class TestPolymorphism2 {
+    public static void main(String args[]) {
+        Shape s1, s2, s3;
+        s1 = new Rectangle();
+        s2 = new Circle();
+        s3 = new Triangle();
+        s1.draw();
+        s2.draw();
+        s3.draw();
+    }
+}</code></pre><small>Output:</small>
+                            <pre class="rounded p-3 m-0" style="background-color: #f5f2f0"><code>drawing rectangle...
+drawing circle...
+drawing triangle...</code></pre><hr><b>Trừu tượng (Abstraction)</b>
+                            Trừu tượng là sự ẩn đi những chi tiết bên trong và hiển thị ra các chức năng, tính chất này gọi là trừu tượng.
+                            Áp dụng tính chất trừu tượng bằng cách sử dụng abstract class và interface.
+
+                            <b>Abstract Class</b>
+                            - Một lớp được khai báo với từ khóa abstract là lớp trừu tượng (abstract class).
+                            - Lớp trừu tượng có thể có các phương thức abstract hoặc non-abtract.
+                            - Lớp trừu tượng có thể khai báo 0, 1 hoặc nhiều method trừu tượng bên trong.
+                            - Không thể khởi tạo 1 đối tượng trực tiếp từ một class trừu tượng.
+                            - Một lớp kế thừa từ lớp trừu tượng (subclass – lớp con) không cần phải implement non-abstract methods, nhưng những method nào có abstract thì bắt buộc phải override. Trừ khi subclass cũng là abstract.
+
+                            <b>Ví dụ abstract class</b>
+                            <small>Shape.java</small>
+                            <pre class="rounded m-0"><code class="language-java">public abstract class Shape {
+    private String color = "red";
+
+    public Shape() { }
+
+    public abstract void draw();
+
+    public String getColor() {
+        return color;
+    }
+}</code></pre><small>Rectangle.java</small>
+                            <pre class="rounded m-0"><code class="language-java">public class Rectangle extends Shape {
+    @Override
+    public void draw() {
+        System.out.println("Draw " + super.getColor() + " rectangle");
+    }
+}</code></pre><small>Circle.java</small>
+                            <pre class="rounded m-0"><code class="language-java">public class Circle extends Shape {
+    @Override
+    public void draw() {
+        System.out.println("Draw " + super.getColor() + " circle");
+    }
+}</code></pre><small>Main.java</small>
+                            <pre class="rounded m-0"><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        Shape rect = new Rectangle();
+        rect.draw();
+        Shape circle = new Circle();
+        circle.draw();
+    }
+}</code></pre><small>Output:</small>
+                            <pre class="rounded p-3 m-0" style="background-color: #f5f2f0"><code>Draw red rectangle
+Draw red circle</code></pre>
+                            <b>Interface</b>
+                            - Các phương thức trong interface đều là các phương thức trừu tượng.
+                            - Interface là một kỹ thuật để thu được tính trừu tượng hoàn toàn và đa kế thừa.
+                            - Interface luôn luôn có modifier là: public interface, cho dù bạn có khai báo rõ hay không.
+                            - Nếu có các trường (field) thì chúng đều là: public static final, cho dù bạn có khai báo rõ hay không.
+                            - Các method của nó đều là method trừu tượng, nghĩa là không có thân hàm, và đều có modifier là: public abstract, cho dù bạn có khai báo hay không.
+                            - Interface không có hàm khởi tạo (constructor).
+                            - Một interface không phải là một lớp. Viết một interface giống như viết một lớp, nhưng chúng có 2 định nghĩa khác nhau. Một lớp mô tả các thuộc tính và hành vi của một đối tượng. Một interface chứa các hành vi mà một class triển khai.
+                            - Trừ khi một lớp triển khai interface là lớp trừu tượng abstract, còn lại tất cả các phương thức của interface cần được định nghĩa trong class.
+
+                            <b>Ví dụ interface</b>
+                            <small>Shape.java</small>
+                            <pre class="rounded m-0"><code class="language-java">public interface Shape {
+    String color = "red";
+
+    void draw();
+}</code></pre><small>Rectangle.java</small>
+                            <pre class="rounded m-0"><code class="language-java">public class Rectangle implements Shape {
+    @Override
+    public void draw() {
+        System.out.println("Draw " + color + " rectangle");
+    }
+}</code></pre><small>Circle.java</small>
+                            <pre class="rounded m-0"><code class="language-java">public class Circle implements Shape {
+    @Override
+    public void draw() {
+        System.out.println("Draw " + super.getColor() + " circle");
+    }
+}</code></pre><small>Main.java</small>
+                            <pre class="rounded m-0"><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        Shape rect = new Rectangle();
+        rect.draw();
+        Shape circle = new Circle();
+        circle.draw();
+    }
+}</code></pre><small>Output:</small>
+                            <pre class="rounded p-3 m-0" style="background-color: #f5f2f0"><code>Draw red rectangle
+Draw red circle</code></pre><hr><b>Đóng gói (Encapsulation)</b>
+                            Tính đóng gói là kỹ thuật ẩn giấu thông tin không liên quan và hiển thị ra thông liên quan. Mục đích chính của đóng gói là giảm thiểu mức độ phức tạp phát triển phần mềm.
+
+                            Cũng được sử dụng để bảo vệ trạng thái bên trong của một đối tượng. Điều này làm giảm số lượng khớp nối có thể có trong một ứng dụng.
+
+                            <b>Ví dụ đóng gói</b>
+                            <small>Student.java</small>
+                            <pre class="rounded m-0"><code class="language-java">public class Student {
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}</code></pre><small>Main.java</small>
+                            <pre class="rounded m-0"><code class="language-java">class Main {
+    public static void main(String[] args) {
+        Student s = new Student();
+        s.setName("Nam");
+        System.out.println(s.getName());
+    }
+}</code></pre><small>Output:</small>
+                            <pre class="rounded p-3 m-0" style="background-color: #f5f2f0"><code>Nam</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Tags -->
+                    <div class="mt-4 mb-5">
+                        <div class="d-flex gap-2">
+                            <a href="#" class="badge bg-light text-dark text-decoration-none">#java</a>
+                            <a href="#" class="badge bg-light text-dark text-decoration-none">#programming</a>
+                        </div>
+                    </div>
+
+                    <!-- Comments Section -->
+                    <section class="comments-section">
+                        <h3 class="fw-bold mb-2">Bình luận (5)</h3>
+
+                        <!-- Comment Form -->
+                        <div class="card border-0 shadow-sm p-4">
+                            <form>
+                                <div class="mb-3">
+                                    <textarea class="form-control border-3 bg-light" rows="3"
+                                              placeholder="Viết bình luận của bạn..."></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Gửi bình luận</button>
+                            </form>
+                        </div>
+
+                        <!-- Comments List -->
+                        <div class="bg-gray-100">
+                            <!-- Single Comment -->
+                            <div class="container mx-auto px-4 py-8">
+                                <div class="comments-list space-y-4">
+                                    <div class="bg-white rounded-lg shadow-md p-4">
+                                        <div class="flex items-start space-x-4">
+                                            <div class="flex-shrink-0">
+                                                <img class="w-10 h-10 rounded-full"
+                                                     th:src="@{https://cdn.vectorstock.com/i/1000v/01/69/businesswoman-character-avatar-icon-vector-12800169.jpg}" style="width: 40px;height: 40px"
+                                                     alt="Nguyễn Văn A">
+                                            </div>
+                                            <div class="flex-grow">
+                                                <div class="flex items-center justify-between">
+                                                    <h6 class="font-bold">Nguyễn Văn A</h6>
+                                                    <small class="text-gray-500">2 giờ trước</small>
+                                                </div>
+                                                <p class="mt-2">Bài viết rất hay và chi tiết. Tôi đặc biệt thích phần so
+                                                    sánh giữa Promises và Async/Await.</p>
+                                                <button class="mt-2 text-blue-600 hover:text-blue-800 flex items-center focus:outline-none toggle-reply"
+                                                        data-target="replyComment">
+                                                    <i class="fas fa-chevron-down mr-1 toggle-icon"></i>
+                                                    <span class="toggle-text">Xem phản hồi</span>
+                                                </button>
+
+                                                <div id="replyComment" class="hidden mt-4 ml-14">
+                                                    <div class="bg-gray-50 rounded-lg p-4">
+                                                        <div class="flex items-start space-x-4">
+                                                            <div class="flex-shrink-0">
+                                                                <img class="w-10 h-10 rounded-full"
+                                                                     th:src="@{/api/placeholder/40/40}"
+                                                                     alt="Trần Văn E">
+                                                            </div>
+                                                            <div class="flex-grow">
+                                                                <div class="flex items-center justify-between">
+                                                                    <h6 class="font-bold">Trần Văn E</h6>
+                                                                    <small class="text-gray-500">1 giờ trước</small>
+                                                                </div>
+                                                                <p class="mt-2">Cảm ơn bạn đã theo dõi. Tôi sẽ cố gắng
+                                                                    viết thêm nhiều bài chi tiết hơn về chủ đề này.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </article>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Related Posts -->
+                <div class="card border-0 shadow-sm p-4 mb-4">
+                    <h4 class="fw-bold mb-3">Bài viết liên quan</h4>
+                    <div class="list-group list-group-flush">
+                        <a href="#" class="list-group-item list-group-item-action border-0 px-0">
+                            <div class="d-flex gap-3">
+                                <img src="/api/placeholder/80/80" class="rounded-3" alt="Related Post">
+                                <div>
+                                    <h6 class="mb-1">JavaScript Promise Patterns</h6>
+                                    <small class="text-muted">15/11/24</small>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action border-0 px-0">
+                            <div class="d-flex gap-3">
+                                <img src="/api/placeholder/80/80" class="rounded-3" alt="Related Post">
+                                <div>
+                                    <h6 class="mb-1">Error Handling in Node.js</h6>
+                                    <small class="text-muted">12/11/24</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Popular Tags -->
+                <div class="card border-0 shadow-sm p-4">
+                    <h4 class="fw-bold mb-3">Tags phổ biến</h4>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="#" class="badge bg-light text-dark text-decoration-none">#javascript</a>
+                        <a href="#" class="badge bg-light text-dark text-decoration-none">#webdev</a>
+                        <a href="#" class="badge bg-light text-dark text-decoration-none">#programming</a>
+                        <a href="#" class="badge bg-light text-dark text-decoration-none">#react</a>
+                        <a href="#" class="badge bg-light text-dark text-decoration-none">#nodejs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Custom styles for blog detail page */
+    .article-content {
+        font-size: 1.1rem;
+        line-height: 1.8;
+    }
+
+    .article-content h2 {
+        margin-top: 2rem;
+    }
+
+    .article-content pre {
+        margin: 1.5rem 0;
+    }
+
+    .comments-section {
+        margin-top: 3rem;
+    }
+
+    blockquote {
+        font-size: 1.2rem;
+        font-style: italic;
+    }
+
+    .badge {
+        padding: 0.5rem 1rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .article-content {
+            font-size: 1rem;
+        }
+
+        blockquote {
+            font-size: 1.1rem;
+        }
+    }
+</style>
+<script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggleButtons = document.querySelectorAll('.toggle-reply');
+        toggleButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const targetId = this.getAttribute('data-target');
+                const targetElement = document.getElementById(targetId);
+                const icon = this.querySelector('.toggle-icon');
+                const text = this.querySelector('.toggle-text');
+
+                if (targetElement.classList.contains('hidden')) {
+                    targetElement.classList.remove('hidden');
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                    text.textContent = 'Ẩn phản hồi';
+                } else {
+                    targetElement.classList.add('hidden');
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                    text.textContent = 'Xem phản hồi';
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

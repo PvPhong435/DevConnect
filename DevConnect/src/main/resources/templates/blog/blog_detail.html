@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       th:replace="~{/layout/layout.html :: dynamic(~{::body})}">
 <body>
 <div th:object="${article}">
@@ -30,12 +30,12 @@
 <!--                            <span class="badge bg-warning me-2">JavaScript</span>-->
                             <span class="text-muted">Published on <span th:text="*{#dates.format(createat, 'dd/MM/yy')}"></span></span>
                         </div>
-                        <h1 class="mb-4" th:text="*{title}"></h1>
+                        <h1 class="fw-bold mb-4" th:text="*{title}"></h1>
                         <div class="d-flex align-items-center mb-4">
 <!--                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7AJgRNJQkHzanHnwf8mAVed-Do-X9NXLQmQ&s"-->
 <!--                                 style="height: 40px;width: 40px" class="rounded-circle me-2" alt="Author Avatar">-->
                             <div>
-                                <div class="fw-medium" th:text="*{author.fullname}">Trần Văn E</div>
+                                <div class="fw-medium" th:text="'Tác giả: ' + *{author.fullname}">Trần Văn E</div>
 <!--                                <div class="text-muted small">Senior JavaScript Developer</div>-->
                             </div>
                         </div>
@@ -67,7 +67,7 @@
 <!--                                }-->
 <!--                            </code>-->
 <!--                        </pre>-->
-
+                        
 <!--                        <h2 class="fw-bold mb-3">2. So sánh với Promises</h2>-->
 <!--                        <p>So với cách viết Promise truyền thống, Async/Await mang lại nhiều ưu điểm:</p>-->
 <!--                        <ul>-->
@@ -87,8 +87,6 @@
                     <div class="mt-4 mb-5">
                         <div class="d-flex gap-2">
                             <a href="#" class="badge bg-light text-dark text-decoration-none" th:each="tag : *{tags}" th:text="${tag.id}"></a>
-<!--                            <a href="#" class="badge bg-light text-dark text-decoration-none">#async</a>-->
-<!--                            <a href="#" class="badge bg-light text-dark text-decoration-none">#programming</a>-->
                         </div>
                     </div>
 
@@ -107,17 +105,30 @@
 
                     <!-- Comments Section -->
                     <section class="comments-section">
-                        <h3 class="fw-bold mb-2">Bình luận <span th:text="${#lists.size(article.comments)}"></span></h3>
+                        <h3 class="fw-bold mb-2">Bình luận <span th:text="${'(' + (#lists.size(article.comments)) + ')'}"></span></h3>
 
                         <!-- Comment Form -->
                         <div class="card border-0 shadow-sm p-4">
-                            <form th:action="@{|/blog/${article.titleSlug}/comment|}" method="post" th:object="${comment}">
+                            <form th:action="@{|/user/${article.titleSlug}/comment|}" method="post" th:object="${comment}">
                                 <div class="mb-3">
                                     <textarea class="form-control border-3 bg-light" rows="3"
-                                              placeholder="Viết bình luận của bạn..." th:field="*{content}"></textarea>
+                                              placeholder="Viết bình luận của bạn..." th:field="*{content}" id="content-comment"></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Gửi bình luận</button>
+                                <button type="submit" class="btn btn-primary" id="submit-comment">Gửi bình luận</button>
                             </form>
+                            <script>
+                                const button = document.querySelector('button#submit-comment');
+                                const textarea = document.querySelector('textarea#content-comment');
+                                function checkBlank() {
+                                    if (textarea.value.trim() === '') {
+                                        button.classList.add('disabled');
+                                    } else {
+                                        button.classList.remove('disabled');
+                                    }
+                                }
+                                textarea.addEventListener('input', checkBlank);
+                                checkBlank();
+                            </script>
                         </div>
 
                         <!-- Comments List -->
@@ -138,7 +149,7 @@
                                                     <h6 class="font-bold" th:text="${comment.user.fullname}"></h6>
                                                     <small class="text-gray-500" th:text="${comment.createAtAsString}"></small>
                                                 </div>
-                                                <div class="mt-2" th:text="${comment.content}"></div>
+                                                <div class="mt-2 fs-5" th:text="${comment.content}"></div>
 <!--                                                <p class="mt-2">Bài viết rất hay và chi tiết. Tôi đặc biệt thích phần so-->
 <!--                                                    sánh giữa Promises và Async/Await.</p>-->
 <!--                                                <button class="mt-2 text-blue-600 hover:text-blue-800 flex items-center focus:outline-none toggle-reply"-->
@@ -182,7 +193,7 @@
                 <div class="card border-0 shadow-sm p-4 mb-4">
                     <h4 class="fw-bold mb-3">Bài viết liên quan</h4>
                     <div class="list-group list-group-flush">
-                        <a href="#" class="list-group-item list-group-item-action border-0 px-0" th:each="rArticle : ${relatedArticle}">
+                        <a th:href="@{|/blog/${rArticle.titleSlug}|}" class="list-group-item list-group-item-action border-0 px-0" th:each="rArticle : ${relatedArticle}">
                             <div class="d-flex gap-3">
                                 <img src="/api/placeholder/80/80" class="rounded-3" alt="Related Post">
                                 <div>

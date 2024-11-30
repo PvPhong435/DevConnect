@@ -14,17 +14,15 @@ import com.dev.Model.Article;
 public class homeController {
 	
 	ArticleDAO articleDAO;
-	
-	
-	
+
 	public homeController(ArticleDAO articleDAO) {
 		super();
 		this.articleDAO = articleDAO;
 	}
 
-	@GetMapping("/home/index")
+	@GetMapping({"/home/index", "/"})
 	public String getHomePage(Model model) {
-		List<Article> list= articleDAO.findAll().stream().peek(a -> a.setTitleSlug(SlugUtil.toSlug(a.getTitle()))).toList();
+		List<Article> list= articleDAO.findAll();
 		model.addAttribute("list", list);
 		return "home/index";
 	}

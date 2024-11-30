@@ -1,5 +1,6 @@
 package com.dev.Model;
 
+import com.dev.Util.SlugUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -38,7 +39,9 @@ public class Article {
     @ManyToOne
     @JoinColumn(name = "author")
     private User author;
-    @Transient
-    private String titleSlug;
 
+    public String getTitleSlug() {
+        return SlugUtil.toSlug(title);
+    }
+    
 }

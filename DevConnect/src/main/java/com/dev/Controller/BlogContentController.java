@@ -30,52 +30,26 @@ public class BlogContentController {
     private final TagRepository tagRepository;
     private final CommentRepository commentRepository;
 
-    @GetMapping("/blog-test")
-    public String index(Model model) {
-        List<Article> list = articleRepository.findAll();
-        for (Article article : list) {
-            for (Comment comment : article.getComments()) {
-                comment.setCreateAtAsString(returnTime(comment.getCreateat().getTime()));
-            }
-        }
-
-        Set<Article> relatedArticle = new HashSet<>();
-        for (int i = 0; i < list.size() && i < 3; i++) {
-            Article article = list.get(i);
-            for (Tag tag : list.get(0).getTags()) {
-                if (article.getTags().contains(tag)) {
-                    relatedArticle.add(article);
-                    break;
-                }
-            }
-        }
-
-        List<Tag> tags = tagRepository.findAll();
-        tags.sort((o1, o2) -> o2.getArticles().size() - o1.getArticles().size());
-        tags = tags.subList(0, Math.min(tags.size(), 5));
-
-        model.addAttribute("article", list.get(0));
-        model.addAttribute("relatedArticle", relatedArticle);
-        model.addAttribute("tags", tags);
-        return "blog/blog_detail";
+    @GetMapping("/test")
+    public String test() {
+        return "blog/blog_test";
     }
 
     @GetMapping("/blog/{title}")
-    public String blog(Model model, @PathVariable String title, @AuthenticationPrincipal UserPrincipal user) {
+    public String blog(Model model, @PathVariable String title) {
         List<Article> list = articleRepository.findAll();
         Optional<Article> articleFound = list.stream()
-                .filter(a -> SlugUtil.toSlug(a.getTitle()).equals(title)).findFirst();
+                .filter(a -> SlugUtil.toSlug(a.getTitle()).equals(title))
+                .findFirst();
 
         if (articleFound.isPresent()) {
             Article article = articleFound.get();
-            article.setTitleSlug(SlugUtil.toSlug(article.getTitle()));
             for (Comment comment : article.getComments()) {
                 comment.setCreateAtAsString(returnTime(comment.getCreateat().getTime()));
             }
 
             Set<Article> relatedArticle = new HashSet<>();
-            for (int i = 0; i < list.size() && i < 3; i++) {
-                Article article1 = list.get(i);
+            for (Article article1 : list) {
                 for (Tag tag : article.getTags()) {
                     if (article1.getTags().contains(tag)) {
                         relatedArticle.add(article1);
@@ -98,13 +72,16 @@ public class BlogContentController {
         return "blog/blog_detail";
     }
 
-    @PostMapping("/blog/{title}/comment")
+    @PostMapping("/user/{title}/comment")
     public String comment(@AuthenticationPrincipal UserPrincipal userPrincipal, @ModelAttribute Comment comment, @PathVariable String title) {
         if (userPrincipal == null)
-            throw new RuntimeException("User not logged in");
-        int latestCommentId = commentRepository.findAll().stream().map(c -> Integer.parseInt(c.getId().replaceAll("\\D", ""))).max(Comparator.naturalOrder()).get();
+            return "Check/Login";
+        int latestCommentId = commentRepository.findAll().stream()
+                .map(c -> Integer.parseInt(c.getId().replaceAll("\\D", "")))
+                .max(Comparator.naturalOrder()).orElse(0);
         Optional<Article> article = articleRepository.findAll().stream()
-                .filter(a -> SlugUtil.toSlug(a.getTitle()).equals(title)).findFirst();
+                .filter(a -> SlugUtil.toSlug(a.getTitle()).equals(title))
+                .findFirst();
         if (article.isPresent()) {
             comment.setId("com" + (latestCommentId + 1));
             comment.setUser(userPrincipal.getUser());
