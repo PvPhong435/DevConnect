@@ -67,7 +67,7 @@ public class userController {
 		//Check for duplicate
 		SavedArticle savedArticle=savedArticleDAO.findByUserAndArticle(user, article).orElse(null);
 		if(savedArticle==null) {
-			SavedArticleKey key=new SavedArticleKey(user.getUsername(),article.getId());
+			SavedArticleKey key=new SavedArticleKey(user.getUsername(),article.getArticleID());
 			savedArticle=new SavedArticle(key, user, article, Date.valueOf(LocalDate.now()), 0);
 			try {
 				savedArticleDAO.save(savedArticle);

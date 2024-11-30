@@ -34,14 +34,13 @@
                     </li>
                 </ul>
             </div>
-
             <!-- Thanh tìm kiếm và đăng nhập -->
             <div class="d-flex align-items-center">
                 <form class="position-relative me-3" th:action="@{/search}" method="get">
                     <input type="text" class="form-control rounded-pill ps-4" name="q" placeholder="Tìm kiếm...">
                     <span class="position-absolute top-50 start-0 translate-middle-y ms-2">🔍</span>
                 </form>
-                <div sec:authorize="isAnonymous()">
+                <div th:if="${auth} == null">
                     <a th:href="@{/login}" class="btn btn-primary rounded-pill px-4 py-2">
                         Đăng nhập
                     </a>
@@ -49,8 +48,18 @@
                         Đăng ký
                     </a>
                 </div>
-                <div sec:authorize="isAuthenticated()">
-                    Welcome, <span th:text="${auth.user.fullname}"></span>
+                <div th:if="${auth} != null">
+                    <div class="dropdown">
+                        <button class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle btn border-0"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <img th:src="${auth.user.img}" alt="" width="32" height="32" class="rounded-circle me-2"> <span th:text="${auth.user.fullname}"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow">
+<!--                            <li><a class="dropdown-item" th:href="@{/user}"><i class="fas fa-sliders-h fa-fw"></i> Tài khoản</a></li>-->
+<!--                            <li><hr class="dropdown-divider"></li>-->
+                            <li><a class="dropdown-item" th:href="@{/logout}"><i class="fas fa-sign-out-alt fa-fw"></i> Đăng xuất</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </nav>

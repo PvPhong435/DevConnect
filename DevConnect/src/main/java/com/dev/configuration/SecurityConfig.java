@@ -46,6 +46,12 @@ public class SecurityConfig {
 					login.loginPage("/login").permitAll();
 					login.successHandler(redirectAuthenticationSuccess);
 					login.defaultSuccessUrl("/");
+					login.permitAll();
+				})
+				.logout(logout -> {
+					logout.logoutUrl("/logout");
+					logout.logoutSuccessUrl("/");
+					logout.permitAll();
 				})
 				.build();
 	}

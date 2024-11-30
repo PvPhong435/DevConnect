@@ -28,6 +28,8 @@ public class Article {
 	private Date createat;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updateat;
+	private int views;
+
 	@OneToMany(mappedBy="article",cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ArticleImages> images;
 	@ManyToMany

@@ -34,7 +34,7 @@ public class Comment {
                 "id='" + id + '\'' +
                 ", content='" + content + '\'' +
                 ", createat=" + createat +
-                ", article=" + article.getId() +
+                ", article=" + article.getArticleID() +
                 ", user=" + user.getUsername() +
                 ", createAtAsString='" + createAtAsString + '\'' +
                 '}';

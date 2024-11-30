@@ -65,7 +65,7 @@ public class BlogContentController {
             model.addAttribute("relatedArticle", relatedArticle);
             model.addAttribute("tags", tags);
         } else {
-            return "notFoundBlog";
+            return "redirect:home/index";
         }
         return "blog/blog_detail";
     }

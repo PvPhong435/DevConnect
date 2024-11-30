@@ -86,6 +86,7 @@ public class loginController {
 	{
 		userSignUp=user;
 		userSignUp.setRole("user");
+		userSignUp.setImg("https://cdn-icons-png.flaticon.com/512/147/147144.png");
 		if(sendMailSignUp(user.getEmail(), user.getFullname()))
 		{
 			return "Check/RegistrationVerification";
