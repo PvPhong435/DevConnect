@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       th:replace="~{/layout/layout.html :: dynamic(~{::body})}">
-
 <body>
 <div>
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
     <!-- Hero Section -->
     <div class="position-relative py-4 bg-light border-bottom">
         <div class="container">
@@ -26,245 +30,126 @@
                         <div class="d-flex align-items-center mb-3">
                             <span class="text-muted">Published on 18/11/24</span>
                         </div>
-                        <h1 class="fw-bold mb-4">Lập trình hướng đối tượng(OOP) trong Java</h1>
-                        <div class="d-flex align-items-center mb-4">
-                            <div>
-                                <div class="fw-medium">Tác giả: Trần Thái Trọng Tín</div>
-                            </div>
-                        </div>
+                        <h1 class="fw-bold mb-4">Học Java để làm gì?</h1>
                     </header>
 
                     <!-- Featured Image -->
 <!--                    <img src="/api/placeholder/800/400" class="img-fluid rounded-4 mb-4" alt="Blog Featured Image">-->
 
                     <!-- Article Content -->
-                    <div class="article-content">
-                        <div style="white-space: pre-line">
-                            <b>Khái niệm về lập trình hướng đối tượng trong java</b>
-                            Lập trình hướng đối tượng (OOP - Object-Oriented Programming) là một phương pháp hay mô hình giúp tăng năng suất, đơn giản hóa việc bảo trì, dễ dàng mở rộng trong thiết kế phần mềm bởi việc cung cấp một vài khái niệm như:
-
-                            Đối tượng (Object)
-                            Lớp (Class)
-                            Kế thừa (Inheritance)
-                            Đa hình (Polymorphism)
-                            Trừu tượng (Abstraction)
-                            Đóng gói (Encapsulation)
-
-                            <img src="https://www.tutorialspoint.com/java/images/java-oops-concepts.jpg" alt="OOP"><hr><b>Đối tượng (Object)</b>
-                            Tất cả những thực thể có trạng thái và hành vi được biết đến như là một đối tượng.
-                            Ví dụ: bàn, ghế, bút chì, xe dạp, ô tô...<hr><b>Lớp (Class)</b>
-                            Tập hợp các đối tượng được gọi là lớp.<hr><b>Kế thừa (Inheritance)</b>
-                            Kế thừa là sự liên quan giữa hai class với nhau, trong đó có class cha (superclass) và class con (subclass). Khi kế thừa class con được hưởng tất cả các phương thức và thuộc tính của class cha. Tuy nhiên, nó chỉ được truy cập các public và protected và không được phép truy cập các private của class cha.
-
-                            <b>Ví dụ về đơn kế thừa</b>
-<pre class="rounded m-0"><code class="language-java">class Animal {
-    void eat() {
-        System.out.println("eating...");
-    }
-}
-
-class Dog extends Animal {
-    void bark() {
-        System.out.println("barking...");
-    }
-}
-
-public class TestInheritance1 {
-    public static void main(String args[]) {
-        Dog d = new Dog();
-        d.bark();
-        d.eat();
-    }
-}</code></pre><small>Output:</small>
-                            <pre class="rounded p-3 m-0" style="background-color: #f5f2f0"><code>barking...
-eating...</code></pre>
-                            <b>Ví dụ về kế thừa nhiều cấp</b>
-                            <pre class="rounded m-0"><code class="language-java">class Animal {
-    void eat() {
-        System.out.println("eating...");
-    }
-}
-
-class Dog extends Animal {
-    void bark() {
-        System.out.println("barking...");
-    }
-}
-
-class BabyDog extends Dog {
-    void weep() {
-        System.out.println("weeping...");
-    }
-}
-
-public class TestInheritance2 {
-    public static void main(String args[]) {
-        BabyDog d = new BabyDog();
-        d.weep();
-        d.bark();
-        d.eat();
-    }
-}</code></pre><small>Output:</small>
-                            <pre class="rounded p-3 m-0" style="background-color: #f5f2f0"><code>weeping...
-barking...
-eating...</code></pre><hr><b>Đa hình (Polymorphism)</b>
-                            Đa hình cho phép các đối tượng của lớp con được xử lý như là các đối tượng của lớp cha, giúp linh hoạt trong việc xử lý đối tượng và thực thi các phương thức theo cách đa hình.
-                            Có hai kiểu của đa hình, đó là đa hình lúc biên dịch (compile) và đa hình lúc thực thi (runtime). Chúng ta có thể thực hiện đa hình bằng cách nạp chồng phương thức và ghi đè phương thức.
-
-                            <b>Ví dụ đa hình</b>
-                            <pre class="rounded m-0"><code class="language-java">class Shape {
-    void draw() {
-        System.out.println("drawing...");
-    }
-}
-
-class Rectangle extends Shape {
-    @Override
-    void draw() {
-        System.out.println("drawing rectangle...");
-    }
-}
-
-class Circle extends Shape {
-    @Override
-    void draw() {
-        System.out.println("drawing circle...");
-    }
-}
-
-class Triangle extends Shape {
-    @Override
-    void draw() {
-        System.out.println("drawing triangle...");
-    }
-}
-
-class TestPolymorphism2 {
-    public static void main(String args[]) {
-        Shape s1, s2, s3;
-        s1 = new Rectangle();
-        s2 = new Circle();
-        s3 = new Triangle();
-        s1.draw();
-        s2.draw();
-        s3.draw();
-    }
-}</code></pre><small>Output:</small>
-                            <pre class="rounded p-3 m-0" style="background-color: #f5f2f0"><code>drawing rectangle...
-drawing circle...
-drawing triangle...</code></pre><hr><b>Trừu tượng (Abstraction)</b>
-                            Trừu tượng là sự ẩn đi những chi tiết bên trong và hiển thị ra các chức năng, tính chất này gọi là trừu tượng.
-                            Áp dụng tính chất trừu tượng bằng cách sử dụng abstract class và interface.
-
-                            <b>Abstract Class</b>
-                            - Một lớp được khai báo với từ khóa abstract là lớp trừu tượng (abstract class).
-                            - Lớp trừu tượng có thể có các phương thức abstract hoặc non-abtract.
-                            - Lớp trừu tượng có thể khai báo 0, 1 hoặc nhiều method trừu tượng bên trong.
-                            - Không thể khởi tạo 1 đối tượng trực tiếp từ một class trừu tượng.
-                            - Một lớp kế thừa từ lớp trừu tượng (subclass – lớp con) không cần phải implement non-abstract methods, nhưng những method nào có abstract thì bắt buộc phải override. Trừ khi subclass cũng là abstract.
-
-                            <b>Ví dụ abstract class</b>
-                            <small>Shape.java</small>
-                            <pre class="rounded m-0"><code class="language-java">public abstract class Shape {
-    private String color = "red";
-
-    public Shape() { }
-
-    public abstract void draw();
-
-    public String getColor() {
-        return color;
-    }
-}</code></pre><small>Rectangle.java</small>
-                            <pre class="rounded m-0"><code class="language-java">public class Rectangle extends Shape {
-    @Override
-    public void draw() {
-        System.out.println("Draw " + super.getColor() + " rectangle");
-    }
-}</code></pre><small>Circle.java</small>
-                            <pre class="rounded m-0"><code class="language-java">public class Circle extends Shape {
-    @Override
-    public void draw() {
-        System.out.println("Draw " + super.getColor() + " circle");
-    }
-}</code></pre><small>Main.java</small>
-                            <pre class="rounded m-0"><code class="language-java">public class Main {
-    public static void main(String[] args) {
-        Shape rect = new Rectangle();
-        rect.draw();
-        Shape circle = new Circle();
-        circle.draw();
-    }
-}</code></pre><small>Output:</small>
-                            <pre class="rounded p-3 m-0" style="background-color: #f5f2f0"><code>Draw red rectangle
-Draw red circle</code></pre>
-                            <b>Interface</b>
-                            - Các phương thức trong interface đều là các phương thức trừu tượng.
-                            - Interface là một kỹ thuật để thu được tính trừu tượng hoàn toàn và đa kế thừa.
-                            - Interface luôn luôn có modifier là: public interface, cho dù bạn có khai báo rõ hay không.
-                            - Nếu có các trường (field) thì chúng đều là: public static final, cho dù bạn có khai báo rõ hay không.
-                            - Các method của nó đều là method trừu tượng, nghĩa là không có thân hàm, và đều có modifier là: public abstract, cho dù bạn có khai báo hay không.
-                            - Interface không có hàm khởi tạo (constructor).
-                            - Một interface không phải là một lớp. Viết một interface giống như viết một lớp, nhưng chúng có 2 định nghĩa khác nhau. Một lớp mô tả các thuộc tính và hành vi của một đối tượng. Một interface chứa các hành vi mà một class triển khai.
-                            - Trừ khi một lớp triển khai interface là lớp trừu tượng abstract, còn lại tất cả các phương thức của interface cần được định nghĩa trong class.
-
-                            <b>Ví dụ interface</b>
-                            <small>Shape.java</small>
-                            <pre class="rounded m-0"><code class="language-java">public interface Shape {
-    String color = "red";
-
-    void draw();
-}</code></pre><small>Rectangle.java</small>
-                            <pre class="rounded m-0"><code class="language-java">public class Rectangle implements Shape {
-    @Override
-    public void draw() {
-        System.out.println("Draw " + color + " rectangle");
-    }
-}</code></pre><small>Circle.java</small>
-                            <pre class="rounded m-0"><code class="language-java">public class Circle implements Shape {
-    @Override
-    public void draw() {
-        System.out.println("Draw " + super.getColor() + " circle");
-    }
-}</code></pre><small>Main.java</small>
-                            <pre class="rounded m-0"><code class="language-java">public class Main {
-    public static void main(String[] args) {
-        Shape rect = new Rectangle();
-        rect.draw();
-        Shape circle = new Circle();
-        circle.draw();
-    }
-}</code></pre><small>Output:</small>
-                            <pre class="rounded p-3 m-0" style="background-color: #f5f2f0"><code>Draw red rectangle
-Draw red circle</code></pre><hr><b>Đóng gói (Encapsulation)</b>
-                            Tính đóng gói là kỹ thuật ẩn giấu thông tin không liên quan và hiển thị ra thông liên quan. Mục đích chính của đóng gói là giảm thiểu mức độ phức tạp phát triển phần mềm.
-
-                            Cũng được sử dụng để bảo vệ trạng thái bên trong của một đối tượng. Điều này làm giảm số lượng khớp nối có thể có trong một ứng dụng.
-
-                            <b>Ví dụ đóng gói</b>
-                            <small>Student.java</small>
-                            <pre class="rounded m-0"><code class="language-java">public class Student {
-    private String name;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-}</code></pre><small>Main.java</small>
-                            <pre class="rounded m-0"><code class="language-java">class Main {
-    public static void main(String[] args) {
-        Student s = new Student();
-        s.setName("Nam");
-        System.out.println(s.getName());
-    }
-}</code></pre><small>Output:</small>
-                            <pre class="rounded p-3 m-0" style="background-color: #f5f2f0"><code>Nam</code></pre>
-                        </div>
-                    </div>
-
+<div class="article-content">
+<p><b><i>Java là một ngôn ngữ lập trình nổi tiếng với cộng đồng lập trình viên trên toàn thế giới, được tạo ra bởi James Gosling tại Sun Microsystems (giờ đã trở thành một phần của Oracle Corporation). Tuy nổi tiếng nhưng vẫn còn nhiều người chưa thật sự hiểu học Java để làm gì, cũng như cơ hội nghề nghiệp sau khi đã học Java.</i></b></p>
+<p>Đọc bài viết này để nắm rõ:</p>
+<ul>
+    <li>Java là gì? Một số ứng dụng phổ biến của Java</li>
+    <li>Những lý do bạn nên học Java năm 2024</li>
+    <li>Các vị trí mà bạn có thể làm sau khi học Java</li>
+    <li>Scala và Kotlin – hai ngôn ngữ bổ trợ sau khi học Java</li>
+</ul>
+<h3><b class="text-primary">Java là gì?</b></h3>
+<p></p>
+<p>Java là một ngôn ngữ lập trình hướng đối tượng đa nền tảng miễn phí, được sử dụng để viết từ các ứng dụng web và di động, phần mềm doanh nghiệp cho đến các ứng dụng dữ liệu lớn và công nghệ phía máy chủ.</p>
+<p>Tính năng đa nền tảng của Java đến từ máy ảo Java (JVM – Java Virtual Machine), bằng việc thực thi code trên một máy ảo Java có thể chạy ở nhiều hệ điều hành, do đó ứng dụng Java có thể cài và tương thích trên nhiều thiết bị, khiến số lượng người có thể dùng sản phẩm là rất lớn.</p>
+<h3><b class="text-primary">Một số ứng dụng phổ biến của Java</b></h3>
+<ul>
+    <li><b>Phát triển trò chơi:</b> Các game rất nổi tiếng dùng hệ điều hành Android như Minecraft, Mission Impossible III, và Asphalt 6 được viết bằng Java.</li>
+    <li><b>Ứng dụng tài chính:</b> Java tập trung vào nhóm đối tượng khách hàng là các công ty tài chính lớn, cung cấp các tính năng liên quan đến cơ sở dữ liệu và bảo mật.</li>
+    <li><b>Các ứng dụng doanh nghiệp:</b> Java cung cấp nhiều phương tiện để phát triển các ứng dụng vận hành và quản lý phức tạp cho các phòng ban trong doanh nghiệp.</li>
+    <li><b>Các ứng dụng nghiên cứu khoa học:</b> Với thư viện toán học đồ sộ như Jet và Colt, Java có thể dùng để phát triển các phần mềm dùng cho khoa học ứng dụng.</li>
+    <li><b>Điện toán đám mây:</b> Java có thể chạy trên cloud thông qua JVM.</li>
+    <li><b>Dữ liệu lớn (Big data):</b> Java hỗ trợ thông qua Apache Hadoop và Apache Spark, là các ứng dụng hỗ trợ xử lý dữ liệu lớn rất được ưa chuộng.</li>
+    <li><b>Trí tuệ nhân tạo:</b> Thông qua các thư viện như DL4J, Weka, và Java-ML, Java cũng hỗ trợ phát triển trí tuệ nhân tạo.</li>
+    <li><b>Internet vạn vật (IoT):</b> Java cũng là một ngôn ngữ có thể lựa chọn cho các dự án lập trình nhúng.</li>
+</ul>
+<h3><b class="text-primary">Những lý do bạn nên học Java năm 2024</b></h3>
+<p></p>
+<h4><b>Mức độ phổ biến của Java</b></h4>
+<p>Theo <a href="https://stratoflow.com/why-is-java-so-popular/">Stratoflow</a>, tính đến năm 2023, hơn 30% lập trình viên toàn thế giới đều có thể code và sử dụng Java. Có thể thấy, với thời gian tồn tại và phát triển hơn 25 năm, Java đã trở thành một ngôn ngữ ổn định, với cộng đồng lớn không ngừng tăng lên, sẵn sàng hỗ trợ trả lời câu hỏi cho người học mới và luôn tạo ra các tính năng mới.</p>
+<p>Một sự thật là, một số lượng rất rất lớn các phần mềm của các doanh nghiệp hoặc một phần của hệ thống của họ sẽ được viết bằng Java, kể cả các tập đoàn công nghệ lớn.</p>
+<h4><b>Ngôn ngữ lập trình hướng đối tượng – OOP</b></h4>
+<p>Java được thiết kế là ngôn ngữ lập trình hướng đối tượng – OOP, là lựa chọn tốt để dạy cho người học mới tư duy theo các nguyên tắc OOP như một lập trình viên.</p>
+<p>Giúp người học luyện tập tư duy theo các nguyên tắc hướng đối tượng như một lập trình viên, suy nghĩ về cách thiết kế các đối tượng và class sẽ gồm các thuộc tính (properties) và các phương thức (methods), để code dễ đọc và dễ quản lý, tái sử dụng được trong tương lai.</p>
+<h4><b>Viết một lần chạy mọi nơi</b></h4>
+<p><i>“Write Once, Run Anywhere” – “viết một lần chạy mọi nơi”</i> là một câu cực kỳ nổi tiếng nói về tính năng Java Virtual Machine (JVM), một máy ảo được thiết kế để thực thi mã Java trên nhiều hệ điều hành. Người học Java có thể chạy code trên nhiều loại thiết bị mà không cần chỉnh sửa nhiều, khiến cho Java là một lựa chọn hoàn hảo cho các phần mềm thương mại đa người dùng.</p>
+<p>Câu nói này còn trở thành meme nổi tiếng trong cộng đồng Java <i>“Write once, debug everywhere” – “viết một lần sửa lỗi mọi nơi”</i>.</p>
+<h4><b>Dễ sử dụng, miễn phí và mã nguồn mở</b></h4>
+<p>Java có cú pháp (syntax) dễ đọc, dễ viết và hoàn toàn miễn phí, phù hợp cho người học mới muốn tiếp cận với thế giới lập trình. Mã nguồn mở giúp cho sự phát triển của Java không bị giới hạn bởi các hạn chế thương mại, nên có rất nhiều công cụ hỗ trợ được cộng đồng tạo ra như Java Development Kit (JDK), các ngôn ngữ dựa trên JVM như Scala, Kotlin rất được ưa chuộng trong các dự án.</p>
+<h4><b>Rất nhiều API hỗ trợ</b></h4>
+<p>Java ngoài là một ngôn ngữ cho người mới, nó còn hỗ trợ đa dạng các Framework như Spring, Hibernate và Struts cho các lập trình viên chuyên nghiệp để xây dựng các tính năng lớn hỗ trợ doanh nghiệp như ứng dụng cung cấp sản phẩm dịch vụ qua web, ứng dụng hỗ trợ gọi API, hệ thống chat, quản lý cơ sở dữ liệu (database).</p>
+<h4><b>Được “chống lưng” từ Oracle</b></h4>
+<p>Oracle mua lại Java vào năm 2010 và hỗ trợ tương thích Java vào mọi sản phẩm của hệ sinh thái này, nên người học Java cực kỳ có lợi vì sản phẩm của Oracle rất phổ biến trong các tập đoàn tài chính lớn và các doanh nghiệp thương mại tại Việt Nam hiện nay, một số ví dụ có thể kể đến: Mcredit – Công ty Tài chính TNHH MB Shinsei, Ngân Hàng Á Châu (ACB), Ngân hàng VPBank, ACS Trading Vietnam (AEON), VP bank, FE Credit,…</p>
+<h4><b>Luôn luôn có nhu cầu tuyển dụng Java</b></h4>
+<p>Java là “xương sống” của rất nhiều dự án từ lớn đến nhỏ, từ các ứng dụng di động đến các hệ thống lớn của các doanh nghiệp, do đó người học Java luôn luôn được săn đón bởi các tập đoàn tài chính, công nghệ và thương mại điện tử.</p>
+<p>Tóm lại, Java là một ngôn ngữ rất rộng lớn, các lập trình viên mới có thể dễ dàng sử dụng, nhưng đồng thời cũng không thiếu không gian phát triển cho các lập trình viên Senior nhiều kinh nghiệm, muốn đạt được các mốc thu nhập cao bằng cách giải quyết các vấn đề lớn hơn, đòi hỏi phải dùng nhiều tính năng khác của ngôn ngữ.</p>
+<h3><b class="text-primary">Các vị trí mà bạn có thể làm sau khi học Java</b></h3>
+    <p></p>
+<h4><b>Lập trình viên web (Web developer)</b></h4>
+<p>Dùng Java để lập trình web là hướng đi an toàn, thường được chọn sau khi học Java, vì các framework như JavaServer Faces (JSF), Spring MVC, và Apache Struts được thiết kế rất chỉn chu cho tác vụ này.</p>
+<p>Ngoài ra, các công ty thường chọn dùng Java vì dễ dàng tương thích với hầu hết các cơ sở dữ liệu.</p>
+<h4><b>Lập trình viên ứng dụng Android (Android developer)</b></h4>
+<p>Vào năm 2008, hệ điều hành điện thoại phổ biến nhất – Android dùng Java để phát triển tất cả các ứng dụng điện thoại, từ đó các lập trình viên ngoài viết web có thể dùng Java để viết ứng dụng đa tính năng, hiệu suất cao trên Google Play và bán cho hàng triệu người dùng.</p>
+<h4><b>Lập trình viên hệ thống (System developer)</b></h4>
+<p>Nhờ vào sự linh hoạt và nhiều sự hỗ trợ từ hệ sinh thái, Java làm một công cụ thường được chọn để lập trình các ứng dụng vận hành phức tạp của doanh nghiệp đạt nhiều tiêu chí về tính bảo mật, dễ dàng nâng cấp, và quản lý.</p>
+<p>Và cũng không thể quên kể đến các lập trình viên hệ thống dùng các phiên bản nền tảng Java có trả phí cho doanh nghiệp:
+</p>
+<ul>
+    <li>Java Enterprise Edition (Java EE)</li>
+    <li>JavaServer Faces (JSF)</li>
+    <li>Java Persistence API (JPA)</li>
+    <li>Enterprise JavaBeans (EJB)</li>
+</ul>
+<h4><b>Kỹ sư dữ liệu (Data engineer)</b></h4>
+<p>Các công cụ Apache Hadoop và Apache Spark được xây dựng bằng Java cung cấp các giải pháp về quản lý, lưu trữ, phân tích dữ liệu lớn, mở ra các cơ hội nghề nghiệp từ mảng dữ liệu như kỹ sư dữ liệu lớn và chuyên viên phân tích.</p>
+<p>Các vị trí này có thể đạt được các mức thu nhập rất cao khi mà các xu hướng trí tuệ nhân tạo, khai thác và sử dụng dữ liệu đang là xu hướng của thời đại.</p>
+<h4><b>Lập trình viên Cloud (Cloud developer)</b></h4>
+<p>Những nền tảng cloud lớn nhất như Amazon Web Services (AWS), Google Cloud Platform (GCP) cũng thiết kế Java vào hệ thống, tạo điều kiện cho các lập trình viên có thể tương tác với một hệ thống phức tạp như cloud thông qua một công cụ quen thuộc như Java.</p>
+<h4><b>Lập trình nhúng (Embedded developer)</b></h4>
+<p>Các hỗ trợ ngôn ngữ nhúng của Java như Eclipse IoT và Java ME Embedded giúp cho người học Java có thêm các sự lựa chọn nghề nghiệp bên cạnh các ngôn ngữ nhúng phổ biến như C, C++, Python, and Rust.</p>
+<h4><b>Chuyên viên kiểm thử (Software Tester/ QA)</b></h4>
+<p>Các chuyên viên kiểm thử, quản lý chất lượng rất quan trọng trong các đội phát triển sản phẩm. Java hỗ trợ các ngôn ngữ để kiểm thử như JUnit and TestNG, giúp cho người học Java cũng có thể phát triển nghề nghiệp theo hướng này.</p>
+<h4><b>DevOps và Automation</b></h4>
+<p>DevOps là một xu hướng lập trình nổi bật hiện nay. Jenkins, Docker, và Ansible là những sản phẩm của Java cung cấp cho DevOps, giúp cho việc tương thích giữa phát triển và vận hành sản phẩm Java trơn tru.</p>
+<p>Những lập trình viên làm DevOps có thể thêm Java vào hồ sơ xin việc và chắc chắn sẽ được nhà tuyển dụng ưu ái.</p>
+<h3><b class="text-primary">Scala và Kotlin – Hai ngôn ngữ bổ trợ sau khi học Java</b></h3>
+<p></p>
+<p>Với tuổi đời lớn như Java, thiết kế Java tất nhiên có chứa những ý tưởng đã lỗi thời và có nhiều hạn chế so với các ngôn ngữ hiện đại hơn như Go và Python.</p>
+<p>Scala, Kotlin là những dự án thiết kế ngôn ngữ lập trình được tạo ra bởi cộng đồng những người vẫn còn tình cảm với Java, các ngôn ngữ này được thiết kế để chạy trên JVM và có thể gọi là những hậu duệ của Java, vừa thừa kế những đặc tính nổi trội của Java vừa cải tiến Java.</p>
+<p>Sau khi học Java, bạn có thể chọn học thêm một số ngôn ngữ này để có lợi thế về kiến thức và cơ hội công việc. Trong một số trường hợp sử dụng các ngôn ngữ này có thể là lựa chọn tối ưu hơn cho dự án.</p>
+<h4><b>Scala</b></h4>
+<p>Scala được thiết kế tại trường đại học EPFL bởi Martin Odersky, từ năm 2001, tên Scala là sự kết nối giữ 2 từ “scalable” và “language”, ý nghĩa là một ngôn ngữ có thể dễ dàng mở rộng để thích ứng với nhiều nhu cầu vận hành từ lớn tới nhỏ của sản phẩm. Scala được sử dụng nhiều trong các dự án liên quan đến khoa học dữ liệu, phân tích và xử lý dữ liệu.</p>
+<p>Ưu điểm của việc code bằng Scala có thể giảm số dòng code nhiều lần so với Java. Đặc biệt là các phần mềm của Scala dễ dàng scale để phục vụ cho số lượng user tăng lên trong thời gian ngắn. Một bất tiện duy nhất khi dùng Scala là code chỉ chạy ở version mới nhất, nên các code Scala ở các phiên bản trước đó sẽ không tương thích.</p>
+<h4><b>Kotlin</b></h4>
+<p>Kotlin là một ngôn ngữ cấp tiến được tạo ra bởi công ty JetBrains năm 2011, công ty này cũng chính là công ty tạo ra phần mềm code nổi tiếng IntelliJ IDEA. Kotlin được thiết kế để cạnh tranh với Scala và cái tên Kotlin được lấy theo tên một hòn đảo ở St. Petersburg nước Nga.</p>
+<p>Kotlin thường được sử dụng trong các dự án lập trình ứng dụng di động. Vào sự kiện Google I/O 2019, gã khổng lồ Google công khai hỗ trợ và tuyên bố Kotlin là ngôn ngữ chính cho hệ điều hành Android. Ưu điểm của Kotlin là giảm đi những cú pháp phức tạp của Java, giúp code dễ đọc.</p>
+<p>Ngoài ra, Kotlin còn có cơ chế khai báo dữ liệu không thể null, giúp tránh được lỗi runtime nullability. Vì là một ngôn ngữ mới nên Kotlin cũng đối mặt với một số vấn đề như thiếu sự hỗ trợ của cộng đồng khi gặp lỗi, và code Kotlin cũng chậm hơn so với Java.</p>
+<h3><b class="text-primary">Các câu hỏi thường gặp về học Java để làm gì</b></h3>
+<p></p>
+<h4><b>Java thường được ứng dụng để phát triển những sản phẩm gì?</b></h4>
+<p>Java thường được dùng để phát triển ứng dụng web như các trang thương mại điện tử, mạng xã hội và các sản phẩm vận hành trong doanh nghiệp.</p>
+<p>Ngoài cung cấp các framework hỗ trợ xây dựng những tính năng, Java còn có các ngôn ngữ con như Kotlin và Scala được thiết kế để giải quyết những vấn khác nhau trong quá trình thiết kế, vận hành và phát triển sản phẩm.</p>
+<h4><b>Những câu hỏi phỏng vấn Java nào thường xuyên được hỏi trong các công ty lớn?</b></h4>
+<p>Sau đây là một số chủ đề thường được phỏng vấn:</p>
+<ul>
+    <li><a href="https://www.javatpoint.com/fibonacci-series-in-java">The Fibonacci Series</a> – Chủ đề tạo dãy số Fibonacci</li>
+    <li><a href="https://www.javatpoint.com/prime-number-program-in-java">The Prime Number Check</a> – Chủ đề kiểm tra số nguyên tố</li>
+    <li><a href="https://www.javatpoint.com/palindrome-program-in-java">String Palindrome</a> – Chủ đề kiểm tra chuỗi ký tự Palindrome</li>
+    <li><a href="https://www.javatpoint.com/bubble-sort-in-java">Bubble Sort</a> – Chủ đề câu hỏi thuật toán sắp xếp</li>
+    <li><a href="https://www.javatpoint.com/merge-sort">Merge Sort</a> – Chủ đề câu hỏi thuật toán sắp xếp</li>
+    <li><a href="https://www.javatpoint.com/armstrong-number-in-java">Armstrong Number</a> – Chủ đề câu hỏi số Armstrong</li>
+    <li><a href="https://www.javatpoint.com/factorial-program-in-java">Factorial</a> – Chủ đề câu hỏi giai thừa</li>
+</ul>
+<h4><b>Kotlin có giống Scala không?</b></h4>
+<p>Cả hai ngôn ngữ đều chạy trên máy ảo Java (JVM), cải tiến Java nhưng với cách tiếp cận khác nhau:</p>
+<ul>
+    <li>Scala hỗ trợ đối sánh mẫu (pattern matching) tốt hơn nên còn được dùng để xử lý dữ liệu như R, Python.</li>
+    <li>Kotlin có thể xử lý nạp chồng toán tử (operator overloading) đơn giản hơn, Kotlin thường được dùng để phát triển ứng dụng Android</li>
+</ul>
+<h3><b class="text-primary">Kết luận học Java để làm gì</b></h3>
+<p></p>
+<p>Java tuy đã là một ngôn ngữ của quá khứ nếu so sánh với những công nghệ mới hơn như Golang, Python,… nhưng vẫn là một sự lựa chọn an toàn và ổn định cho nhiều dự án lớn trong năm 2024.</p>
+<p>Do đó, không cần phải lo lắng học Java để làm gì vì người học Java có thể thích nghi với nhiều vị trí công việc khác nhau và nhiều dự án khác nhau, mang đến sự linh động trong tìm kiếm công việc và dự án, trong buổi AI đang liên tục cải tiến để thay từng phần một các công việc của lập trình viên.</p>
+<small>Nguồn: <a href="https://itviec.com/blog/hoc-java-de-lam-gi">ITviec - Học Java để làm gì</a></small>
+</div>
                     <!-- Tags -->
                     <div class="mt-4 mb-5">
                         <div class="d-flex gap-2">

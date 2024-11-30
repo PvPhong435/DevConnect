@@ -37,7 +37,7 @@
             <!-- Thanh tìm kiếm và đăng nhập -->
             <div class="d-flex align-items-center">
                 <form class="position-relative me-3" th:action="@{/search}" method="get">
-                    <input type="text" class="form-control rounded-pill ps-4" name="q" placeholder="Tìm kiếm...">
+                    <input type="text" class="form-control rounded-pill" style="padding-left: 32px" name="q" placeholder="Tìm kiếm...">
                     <span class="position-absolute top-50 start-0 translate-middle-y ms-2">🔍</span>
                 </form>
                 <div th:if="${auth} == null">
