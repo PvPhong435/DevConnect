@@ -11,6 +11,6 @@ import java.util.List;
 public interface ArticleDAO extends JpaRepository<Article, String> {
 
     List<Article> findAllByOrderByCreateatDesc();
-    List<Article> findAllByTitleContaining(String name);
+    List<Article> findAllByTitleContainingIgnoreCase(String name);
 
 }

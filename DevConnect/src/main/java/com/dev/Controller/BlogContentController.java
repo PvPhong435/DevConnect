@@ -7,6 +7,7 @@ import com.dev.Model.Article;
 import com.dev.Model.Comment;
 import com.dev.Model.Tag;
 import com.dev.Util.SlugUtil;
+import com.dev.services.CountViewService;
 import com.dev.services.UserPrincipal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -26,6 +27,7 @@ import java.util.stream.Collectors;
 public class BlogContentController {
 
     private final ArticleDAO articleDAO;
+    private final CountViewService countViewService;
     private final TagDAO tagDAO;
     private final CommentDAO commentDAO;
 
@@ -43,6 +45,7 @@ public class BlogContentController {
 
         if (articleFound.isPresent()) {
             Article article = articleFound.get();
+
             for (Comment comment : article.getComments()) {
                 comment.setCreateAtAsString(returnTime(comment.getCreateat().getTime()));
             }
@@ -66,6 +69,8 @@ public class BlogContentController {
             model.addAttribute("article", article);
             model.addAttribute("relatedArticle", relatedArticle);
             model.addAttribute("tags", tags);
+
+            countViewService.incrementViews(article);
         } else {
             return "redirect:home/index";
         }

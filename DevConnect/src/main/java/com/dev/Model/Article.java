@@ -50,4 +50,8 @@ public class Article {
 		return SlugUtil.toSlug(title);
 	}
 
+	public void incrementViews() {
+		views += 1;
+	}
+
 }

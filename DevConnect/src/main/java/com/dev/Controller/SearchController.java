@@ -27,22 +27,21 @@ public class SearchController {
         List<Article> articlesFound = new ArrayList<>();
         String message;
         if (search.startsWith("#")) {
-            List<Tag> tags = tagDAO.findAll();
-            List<Tag> listTagsFound = tags.stream().filter(t -> t.getTagByName().contains(search)).toList();
+            List<Tag> listTagsFound = tagDAO.findAll().stream().filter(t -> t.getId().contains(search)).toList();
             if (!listTagsFound.isEmpty()) {
-                Optional<Tag> tag = listTagsFound.stream().filter(t -> t.getTagByName().equals(search)).findFirst();
+                Optional<Tag> tag = listTagsFound.stream().filter(t -> t.getId().equals(search)).findFirst();
                 if (tag.isPresent()) {
-                    message = "Tìm thấy các bài viết của #" + search;
+                    message = "Tìm thấy các bài viết của " + search;
                     articlesFound = tag.get().getArticles();
                 } else {
-                    message = "Tìm thấy các bài viết liên quan #" + search;
+                    message = "Tìm thấy các bài viết liên quan " + search;
                     articlesFound = listTagsFound.stream().flatMap(tagFound -> tagFound.getArticles().stream()).collect(Collectors.toList());
                 }
             } else
-                message = "Không tìm thấy tag liên quan #" + search;
+                message = "Không tìm thấy tag liên quan " + search;
         } else {
             message = "Tìm thấy các bài viết liên quan: " + search;
-            articlesFound = articleDAO.findAllByTitleContaining(search);
+            articlesFound = articleDAO.findAllByTitleContainingIgnoreCase(search);
         }
 
         if (articlesFound.isEmpty()) {
