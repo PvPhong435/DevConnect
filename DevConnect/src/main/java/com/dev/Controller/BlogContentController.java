@@ -1,5 +1,8 @@
 package com.dev.Controller;
 
+import com.dev.Dao.ArticleDAO;
+import com.dev.Dao.CommentDAO;
+import com.dev.Dao.TagDAO;
 import com.dev.Model.Article;
 import com.dev.Model.Comment;
 import com.dev.Model.Tag;
@@ -26,9 +29,9 @@ import java.util.*;
 @RequiredArgsConstructor
 public class BlogContentController {
 
-    private final ArticleRepository articleRepository;
-    private final TagRepository tagRepository;
-    private final CommentRepository commentRepository;
+    private final ArticleDAO articleDAO;
+    private final TagDAO tagDAO;
+    private final CommentDAO commentDAO;
 
     @GetMapping("/test")
     public String test() {
@@ -37,7 +40,7 @@ public class BlogContentController {
 
     @GetMapping("/blog/{title}")
     public String blog(Model model, @PathVariable String title) {
-        List<Article> list = articleRepository.findAll();
+        List<Article> list = articleDAO.findAll();
         Optional<Article> articleFound = list.stream()
                 .filter(a -> SlugUtil.toSlug(a.getTitle()).equals(title))
                 .findFirst();
@@ -58,7 +61,7 @@ public class BlogContentController {
                 }
             }
 
-            List<Tag> tags = tagRepository.findAll();
+            List<Tag> tags = tagDAO.findAll();
             tags.sort((o1, o2) -> o2.getArticles().size() - o1.getArticles().size());
             tags = tags.subList(0, Math.min(tags.size(), 5));
 
@@ -76,17 +79,18 @@ public class BlogContentController {
     public String comment(@AuthenticationPrincipal UserPrincipal userPrincipal, @ModelAttribute Comment comment, @PathVariable String title) {
         if (userPrincipal == null)
             return "Check/Login";
-        int latestCommentId = commentRepository.findAll().stream()
+        int latestCommentId = commentDAO.findAll().stream()
                 .map(c -> Integer.parseInt(c.getId().replaceAll("\\D", "")))
                 .max(Comparator.naturalOrder()).orElse(0);
-        Optional<Article> article = articleRepository.findAll().stream()
+
+        Optional<Article> article = articleDAO.findAll().stream()
                 .filter(a -> SlugUtil.toSlug(a.getTitle()).equals(title))
                 .findFirst();
         if (article.isPresent()) {
             comment.setId("com" + (latestCommentId + 1));
             comment.setUser(userPrincipal.getUser());
             comment.setArticle(article.get());
-            commentRepository.save(comment);
+            commentDAO.save(comment);
         }
         return "redirect:/blog/" + title;
     }

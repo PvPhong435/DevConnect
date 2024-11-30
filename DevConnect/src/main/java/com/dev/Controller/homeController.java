@@ -21,7 +21,7 @@ public class homeController {
 
     @GetMapping({"/home/index", "/"})
     public String getHomePage(Model model) {
-        List<Article> list= articleDAO.findAll();
+        List<Article> list= articleDAO.findAllByOrderByCreateatDesc();
         model.addAttribute("list", list);
         return "home/index";
     }
