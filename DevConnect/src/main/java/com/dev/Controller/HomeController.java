@@ -16,4 +16,6 @@ public class HomeController {
 
     @GetMapping("/blog")
     public String blog(){return "blog/blog_detail";}
+
+
 }
