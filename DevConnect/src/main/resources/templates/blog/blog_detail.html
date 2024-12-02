@@ -2,6 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       th:replace="~{/layout/layout.html :: dynamic(~{::body})}">
 <body>
+<style>
+    a {
+        text-decoration: none;
+    }
+</style>
 <div th:object="${article}">
     <meta name="title" th:content="*{title}">
     <script>
