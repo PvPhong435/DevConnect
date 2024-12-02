@@ -59,7 +59,7 @@
 							<div class="col-auto">
 								<div class="d-flex align-items-center">
 									<div class="display-6 fw-bold me-2">10K+</div>
-									<div class="text-muted">
+									<div class="text-white">
 										Câu hỏi<br />được giải đáp
 									</div>
 								</div>
@@ -67,7 +67,7 @@
 							<div class="col-auto">
 								<div class="d-flex align-items-center">
 									<div class="display-6 fw-bold me-2">5K+</div>
-									<div class="text-muted">
+									<div class="text-white">
 										Thành viên<br />tích cực
 									</div>
 								</div>
@@ -366,7 +366,7 @@
 					<div th:each="article: ${list}" class="col-md-3">
 						<div class="card border-0 shadow-sm h-100">
 							<div th:if="${article.images.size()!=0}">
-								<img th:src="${article.images[0].imgURL}" class="card-img-top"
+								<img th:src="${article.images[0].imgURL}" class="card-img-top" height="200"
 									alt="Blog Image">
 							</div>
 							<div th:if="${article.images.size()==0}">
@@ -380,7 +380,7 @@
 										th:text="${#dates.format(article.createat,'dd/MM/yyyy')}"
 										class="text-muted small"></span>
 								</div>
-								<h5 class="card-title fw-bold mb-3" style="height: 51px">
+								<h5 class="card-title fw-bold mb-3" style="height: 51px; overflow: hidden; text-overflow: ellipsis" th:title="${article.title}">
 									<a th:href="@{|/blog/${article.titleSlug}|}" th:text="${article.title}"
 										class="text-decoration-none text-dark stretched-link"> </a>
 								</h5>

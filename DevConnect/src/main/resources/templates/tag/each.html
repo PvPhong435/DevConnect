@@ -27,7 +27,7 @@
                         <span class="badge bg-primary me-2"></span>
                         <span th:text="${#dates.format(article.createat,'dd/MM/yyyy')}" class="text-muted small"></span>
                     </div>
-                    <h5 class="card-title fw-bold mb-3" style="height: 51px">
+                    <h5 class="card-title fw-bold mb-3" style="height: 51px; overflow: hidden; text-overflow: ellipsis" th:title="${article.title}">
                         <a th:href="@{|/blog/${article.titleSlug}|}" th:text="${article.title}"
                            class="text-decoration-none text-dark stretched-link"> </a>
                     </h5>

@@ -34,13 +34,13 @@ public class SecurityConfig {
 				.authenticationProvider(authenticationProviderUser())
 				.authorizeHttpRequests(
 						auth ->{
-							auth.requestMatchers("/","/error","/favicon.ico","/home/**").permitAll();
+							auth.requestMatchers("/","/error","/favicon.ico","/home/**", "/tags/**", "/blog/**", "/test", "/search").permitAll();
 							auth.requestMatchers("/js/**","/images/**","/css/**").permitAll();
 							auth.anyRequest().authenticated();	
 						}
 						)
 				.exceptionHandling(exception -> {
-					exception.authenticationEntryPoint(redirectAuthenticationEntrypoint);
+//					exception.authenticationEntryPoint(redirectAuthenticationEntrypoint);
 				})
 				.formLogin(login->{
 					login.loginPage("/login").permitAll();

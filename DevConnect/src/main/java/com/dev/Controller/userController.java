@@ -90,7 +90,7 @@ public class userController {
 	
 	@DeleteMapping("/user/bookmark/{id}")
 	@ResponseBody
-	public ResponseEntity<Void> deleteBookmark(@PathVariable String article_id,@AuthenticationPrincipal UserPrincipal userPrincipal){
+	public ResponseEntity<Void> deleteBookmark(@PathVariable("id") String article_id,@AuthenticationPrincipal UserPrincipal userPrincipal){
 		String username=userPrincipal.getUsername();
 		SavedArticleKey savedArticleKey=new SavedArticleKey(username, article_id);
 		savedArticleDAO.deleteById(savedArticleKey);

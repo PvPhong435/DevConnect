@@ -16,14 +16,14 @@ document.querySelectorAll(".bookmark").forEach(bookmark=> bookmark.addEventListe
 	})
 }))
 
-function deleteBookmark(article_id){
-	console.log(article_id+'pressed')
-	fetch(`/user/bookmark/${article_id}`,{
+function deleteBookmark(bookmarkId){
+	console.log(bookmarkId.article_id+' pressed')
+	fetch(`/user/bookmark/${bookmarkId.article_id}`,{
 		method:'DELETE'
 	})
 	.then(response => {
 		if(response.ok){
-			const bookmarkElement=document.getElementById(`bookmark-${bookmarkId}`);
+			const bookmarkElement=document.getElementById(`bookmark-${bookmarkId.user_id}-${bookmarkId.article_id}`);
 			bookmarkElement.remove();
 		}
 	})
