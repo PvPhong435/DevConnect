@@ -40,7 +40,7 @@ public class SecurityConfig {
 						}
 						)
 				.exceptionHandling(exception -> {
-//					exception.authenticationEntryPoint(redirectAuthenticationEntrypoint);
+					exception.authenticationEntryPoint(redirectAuthenticationEntrypoint);
 				})
 				.formLogin(login->{
 					login.loginPage("/login").permitAll();
