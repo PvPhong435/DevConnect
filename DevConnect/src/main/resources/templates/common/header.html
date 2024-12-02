@@ -24,17 +24,17 @@
                         <a class="nav-link" th:href="@{/}" >Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/tags}">Tags</a>
+                        <a class="nav-link" href="#post">Bài viết</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/tags}">HashTags</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/user/bookmarks}">Bookmarks</a>
                     </li>
-<!--                    <li class="nav-item">-->
-<!--                        <a class="nav-link" th:href="@{/questions}">Hỏi đáp</a>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item">-->
-<!--                        <a class="nav-link" th:href="@{/posts}">Bài viết</a>-->
-<!--                    </li>-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.facebook.com/profile.php?id=61569338803500">Liên hệ</a>
+                    </li>
                 </ul>
             </div>
             <!-- Thanh tìm kiếm và đăng nhập -->
@@ -60,7 +60,12 @@
                         <ul class="dropdown-menu dropdown-menu-end shadow">
 <!--                            <li><a class="dropdown-item" th:href="@{/user}"><i class="fas fa-sliders-h fa-fw"></i> Tài khoản</a></li>-->
 <!--                            <li><hr class="dropdown-divider"></li>-->
-                            <li><a class="dropdown-item" th:href="@{/logout}"><i class="fas fa-sign-out-alt fa-fw"></i> Đăng xuất</a></li>
+                            <li>
+                                <a class="dropdown-item" href="#">Đổi mật khẩu</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" th:href="@{/logout}"><i class="fas fa-sign-out-alt fa-fw"></i> Đăng xuất</a>
+                            </li>
                         </ul>
                     </div>
                 </div>

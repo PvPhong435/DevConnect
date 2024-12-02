@@ -351,7 +351,7 @@
 
 
 		<!-- Live Activity Feed -->
-		<section class="py-5 bg-light">
+		<section class="py-5 bg-light" id="post">
 			<div class="container">
 				<div class="row mb-4">
 					<div class="col-lg-6">
@@ -404,6 +404,25 @@
 										<button type="button" class="btn border-0 btn-toggle" onclick="addBookmark(this)"
 										th:attr="data-article-id=${article.articleID}">
 											<i class="child fas fa-bookmark fa-lg btn-unbookmark"></i>
+<!--											<script>-->
+<!--												document.querySelectorAll("i.btn-unbookmark").forEach(bookmark => {-->
+<!--													const articleID = bookmark.getAttribute("data-article-id")-->
+<!--													fetch(`/user/bookmark/${articleID}`,{-->
+<!--														method:'POST',-->
+<!--														headers:{-->
+<!--															'Content-Type':'application/json',-->
+<!--														},-->
+<!--													}).then(response => response.json())-->
+<!--															.then(data => {-->
+<!--																var articleIdFound = data.article.articleId;-->
+<!--																if(articleID === articleIdFound)-->
+<!--																	bookmark-->
+<!--															})-->
+<!--															.catch(error=>{-->
+<!--																console.error('Error: ',error)-->
+<!--															})-->
+<!--												});-->
+<!--											</script>-->
 										</button>
 									</span>
 								</div>

@@ -4,12 +4,12 @@
 
 <!-- Liên kết file CSS với Thymeleaf -->
 <body>
-<meta name="title" th:content="'Các bài viết ' + ${#strings.capitalizeWords(tag.tagByName)}">
+<meta name="title" th:content="'Các bài viết ' + ${tag.tagByName}">
 <script>
     document.title = document.querySelector('meta[name="title"]').content;
 </script>
 <div class="container my-5">
-    <h2 class="mb-2">#<span th:text="${#strings.capitalizeWords(tag.tagByName)}"></span></h2>
+    <h2 class="mb-2">#<span th:text="${tag.tagByName}"></span></h2>
     <div class="row g-4">
         <!-- Blog Card -->
         <div th:each="article: ${tag.articles}" class="col-md-3">
