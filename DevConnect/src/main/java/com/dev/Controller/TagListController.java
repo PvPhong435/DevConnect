@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +22,7 @@ public class TagListController {
     public String index(Model model) {
         List<Tag> tags = tagDAO.findAll().stream().filter(tag -> !tag.getArticles().isEmpty()).toList();
         model.addAttribute("tags", tags);
-        model.addAttribute("tagspopular", tags.subList(0, Math.min(10, tags.size())));
+        model.addAttribute("tagspopular", tags.subList(0, Math.min(10, tags.size())).stream().sorted((o1, o2) -> Integer.compare(o2.getArticles().size(), o1.getArticles().size())).toList());
         return "tag/taglist";
     }
 
