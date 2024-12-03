@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/layout/layout.html :: dynamic(~{::body})}">
+
+<!-- Liên kết file CSS với Thymeleaf -->
+<body>
+<meta name="title" th:content="'Các bài viết ' + ${tag.tagByName}">
+<script>
+    document.title = document.querySelector('meta[name="title"]').content;
+</script>
+<div class="container my-5">
+    <h2 class="mb-2">#<span th:text="${tag.tagByName}"></span></h2>
+    <div class="row g-4">
+        <!-- Blog Card -->
+        <div th:each="article: ${tag.articles}" class="col-md-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div th:if="${article.images.size()!=0}">
+                    <img th:src="${article.images[0].imgURL}" class="card-img-top"
+                         alt="Blog Image">
+                </div>
+                <div th:if="${article.images.size()==0}">
+                    <p>Image not found</p>
+                </div>
+
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="badge bg-primary me-2"></span>
+                        <span th:text="${#dates.format(article.createat,'dd/MM/yyyy')}" class="text-muted small"></span>
+                    </div>
+                    <h5 class="card-title fw-bold mb-3" style="height: 51px; overflow: hidden; text-overflow: ellipsis" th:title="${article.title}">
+                        <a th:href="@{|/blog/${article.titleSlug}|}" th:text="${article.title}"
+                           class="text-decoration-none text-dark stretched-link"> </a>
+                    </h5>
+                    <!--								<p th:text="${article.content}" class="card-text text-muted"></p>-->
+                    <div class="mt-1">
+                        <div class="d-flex gap-2">
+                            <a th:href="@{|/tags/${tag.tagByName}|}" class="badge bg-light text-dark text-decoration-none" th:each="tag : ${article.tags}" th:text="${tag.id}"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-0 pt-0 pb-4 px-4 row">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <div th:if="${article.author != null}">
+                                <img th:src="${article.author.img}" class="rounded-circle me-2"
+                                     width="24" height="24" alt="Avatar">
+                                <span th:text="${article.author.fullname}" class="small fw-medium"></span>
+                            </div>
+                        </div>
+                        <span class="z-2 position-relative d-flex align-items-center justify-content-end ">
+                            <button type="button" class="btn border-0 btn-toggle" onclick="addBookmark(this)"
+                                    th:attr="data-article-id=${article.articleID}">
+                                <i class="child fas fa-bookmark fa-lg btn-unbookmark"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

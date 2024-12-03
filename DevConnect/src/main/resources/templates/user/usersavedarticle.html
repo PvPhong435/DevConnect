@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/layout/layout.html :: dynamic(~{::body})}">
+
+<!-- Liên kết file CSS với Thymeleaf -->
+<body>
+	<section class="py-5 bg-light">
+		<div class="container">
+			<div class="row mb-4">
+				<div class="col-lg-6">
+					<h2 th:if="${#lists.size(bookmarks) > 0}" class="fw-bold">Những bài viết được bookmark</h2>
+					<h2 th:if="${#lists.size(bookmarks) == 0}" class="fw-bold">Không có bài viết được bookmark</h2>
+				</div>
+			</div>
+			<div class="row g-4">
+				<!-- Blog Card -->
+				<div th:each="bookmark : ${bookmarks}" th:id="'bookmark-' + ${bookmark.id.user_id} + '-' + ${bookmark.id.article_id}" class="col-md-3">
+					<div class="card border-0 shadow-sm h-100">
+						<div th:if="${bookmark.article.images.size()!=0}">
+							<img th:src="${bookmark.article.images[0].imgURL}" class="card-img-top" height="200"
+								 alt="Blog Image">
+						</div>
+						<div th:if="${bookmark.article.images.size()==0}">
+							<p>Image not found</p>
+						</div>
+
+						<div class="card-body">
+							<div class="d-flex align-items-center mb-3">
+								<span class="badge bg-primary me-2"></span>
+								<span
+										th:text="${#dates.format(bookmark.article.createat,'dd/MM/yyyy')}"
+										class="text-muted small"></span>
+							</div>
+							<h5 class="card-title fw-bold mb-3" style="height: 51px; overflow: hidden; text-overflow: ellipsis" th:title="${bookmark.article.title}">
+								<a th:href="@{|/blog/${bookmark.article.titleSlug}|}" th:text="${bookmark.article.title}"
+								   class="text-decoration-none text-dark stretched-link"> </a>
+							</h5>
+							<!--								<p th:text="${article.content}" class="card-text text-muted"></p>-->
+							<div class="mt-1">
+								<div class="d-flex gap-2">
+									<a th:href="@{|/tags/${tag.tagByName}|}" class="badge bg-light text-dark text-decoration-none" th:each="tag : ${bookmark.article.tags}" th:text="${tag.id}"></a>
+								</div>
+							</div>
+						</div>
+						<div class="card-footer bg-transparent border-0 pt-0 pb-4 px-4 row">
+							<div class="d-flex justify-content-between align-items-center">
+								<div class="d-flex align-items-center">
+									<div th:if="${bookmark.article.author != null}">
+										<img th:src="${bookmark.article.author.img}" class="rounded-circle me-2"
+											 width="24" height="24" alt="Avatar">
+										<span th:text="${bookmark.article.author.fullname}" class="small fw-medium"></span>
+									</div>
+								</div>
+								<span class="z-2 position-relative d-flex align-items-center justify-content-end">
+									<button class="btn-close" th:onclick="deleteBookmark([[${bookmark.id}]])" aria-label="Close"></button>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script src="/js/index.js"></script>
+</body>
+</html>

@@ -44,8 +44,6 @@ public class loginController {
 	User userSignUp;
 	HttpSession session;
 
-	
-	
 	//Đăng nhập
 	@GetMapping("/login")
 	public String login(Model model)
@@ -53,14 +51,13 @@ public class loginController {
 //		User user=new User();
 //		model.addAttribute("user",user);
 		List<User> dsnv=userDao.findAll();
-		System.out.println(dsnv.toString());
 		model.addAttribute("mess", mess);
 		return "Check/Login";
 	}
 	
 	@PostMapping("/login")
 	public String checkLogin(Model model, @RequestParam("username") String username, @RequestParam("password") String pass) {
-	    User user = userDao.findByUsername(username);
+	    User user = userDao.findByUsername(username).orElse(null);
 	    if (user == null) {
 	    	mess="Tài khoản không tồn tại";
 	        return "redirect:/login";
@@ -69,11 +66,9 @@ public class loginController {
 	    	mess="Sai mật khẩu, vui lòng nhập lại";
 	        return "redirect:/login";
 	    }
-	    user = user;
 	    System.out.println("Đăng nhập thành công");
 	    HttpSession session = request.getSession();
 		session.setAttribute("user", user);
-		System.out.println((User)session.getAttribute("user"));
 	    return "check/success";
 	}
 
@@ -91,6 +86,7 @@ public class loginController {
 	{
 		userSignUp=user;
 		userSignUp.setRole("user");
+		userSignUp.setImg("https://cdn-icons-png.flaticon.com/512/147/147144.png");
 		if(sendMailSignUp(user.getEmail(), user.getFullname()))
 		{
 			return "Check/RegistrationVerification";
@@ -108,7 +104,6 @@ public class loginController {
 		
 		if(otp.equals(checkMaXacThuc))
 		{
-			
 			System.out.println("Đăng ký thành công");
 			user=userSignUp;
 			userDao.save(user);
@@ -163,7 +158,7 @@ public class loginController {
 		}
 		else
 		{
-			user=userDao.findByUsername(username);
+			user=userDao.findByUsername(username).orElse(null);
 			if(user!=null)
 			{
 				if(!sendMail(user.getEmail(), user.getFullname()))

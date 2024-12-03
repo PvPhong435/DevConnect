@@ -1,10 +1,10 @@
-package com.dev;
+package com.dev.finalasm;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DevConnectApplicationTests {
+class FinalAsmApplicationTests {
 
 	@Test
 	void contextLoads() {

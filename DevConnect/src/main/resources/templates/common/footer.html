@@ -1,0 +1,59 @@
+<!-- File: templates/fragments/footer.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="footer">
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Về chúng tôi -->
+                <div class="col-12 col-md-4">
+                    <h2 class="h4 fw-semibold mb-3">Về chúng tôi</h2>
+                    <p class="text-secondary">DevConnect là nền tảng chia sẻ kiến thức và hỏi đáp về công nghệ, lập trình
+                        hàng đầu tại Việt Nam.</p>
+                </div>
+
+                <!-- Liên kết -->
+                <div class="col-12 col-md-4">
+                    <h2 class="h4 fw-semibold mb-3">Liên kết</h2>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a href="#" class="text-secondary text-decoration-none hover-white">Điều khoản sử dụng</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="#" class="text-secondary text-decoration-none hover-white">Chính sách bảo mật</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="#" class="text-secondary text-decoration-none hover-white">Liên hệ</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Theo dõi -->
+                <div class="col-12 col-md-4">
+                    <h2 class="h4 fw-semibold mb-3">Theo dõi chúng tôi</h2>
+                    <div class="d-flex gap-2">
+                        <a href="https://www.facebook.com/profile.php?id=61569338803500" class="p-2 text-white">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Copyright -->
+            <div class="text-center text-secondary mt-4">
+                <p class="mb-0">&copy; 2024 TechQA. Tất cả các quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .hover-white:hover {
+            color: white !important;
+            transition: color 0.3s ease;
+        }
+    </style>
+</div>
+</body>
+</html>
