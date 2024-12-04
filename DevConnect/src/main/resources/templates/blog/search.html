@@ -47,10 +47,10 @@
                         </div>
                         <span class="z-2 position-relative d-flex align-items-center justify-content-end ">
                             <button type="button" class="btn border-0 btn-toggle" onclick="addBookmark(this)" th:attr="data-article-id=${article.articleID}">
-                                <div th:if="${bookmarkArticleIds==null}">
+                                <div th:if="${!isAuthenticated}">
                                     <i class="child fas fa-bookmark fa-lg btn-unbookmark" ></i>
                                 </div>
-                                <div th:if="${bookmarkArticleIds!=null}">
+                                <div th:if="${isAuthenticated}">
                                     <i class="child fas fa-bookmark fa-lg " th:classappend="${#lists.contains(bookmarkArticleIds,article.articleID) ? 'btn-bookmark':'btn-unbookmark'}" ></i>
                                 </div>
                             </button>

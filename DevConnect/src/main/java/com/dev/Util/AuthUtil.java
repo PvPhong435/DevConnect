@@ -27,10 +27,11 @@ public class AuthUtil {
     }
 
     public void modelAddBookmarksIfAuthenticated(Model model, UserPrincipal userPrincipal) {
+        model.addAttribute("isAuthenticated", isUserAuthenticated());
         if(isUserAuthenticated()){
             System.out.println("is Authenticated");
-            if(userPrincipal!=null){
-                User user=userPrincipal.getUser();
+            User user=userDao.findById(userPrincipal.getUsername()).orElse(null);
+            if(user!=null){
                 Set<SavedArticle> savedArticles=user.getSavedArticles();
                 Set<String> savedArticleIndex = savedArticles.stream().map(savedArticle -> savedArticle.getId().getArticle_id()).collect(Collectors.toSet());
                 model.addAttribute("bookmarkArticleIds",savedArticleIndex);

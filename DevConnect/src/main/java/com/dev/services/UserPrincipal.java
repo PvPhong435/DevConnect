@@ -38,7 +38,6 @@ public class UserPrincipal implements UserDetails {
 	}
 
 	public User getUser() {
-		user.getSavedArticles().size();
 		return user;
 	}
 }

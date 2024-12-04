@@ -19,7 +19,7 @@ public class DevConnectUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
-		User user=userDAO.findByUsername(username).orElse(null);
+		User user=userDAO.findById(username).orElse(null);
 		if(user==null) {
 			System.out.println("user not found");
 			throw new UsernameNotFoundException("There is something wrong with your credential");

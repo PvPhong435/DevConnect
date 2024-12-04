@@ -43,7 +43,7 @@ public class loginController {
 	
 	@PostMapping("/login")
 	public String checkLogin(Model model, @RequestParam("username") String username, @RequestParam("password") String pass) {
-	    User user = userDao.findByUsername(username).orElse(null);
+	    User user = userDao.findById(username).orElse(null);
 	    if (user == null) {
 	    	mess="Tài khoản không tồn tại";
 	        return "redirect:/login";
@@ -144,7 +144,7 @@ public class loginController {
 		}
 		else
 		{
-			user=userDao.findByUsername(username).orElse(null);
+			user=userDao.findById(username).orElse(null);
 			if(user!=null)
 			{
 				if(!sendMail(user.getEmail(), user.getFullname()))

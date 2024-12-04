@@ -36,7 +36,7 @@ public class userController {
 
 	@GetMapping("/user/bookmarks")
 	public String userBookmarks(Model model,@AuthenticationPrincipal UserPrincipal userPrincipal) {
-		User user=userPrincipal.getUser();
+		User user=userDAO.findById(userPrincipal.getUsername()).orElse(null);
 		if(user==null) {
 			return "error/ServerError";
 		}

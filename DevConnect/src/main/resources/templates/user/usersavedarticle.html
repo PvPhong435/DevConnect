@@ -25,17 +25,18 @@
 						</div>
 
 						<div class="card-body">
-							<div class="d-flex align-items-center mb-3">
-								<span class="badge bg-primary me-2"></span>
-								<span
-										th:text="${#dates.format(bookmark.article.createat,'dd/MM/yyyy')}"
-										class="text-muted small"></span>
+							<div class="d-flex align-items-center justify-content-between mb-3">
+								<span th:text="${#dates.format(bookmark.article.createat,'dd/MM/yyyy')}" class="text-muted small"></span>
+								<span class="position-absolute badge p-1" style="top: 3px; left: 3px; text-shadow: #000 0 0 1px, #000 0 0 1px, #000 0 0 1px, #000 0 0 1px, #000 0 0 1px, #000 0 0 1px;">
+									<i class="child fas fa-bookmark btn-bookmark me-1"></i>
+									<span class="small" th:text="${#dates.format(bookmark.save_date,'dd/MM/yyyy')}"></span>
+								</span>
 							</div>
 							<h5 class="card-title fw-bold mb-3" style="height: 51px; overflow: hidden; text-overflow: ellipsis" th:title="${bookmark.article.title}">
-								<a th:href="@{|/blog/${bookmark.article.titleSlug}|}" th:text="${bookmark.article.title}"
-								   class="text-decoration-none text-dark stretched-link"> </a>
+								<a th:href="@{|/blog/${bookmark.article.titleSlug}|}"
+								   th:text="${bookmark.article.title}"
+								   class="text-decoration-none text-dark stretched-link"></a>
 							</h5>
-							<!--								<p th:text="${article.content}" class="card-text text-muted"></p>-->
 							<div class="mt-1">
 								<div class="d-flex gap-2">
 									<a th:href="@{|/tags/${articleTag.tag.tagByName}|}" class="badge bg-light text-dark text-decoration-none" th:each="articleTag : ${bookmark.article.articleTags}" th:text="${articleTag.tag.id}"></a>
