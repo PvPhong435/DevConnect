@@ -38,7 +38,7 @@
 							<!--								<p th:text="${article.content}" class="card-text text-muted"></p>-->
 							<div class="mt-1">
 								<div class="d-flex gap-2">
-									<a th:href="@{|/tags/${tag.tagByName}|}" class="badge bg-light text-dark text-decoration-none" th:each="tag : ${bookmark.article.tags}" th:text="${tag.id}"></a>
+									<a th:href="@{|/tags/${articleTag.tag.tagByName}|}" class="badge bg-light text-dark text-decoration-none" th:each="articleTag : ${bookmark.article.articleTags}" th:text="${articleTag.tag.id}"></a>
 								</div>
 							</div>
 						</div>

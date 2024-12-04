@@ -1,8 +1,10 @@
 package com.dev.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
@@ -18,9 +20,8 @@ public class Tag {
     @Column(name = "tagid")
     private String id;
     private String nametag;
-    @JsonIgnore
-    @ManyToMany(mappedBy = "tags")
-    private List<Article> articles;
+    @OneToMany(mappedBy = "tag",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ArticleTag> articleTags;
 
     public String getTagByName() {
         return id.replace("#", "");

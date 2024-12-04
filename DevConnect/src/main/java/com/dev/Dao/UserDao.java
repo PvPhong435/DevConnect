@@ -1,10 +1,9 @@
 package com.dev.Dao;
 
-import java.util.Optional;
-
+import com.dev.Model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.dev.Model.User;
+import java.util.Optional;
 
 public interface UserDao extends JpaRepository<User, String>{
 	

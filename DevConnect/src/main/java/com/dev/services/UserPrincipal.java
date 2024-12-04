@@ -1,13 +1,12 @@
 package com.dev.services;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
+import com.dev.Model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.dev.Model.User;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class UserPrincipal implements UserDetails {
 
@@ -39,6 +38,7 @@ public class UserPrincipal implements UserDetails {
 	}
 
 	public User getUser() {
+		user.getSavedArticles().size();
 		return user;
 	}
 }

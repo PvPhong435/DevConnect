@@ -1,11 +1,11 @@
 package com.dev.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import lombok.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Set;
 
@@ -31,6 +31,6 @@ public class User {
     private Set<Comment> comments;
     @OneToMany(mappedBy = "author")
     private Set<Article> articles;
-    @OneToMany(mappedBy= "user")
+    @OneToMany(mappedBy= "user", fetch = FetchType.EAGER)
     private Set<SavedArticle> savedArticles;
 }

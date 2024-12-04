@@ -1,15 +1,17 @@
 package com.dev.Controller;
 
+import com.dev.Dao.ArticleDAO;
 import com.dev.Dao.TagDAO;
 import com.dev.Model.Tag;
+import com.dev.Util.AuthUtil;
+import com.dev.services.UserPrincipal;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.Comparator;
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -17,22 +19,24 @@ import java.util.Optional;
 public class TagListController {
 
     private final TagDAO tagDAO;
+    private final ArticleDAO articleDAO;
+    private final AuthUtil authUtil;
 
     @GetMapping("/tags")
     public String index(Model model) {
-        List<Tag> tags = tagDAO.findAll().stream().filter(tag -> !tag.getArticles().isEmpty()).toList();
-        model.addAttribute("tags", tags);
-        model.addAttribute("tagspopular", tags.subList(0, Math.min(10, tags.size())).stream().sorted((o1, o2) -> Integer.compare(o2.getArticles().size(), o1.getArticles().size())).toList());
+        model.addAttribute("tags", tagDAO.findAllByOrderById());
+        model.addAttribute("tagspopular", tagDAO.findAllIfHasAtLeastOneArticleAndOrderByArticle(10));
         return "tag/taglist";
     }
 
     @GetMapping("/tags/{name}")
-    public String tag(@PathVariable String name, Model model) {
-        Optional<Tag> optionalTag = tagDAO.findAll().stream().filter(t -> t.getTagByName().equals(name)).findFirst();
+    public String tag(@PathVariable String name, Model model, @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        name = name.startsWith("#") ? name : "#" + name;
+        Optional<Tag> optionalTag = tagDAO.findById(name);
         if (optionalTag.isPresent()) {
-            Tag tag = optionalTag.get();
-            tag.setArticles(tag.getArticles().stream().sorted((o1, o2) -> o2.getCreateat().compareTo(o1.getCreateat())).toList());
-            model.addAttribute("tag", tag);
+            authUtil.modelAddBookmarksIfAuthenticated(model, userPrincipal);
+            model.addAttribute("tag", optionalTag.get());
+            model.addAttribute("articles", articleDAO.findAllByTagId(name));
         } else {
             return "redirect:/tags";
         }

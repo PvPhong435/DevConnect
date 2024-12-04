@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.time.*;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -46,24 +46,9 @@ public class BlogContentController {
         if (articleFound.isPresent()) {
             Article article = articleFound.get();
 
-            for (Comment comment : article.getComments()) {
-                comment.setCreateAtAsString(returnTime(comment.getCreateat().getTime()));
-            }
+            List<Article> relatedArticle = articleDAO.findAllRelatedArticles(tagDAO.findAllByArticleId(article.getArticleID()), article.getArticleID());
 
-            Set<Article> relatedArticle = new HashSet<>();
-            for (Article article1 : list) {
-                for (Tag tag : article.getTags()) {
-                    if (article1.getTags().contains(tag) && !article1.getTitleSlug().equals(title)) {
-                        relatedArticle.add(article1);
-                        break;
-                    }
-                }
-            }
-            relatedArticle = relatedArticle.stream().sorted((o1, o2) -> o2.getCreateat().compareTo(o1.getCreateat())).collect(Collectors.toCollection(LinkedHashSet::new));
-
-            List<Tag> tags = tagDAO.findAll();
-            tags.sort((o1, o2) -> o2.getArticles().size() - o1.getArticles().size());
-            tags = tags.subList(0, Math.min(tags.size(), 5));
+            List<Tag> tags = tagDAO.findAllByOrderByArticle(10);
 
             model.addAttribute("comment", new Comment());
             model.addAttribute("article", article);
@@ -88,31 +73,17 @@ public class BlogContentController {
         Optional<Article> article = articleDAO.findAll().stream()
                 .filter(a -> SlugUtil.toSlug(a.getTitle()).equals(title))
                 .findFirst();
+
+        String idComment = "";
+
         if (article.isPresent()) {
             comment.setId("com" + (latestCommentId + 1));
             comment.setUser(userPrincipal.getUser());
             comment.setArticle(article.get());
-            commentDAO.save(comment);
+            Comment finalComment = commentDAO.save(comment);
+            idComment = "#" + finalComment.getId();
         }
-        return "redirect:/blog/" + title;
+        return "redirect:/blog/" + title + idComment;
     }
 
-    private String returnTime(long duration) {
-        Duration duration1 = Duration.between(Instant.ofEpochMilli(duration), Instant.now());
-        Period period = Period.between(LocalDate.ofInstant(Instant.ofEpochMilli(duration), ZoneId.systemDefault()), LocalDate.now());
-        if(period.getYears() > 1) {
-            return period.getYears() + " năm trước";
-        } else if (period.getMonths() > 1) {
-            return period.getMonths() + " tháng trước";
-        } else if (period.getDays() > 1) {
-            return period.getDays() + " ngày trước";
-        } else if (duration1.toHoursPart() > 1) {
-            return duration1.toHoursPart() + " tiếng trước";
-        } else if (duration1.toMinutesPart() > 1) {
-            return duration1.toMinutesPart() + " phút trước";
-        } else if (duration1.toSecondsPart() > 1) {
-            return duration1.toSecondsPart() + " giây trước";
-        } else
-            return "0 giây trước";
-    }
 }
