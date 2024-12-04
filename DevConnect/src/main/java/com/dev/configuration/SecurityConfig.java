@@ -33,7 +33,7 @@ public class SecurityConfig {
 				.authenticationProvider(authenticationProviderUser())
 				.authorizeHttpRequests(
 						auth ->{
-							auth.requestMatchers("/","/error","/favicon.ico","/home/**", "/tags/**", "/blog/**", "/test", "/search").permitAll();
+							auth.requestMatchers("/","/error","/favicon.ico","/home/**", "/tags/**", "/blog/**", "/test", "/search", "/signup").permitAll();
 							auth.requestMatchers("/js/**","/images/**","/css/**").permitAll();
 							auth.anyRequest().authenticated();	
 						}

@@ -27,7 +27,6 @@ public class AuthUtil {
     }
 
     public void modelAddBookmarksIfAuthenticated(Model model, UserPrincipal userPrincipal) {
-        model.addAttribute("isAuthenticated", isUserAuthenticated());
         if(isUserAuthenticated()){
             System.out.println("is Authenticated");
             User user=userDao.findById(userPrincipal.getUsername()).orElse(null);
