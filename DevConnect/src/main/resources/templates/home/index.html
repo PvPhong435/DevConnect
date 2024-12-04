@@ -2,8 +2,8 @@
 
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{/layout/layout.html :: dynamic(~{::body})}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+	  th:replace="~{/layout/layout.html :: dynamic(~{::body})}">
 
 <!-- Liên kết file CSS với Thymeleaf -->
 
@@ -403,7 +403,15 @@
 									<span class="z-2 position-relative d-flex align-items-center justify-content-end ">
 										<button type="button" class="btn border-0 btn-toggle" onclick="addBookmark(this)"
 										th:attr="data-article-id=${article.articleID}">
-											<i class="child fas fa-bookmark fa-lg btn-unbookmark"></i>
+												<div th:if="${bookmarkArticleIds==null}">
+													<i class="child fas fa-bookmark fa-lg btn-unbookmark" ></i>
+												</div>
+												<div th:if="${bookmarkArticleIds!=null}">
+														<i class="child fas fa-bookmark fa-lg " th:classappend="${#lists.contains(bookmarkArticleIds,article.articleID) ? 'btn-bookmark':'btn-unbookmark'}" ></i>
+												</div>
+
+
+
 <!--											<script>-->
 <!--												document.querySelectorAll("i.btn-unbookmark").forEach(bookmark => {-->
 <!--													const articleID = bookmark.getAttribute("data-article-id")-->

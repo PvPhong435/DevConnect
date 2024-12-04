@@ -19,6 +19,7 @@ public class RedirectAuthenticationSuccess implements AuthenticationSuccessHandl
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
+		System.out.println("In success handler");
 		if(response.getHeader("Content-Type").equals("application/json")) {
 			response.sendRedirect("/");
 		}

@@ -31,5 +31,6 @@ public class User {
     private Set<Comment> comments;
     @OneToMany(mappedBy = "author")
     private Set<Article> articles;
-
+    @OneToMany(mappedBy= "user")
+    private Set<SavedArticle> savedArticles;
 }
