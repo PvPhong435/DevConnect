@@ -55,7 +55,7 @@ public class loginController {
 	    System.out.println("Đăng nhập thành công");
 	    HttpSession session = request.getSession();
 		session.setAttribute("user", user);
-	    return "check/success";
+	    return "redirect:/";
 	}
 
 	
@@ -93,8 +93,8 @@ public class loginController {
 			System.out.println("Đăng ký thành công");
 			user=userSignUp;
 			userDao.save(user);
-			//session.setAttribute("user", user);
-			return "redirect:/login";
+			session.setAttribute("user", user);
+			return "redirect:/";
 		}
 		else
 		{

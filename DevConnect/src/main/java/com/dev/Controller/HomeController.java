@@ -1,34 +1,62 @@
 package com.dev.Controller;
 
+import com.dev.Dao.ArticleDAO;
+import com.dev.Dao.UserDao;
 import com.dev.Model.Article;
-import com.dev.Repository.ArticleRepository;
-import com.dev.Util.SlugUtil;
+import com.dev.Util.AuthUtil;
+import com.dev.services.ApiResponse;
+import com.dev.services.UserPrincipal;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
+
+import java.util.Optional;
 
 @Controller
-public class HomeController {
+public class homeController {
 
-    ArticleRepository articleRepository;
+    ArticleDAO articleDAO;
+    AuthUtil authUtil;
+    UserDao userDAO;
 
-    public HomeController(ArticleRepository articleRepository) {
-        this.articleRepository = articleRepository;
+    public homeController(ArticleDAO articleDAO, AuthUtil authUtil, UserDao userDAO) {
+        super();
+        this.articleDAO = articleDAO;
+        this.authUtil=authUtil;
+        this.userDAO=userDAO;
     }
 
-    @GetMapping("/")
-    public String home(Model model) {
-        List<Article> articles = articleRepository.findAllByOrderByCreateatDesc();
-        articles.forEach(article -> article.setTitleSlug(SlugUtil.toSlug(article.getTitle())));
-        model.addAttribute("articles", articles);
+    @GetMapping({"/home/index", "/", ""})
+    public String getHomePage(Model model, @AuthenticationPrincipal UserPrincipal userPrincipal, @RequestParam(name = "page", defaultValue = "1") int page) {
+        authUtil.modelAddBookmarksIfAuthenticated(model, userPrincipal);
+
+        int finalPage = Math.max(1, page);
+
+        Page<Article> pages = articleDAO.findAll(PageRequest.of(finalPage - 1, 12, Sort.by(Sort.Direction.DESC, "views")));
+        model.addAttribute("pages", pages);
+        model.addAttribute("page", page);
         return "home/index";
     }
-
-    @GetMapping("/about")
-    public String about() {
-        return "home/about";
+    
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiResponse<Object>> handleException(Exception ex) {
+        return new ResponseEntity<>(new ApiResponse<>(ex.getMessage(), null), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    
+    @ExceptionHandler(Exception.class)
+    public String error(Model model, Exception exception)
+    {
+    	model.addAttribute("error", exception.getMessage());
+    	return "error/MessError";
     }
 
 }
