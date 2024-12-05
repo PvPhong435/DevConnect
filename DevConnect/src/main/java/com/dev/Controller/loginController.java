@@ -94,7 +94,7 @@ public class loginController {
 			user=userSignUp;
 			userDao.save(user);
 			//session.setAttribute("user", user);
-			return "Check/success";
+			return "redirect:/login";
 		}
 		else
 		{
@@ -186,7 +186,7 @@ public class loginController {
 	public String ChangePass(Model model)
 	{
 		
-		return "";
+		return "Check/CheckPass";
 	}
 	
 	@PostMapping("/changePass")

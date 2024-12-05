@@ -24,7 +24,7 @@
                         <a class="nav-link" th:href="@{/}" >Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#post">Bài viết</a>
+                        <a class="nav-link" href="/#post">Bài viết</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/tags}">HashTags</a>
@@ -40,7 +40,7 @@
             <!-- Thanh tìm kiếm và đăng nhập -->
             <div class="d-flex align-items-center">
                 <form class="position-relative me-3" th:action="@{/search}" method="get">
-                    <input type="text" class="form-control rounded-pill" style="padding-left: 32px" name="q" placeholder="Tìm kiếm...">
+                    <input type="text" class="form-control rounded-pill" style="padding-left: 32px" name="q" placeholder="Tìm kiếm..." th:value="${param.q}">
                     <span class="position-absolute top-50 start-0 translate-middle-y ms-2">🔍</span>
                 </form>
                 <div th:if="${auth} == null">
@@ -60,9 +60,9 @@
                         <ul class="dropdown-menu dropdown-menu-end shadow">
 <!--                            <li><a class="dropdown-item" th:href="@{/user}"><i class="fas fa-sliders-h fa-fw"></i> Tài khoản</a></li>-->
 <!--                            <li><hr class="dropdown-divider"></li>-->
-                            <li>
-                                <a class="dropdown-item" href="#">Đổi mật khẩu</a>
-                            </li>
+<!--                            <li>-->
+<!--                                <a class="dropdown-item" href="/changePass">Đổi mật khẩu</a>-->
+<!--                            </li>-->
                             <li>
                                 <a class="dropdown-item" th:href="@{/logout}"><i class="fas fa-sign-out-alt fa-fw"></i> Đăng xuất</a>
                             </li>
